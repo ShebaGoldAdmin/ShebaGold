@@ -1,0 +1,14 @@
+@use './fonts';
+@use './typography';
+
+body{
+  background: rgb(var(--color-dark));
+}
+
+main{
+  background: rgb(var(--color-white));
+}
+
+hr{
+  border-bottom: 1px solid rgb(var(--color-stroke));
+}

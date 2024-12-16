@@ -1,0 +1,95 @@
+<template>
+  <main>
+    <Splash @scrollTo="scrollToAnchor"/>
+    <section class="overview" id="overview">
+      <div class="container container--sm">
+        <img class="mb-32" src="public/images/logo-single.svg" alt="Sheba Gold Capital" /> 
+        <h2 class="mb-24 mb-64-sm">Leading the Way in Strategic Investment<br> and Sustainable Growth</h2>
+        <p class="lg">Sheba Gold Capital is an esteemed investment firm specializing in the identification of lucrative real estate holdings nationwide, as well ass businesses exhibiting significant growth potential.</p>   
+      </div>
+    </section>
+
+    <section class="pt-32 pt-120-sm pb-32 pb-192-sm overview-items">
+      <div class="container">
+        <OverviewItem 
+          v-for="item in overviewItems" 
+          :key="item.id" 
+          :item="item"
+        />
+        <Blockquote>We invite you to join us on our journey towards unparalleled success.</Blockquote>
+        <hr>
+      </div>
+    </section>
+  </main>
+</template>
+
+<script setup lang="js">
+import { onMounted } from 'vue';
+const { $lenis, $gsap } = useNuxtApp();
+import splitType from 'split-type';
+
+import Splash from '~/components/Splash.vue';
+import OverviewItem from '~/components/OverviewItem.vue';
+import Blockquote from '~/components/Blockquote.vue';
+
+import overviewData from '~/data/overview-items.json';
+
+const overviewItems = overviewData;
+
+onMounted(() => {
+ $gsap.utils.toArray('.overview-item').forEach(item => {
+    $gsap.from(item, {
+      y: -100,
+      opacity: 0.3,
+      duration: 5,
+      scrollTrigger: {
+        trigger: item,
+        start: 'top 80%',
+        end: 'top 20%',
+        scrub: true,
+      },
+    });
+  });
+
+  const ourText = new splitType('h2', { types: 'words' });
+  const words = ourText.words;
+
+  $gsap.from(words, { 
+    x: 30,
+    opacity: 0,
+    stagger: 0.4,
+    duration: 2,
+    ease: 'power4.out',
+    scrollTrigger: {
+      trigger: 'h2',
+      start: 'top 90%',
+      end: 'bottom 60%',
+      scrub: true,
+    },
+  });
+});
+
+const scrollToAnchor = () => {
+  $lenis.scrollTo('#overview', {
+    easing: 'ease',
+  });
+};
+</script>
+
+
+<style lang="scss" scoped>
+.overview{
+  background: rgb(var(--color-dark));
+  padding: 186px 0 310px;
+  text-align: center;
+  color: rgb(var(--color-white));
+  @include respond-to(sm){
+    padding: 88px 0 160px;
+  }
+  p{
+    opacity: 0.6;
+    max-width: 926px;
+    margin: 0 auto;
+  }
+}
+</style>

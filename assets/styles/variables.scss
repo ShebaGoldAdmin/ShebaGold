@@ -1,0 +1,17 @@
+:root{
+  --font-body: "Libre Franklin", sans-serif;
+  --font-heading: "IvarDisplayCondensed-Regular";
+
+  --color-navy-blue: 13, 21, 62;
+  --color-dark: 9, 13, 18;
+  --color-white: 255, 255, 255;
+  --color-gold: 201, 169, 110;
+  --color-light-gray: 245, 245, 245;
+  --color-black: 0, 0, 0;
+  --color-stroke: 233, 235, 243;
+  --color-stroke-dark: 23, 30, 39;
+  --color-gray: 204, 204, 204;
+
+  --transition-quartic: cubic-bezier(.9,.03,.69,.22);
+  --transition-backward: cubic-bezier(.68,-0.55,.27,1.55);
+}

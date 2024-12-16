@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "Jane Doe",
+    "title": "CEO",
+    "photo": "/assets/images/team/jane.jpg",
+    "bio": "Jane has over 20 years of experience in business management."
+  },
+  {
+    "id": 2,
+    "name": "John Smith",
+    "title": "CTO",
+    "photo": "/assets/images/team/john.jpg",
+    "bio": "John specializes in technology solutions for growing companies."
+  }
+]

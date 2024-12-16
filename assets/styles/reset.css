@@ -1,0 +1,97 @@
+/* purgecss start ignore */
+html, body,
+h1, h2, h3, h4, h5, h6,
+div, p, article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary,
+table, caption, tbody, tfoot, thead, tr, th, td,
+fieldset, form, label, legend, a, hr, button,
+li, ul, ol,
+input, textarea,
+blockquote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  vertical-align: baseline;
+}
+
+blockquote, q {
+  quotes: none;
+}
+blockquote::before, blockquote::after,
+q::before, q::after {
+  content: '';
+  content: none;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+}
+
+ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+img {
+  border: 0;
+}
+
+textarea {
+  overflow: auto;
+}
+
+* {
+  outline: none;
+  box-sizing: border-box;
+}
+
+*:hover,
+*:focus,
+*:active {
+  outline: none;
+}
+
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: 200ms;
+}
+
+a:hover,
+a:focus,
+a:visited {
+  text-decoration: none;
+  outline: none;
+  outline-offset: 0;
+}
+
+button, .btn {
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+body {
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* purgecss end ignore */

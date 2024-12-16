@@ -1,0 +1,44 @@
+@use './mixins' as *;
+@use './variables' as *;
+
+body {
+  font-family: var(--font-body);
+  color: rgb(var(--color-navy-blue));
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-heading);
+}
+
+h1{
+  @include fsz(128px);
+}
+
+h2{
+  @include fsz(88px);
+  @include respond-to(sm){
+    @include fsz(40px);
+  }
+}
+
+h3{
+  @include fsz(60px);
+  @include respond-to(sm){
+    @include fsz(40px);
+  }
+}
+
+h4{
+  @include fsz(52px);
+}
+
+h5{
+  @include fsz(40px);
+}
+
+p{
+  @include textDesktopM();
+  &.lg{
+    @include textDesktopL();
+  }
+}

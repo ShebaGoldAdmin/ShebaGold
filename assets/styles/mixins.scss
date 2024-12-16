@@ -1,0 +1,218 @@
+// --- Import Math Module
+@use 'sass:math';
+
+// --- Breakpoints
+$screen-xs: 575px !default;
+$screen-sm: 767px !default;
+$screen-md: 991px !default;
+$screen-lg: 1199px !default;
+$screen-xl: 1488px !default;
+
+// --- Grid Settings
+$grid-columns: 12 !default;
+$grid-font-size: 16 !default;
+$grid-fraction: 8 !default;
+
+// --- Margin and Padding Lists
+$margin-type-list: (
+  m: null,
+  mt: top,
+  mr: right,
+  mb: bottom,
+  ml: left
+);
+
+$padding-type-list: (
+  p: null,
+  pt: top,
+  pr: right,
+  pb: bottom,
+  pl: left
+);
+
+// --- Responsive Breakpoints List
+$breakpoints: (
+  xs: $screen-xs,
+  sm: $screen-sm,
+  md: $screen-md,
+  lg: $screen-lg,
+  xl: $screen-xl
+);
+
+  // margin function
+@mixin make-margin($screen-name, $line:"-"){
+  @each $option-name, $option-value in $margin-type-list {
+    @for $i from 0 through 40 {
+      .#{$option-name}-#{$i*$grid-fraction}#{$line}#{$screen-name}{
+        @if( $option-name == "m" ){
+          margin: #{math.div($i * $grid-fraction, $grid-font-size) + rem} !important;
+        }
+        @else{
+          margin-#{$option-value}: #{math.div($i * $grid-fraction, $grid-font-size) + rem} !important;
+        }
+      }
+    }
+    @for $i from -20 through -1 {
+      .n-#{$option-name}#{$i*$grid-fraction}#{$line}#{$screen-name}{
+        @if( $option-name == "m" ){
+          margin: #{math.div($i * $grid-fraction, $grid-font-size) + rem} !important;
+        }
+        @else{
+          margin-#{$option-value}: #{math.div($i * $grid-fraction, $grid-font-size) + rem} !important;
+        }
+      }
+    }
+  }
+  @for $i from 1 through 40 {
+    .m-#{$i*$grid-fraction}#{$line}#{$screen-name} {
+      margin: #{math.div($i * $grid-fraction, $grid-font-size) + rem} !important;
+    }
+  }
+}
+@include make-margin($screen-name:null, $line:null);
+
+
+// padding function
+@mixin make-padding($screen-name, $line:"-"){
+  @each $option-name, $option-value in $padding-type-list {
+    @for $i from 0 through 40 {
+      .#{$option-name}-#{$i*$grid-fraction}#{$line}#{$screen-name}{
+        @if( $option-name == "p" ){
+          padding: #{math.div($i * $grid-fraction, $grid-font-size) + rem} !important;
+        }
+        @else{
+          padding-#{$option-value}: #{math.div($i * $grid-fraction, $grid-font-size) + rem} !important;
+        }
+      }
+    }
+  }
+  @for $i from 1 through 40 {
+    .p-#{$i*$grid-fraction}#{$line}#{$screen-name} {
+      padding: #{math.div($i * $grid-fraction, $grid-font-size) + rem} !important;
+    }
+  }
+}
+@include make-padding($screen-name:null, $line:null);
+
+// margin, padding
+@each $screen-name, $screen-size in $breakpoints {
+  @media (min-width: #{($screen-size + 1px)}) {
+    @include make-margin($screen-name);
+    @include make-padding($screen-name);
+  }
+}
+
+
+// --- Responsive Font Size Utility
+@function calculateRem($size) {
+  $remSize: math.div($size, $grid-font-size * 1px);
+  @return $remSize * 1rem;
+}
+
+@mixin fsz($size) {
+  font-size: calculateRem($size);
+}
+
+// --- Text Truncate
+@mixin truncateText() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// --- Center Position
+@mixin center($position) {
+  position: absolute;
+  @if $position == 'vertical' {
+    top: 50%;
+    transform: translateY(-50%);
+  } @else if $position == 'horizontal' {
+    left: 50%;
+    transform: translateX(-50%);
+  } @else if $position == 'both' {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+// --- Responsive Breakpoint Utility
+@mixin respond-to($media) {
+  @each $key, $value in $breakpoints {
+    @if $media == $key {
+      @media only screen and (max-width: #{$value}) { @content; }
+    } @else if $media == "#{$key}_up" {
+      @media only screen and (min-width: #{$value + 1px}) { @content; }
+    }
+  }
+}
+
+
+$container-padding: $grid-fraction * 3 + px;
+$row-margin: $grid-fraction * -1 + px;
+$row-margin-sm: $grid-fraction * -1 + px;
+$col-padding: $grid-fraction * 1.25 + px;
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+  max-width: 1440px;
+  &--sm {
+    max-width: 1280px;
+  }
+  .container {
+    padding: 0;
+  }
+}
+
+.row {
+  margin: 0 $row-margin;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  @include respond-to(sm) {
+    margin: 0 $row-margin-sm;
+  }
+  &.no-gutter {
+    margin: 0;
+
+    > .col, > [class^="col-"], > [class*=" col-"] {
+      padding: 0;
+    }
+  }
+}
+
+.col, [class^="col-"], [class*=" col-"] {
+  width: 100%;
+  padding: 0 $col-padding;
+}
+
+@mixin make-grid($prefix, $columns) {
+  @for $i from 1 through $columns {
+    .#{$prefix}-#{$i} {
+      max-width: math.div(100%, $columns) * $i;
+      flex: 0 0 math.div(100%, $columns) * $i;
+    }
+  }
+}
+
+@each $type, $screen-size in $breakpoints {
+  @if $type != "xs" {
+    @media (min-width: #{($screen-size + 1px)}) {
+      @include make-grid("col-#{$type}", $grid-columns);
+    }
+  } @else {
+    @include make-grid("col", $grid-columns);
+  }
+}
+
+@mixin textDesktopM{
+  @include fsz(18px);
+  line-height: 1.55;
+}
+
+@mixin textDesktopL{
+  @include fsz(20px);
+  line-height: 1.7;
+}
