@@ -113,7 +113,7 @@ const scrollToAnchor = () => {
   font-family: var(--font-heading);
   @include fsz(348px);
   letter-spacing: 17px;
-  color: rgba(var(--color-light-gray),0.1);
+  color: rgba(var(--color-light-gray),0.05);
   bottom: 100px;
   position: absolute;
   left: 0;
