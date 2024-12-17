@@ -41,7 +41,7 @@ section{
   background: rgb(var(--color-black));
   transition: 500ms;
   &.loaded{
-    background: rgba(var(--color-black), 0.7);
+    background: rgba(var(--color-black), 0.5);
     .splash-button-wrap{
       top: 70%;
       opacity: 1;

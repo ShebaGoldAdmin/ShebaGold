@@ -1,11 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
-  modules: [
-    '@pinia/nuxt',
-    '@nuxt/image',
-    'nuxt-purgecss',
-  ],
+  modules: ['@pinia/nuxt', '@nuxt/image', 'nuxt-purgecss', 'nuxt-gtag'],
 
   css: ['@/assets/styles/normalize.css','@/assets/styles/reset.css', '@/assets/styles/main.scss'],
 
@@ -47,6 +43,10 @@ export default defineNuxtConfig({
         { rel: 'manifest', href: '/site.webmanifest' }
       ],
     },
+  },
+
+  gtag: {
+    id: 'G-08J21DYCS5'
   },
 
   compatibilityDate: '2024-12-06',

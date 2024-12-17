@@ -7,6 +7,7 @@
         <h2 class="mb-24 mb-64-sm">Leading the Way in Strategic Investment<br> and Sustainable Growth</h2>
         <p class="lg">Sheba Gold Capital is an esteemed investment firm specializing in the identification of lucrative real estate holdings nationwide, as well ass businesses exhibiting significant growth potential.</p>   
       </div>
+      <div class="overview-heading">Overview</div>
     </section>
 
     <section class="pt-32 pt-120-sm pb-32 pb-192-sm overview-items">
@@ -67,11 +68,26 @@ onMounted(() => {
       scrub: true,
     },
   });
+
+  $gsap.fromTo(
+    ".overview-heading",
+    { x: -400 },
+    {
+      x: 600,
+      scrollTrigger: {
+        trigger: ".overview-heading",
+        start: "top bottom",
+        end: "+=3000",
+        scrub: true,
+      },
+    }
+  );
 });
 
 const scrollToAnchor = () => {
   $lenis.scrollTo('#overview', {
     easing: 'ease',
+    lerp: 0.06,
   });
 };
 </script>
@@ -83,6 +99,7 @@ const scrollToAnchor = () => {
   padding: 186px 0 310px;
   text-align: center;
   color: rgb(var(--color-white));
+  position: relative;
   @include respond-to(sm){
     padding: 88px 0 160px;
   }
@@ -90,6 +107,22 @@ const scrollToAnchor = () => {
     opacity: 0.6;
     max-width: 926px;
     margin: 0 auto;
+  }
+}
+.overview-heading{
+  font-family: var(--font-heading);
+  @include fsz(348px);
+  letter-spacing: 17px;
+  color: rgba(var(--color-light-gray),0.1);
+  bottom: 100px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  @include respond-to(sm){
+    @include fsz(130px);
+    letter-spacing: 6.5px;
+    bottom: 20px;
   }
 }
 </style>

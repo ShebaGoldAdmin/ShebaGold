@@ -15,6 +15,7 @@
     "gsap": "^3.12.5",
     "lenis": "^1.1.18",
     "nuxt": "^3.14.1592",
+    "nuxt-gtag": "^3.0.2",
     "pinia": "^2.3.0",
     "split-type": "^0.3.4",
     "vue": "latest",
