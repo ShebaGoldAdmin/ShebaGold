@@ -13,3 +13,22 @@ main{
 hr{
   border-bottom: 1px solid rgb(var(--color-stroke));
 }
+
+.v-popper--theme-tooltip .v-popper__inner {
+  background: rgb(var(--color-gold)) !important;
+  color: black !important;
+  padding: 24px;
+  border-radius: 6px;
+  border: 1px solid rgb(var(--color-gold)) !important;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, .1);
+  @include fsz(14px);
+}
+
+.v-popper--theme-tooltip .v-popper__arrow-inner {
+  visibility: visible;
+  border-color: rgb(var(--color-gold)) !important;
+}
+
+.v-popper--theme-tooltip .v-popper__arrow-outer {
+  border-color: rgb(var(--color-gold)) !important;
+}

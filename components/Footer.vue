@@ -3,14 +3,54 @@
     <div class="container">
       <div class="footer-inner">
         <ul>
-          <li><a href="#0"><span>Home</span></a></li>
-          <li><a href="#0"><span>Overview</span></a></li>
-          <li><a href="#0"><span>Principals</span></a></li>
+          <li><NuxtLink to="/">Home</NuxtLink></li>
+          <li><button @click="$scrollToAnchor('#overview')"><span>Overview</span></button></li>
+          <li>
+            <VTooltip
+              :placement="'top'"
+              :distance="14"
+            >
+              <NuxtLink to="#0">Principals</NuxtLink>
+              <template #popper>
+                Coming Soon!
+              </template>
+            </VTooltip>
+          </li>
         </ul>
         <ul>
-          <li><a href="#0"><span>Leadership</span></a></li>
-          <li><a href="#0"><span>Team</span></a></li>
-          <li><a href="#0"><span>Portfolio</span></a></li>
+          <li>
+            <VTooltip
+              :placement="'top'"
+              :distance="14"
+            >
+              <NuxtLink to="#0">Leadership</NuxtLink>
+              <template #popper>
+                Coming Soon!
+              </template>
+            </VTooltip>
+          </li>
+          <li>
+            <VTooltip
+              :placement="'top'"
+              :distance="14"
+            >
+              <NuxtLink to="#0">Team</NuxtLink>
+              <template #popper>
+                Coming Soon!
+              </template>
+            </VTooltip>
+          </li>
+          <li>
+            <VTooltip
+              :placement="'top'"
+              :distance="14"
+            >
+              <NuxtLink to="#0">Portfolio</NuxtLink>
+              <template #popper>
+                Coming Soon!
+              </template>
+            </VTooltip>
+          </li>
         </ul>
         <div class="footer-logo">
           <img src="/images/logo-text.svg" alt="">
@@ -78,7 +118,7 @@ footer{
     @include respond-to(xs){
       margin: 8px 0;
     }
-    a{
+    a, button{
       @include textDesktopM();
       color: rgba(var(--color-white), 0.5);
       padding: 4px 12px;

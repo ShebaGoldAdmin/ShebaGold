@@ -1,6 +1,6 @@
 <template>
   <main>
-    <Splash @scrollTo="scrollToAnchor"/>
+    <Splash/>
     <section class="overview" id="overview">
       <div class="container container--sm">
         <img class="mb-32" src="public/images/logo-single.svg" alt="Sheba Gold Capital" /> 
@@ -26,7 +26,7 @@
 
 <script setup lang="js">
 import { onMounted } from 'vue';
-const { $lenis, $gsap } = useNuxtApp();
+const { $gsap } = useNuxtApp();
 import splitType from 'split-type';
 
 import Splash from '~/components/Splash.vue';
@@ -83,13 +83,6 @@ onMounted(() => {
     }
   );
 });
-
-const scrollToAnchor = () => {
-  $lenis.scrollTo('#overview', {
-    easing: 'ease',
-    lerp: 0.06,
-  });
-};
 </script>
 
 

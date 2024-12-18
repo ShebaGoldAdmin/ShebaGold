@@ -5,7 +5,7 @@
       <div class="splash-inner" :class="{'loaded': isAnimationComplete}">
         <div class="splash-button-wrap">
           <ArrowButton color="gold" 
-            @click="$emit('scrollTo')"
+            @click="$scrollToAnchor('#overview')"
           />
         </div>
         <LoadAnimation @onAnimationComplete="handleAnimationComplete"/>
