@@ -2,7 +2,7 @@
   <Head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400..500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300..500&display=swap" rel="stylesheet">
   </Head>
   <main>
     <NuxtPage />
@@ -18,7 +18,7 @@ import { onMounted } from 'vue';
 const { $gsap } = useNuxtApp();
 
 onMounted(() => {
- $gsap.utils.toArray('p').forEach(item => {
+ $gsap.utils.toArray('.scalable').forEach(item => {
     $gsap.from(item, {
       y: 20,
       scale: 0.8,

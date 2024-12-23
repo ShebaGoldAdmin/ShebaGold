@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Wisdom",
+    "subtabs": [
+      { "name": "Sub Wisdom 1", "text": "Detailed explanation for Sub Wisdom 1." },
+      { "name": "Sub Wisdom 2", "text": "Detailed explanation for Sub Wisdom 2." },
+      {
+        "name": "Accountability",
+        "text": "Sheba Gold Capital deems ourselves responsible for each action and decision made. This reflects our ability to meet commitments and take ownership when necessary. Through this valued principle, we can solidify trust and grow credibility."
+      },
+      { "name": "Sub Wisdom 4", "text": "Detailed explanation for Sub Wisdom 4." }
+    ]
+  },
+  {
+    "name": "Wealth",
+    "text": "To strategically identify and syndicate selected real estate ventures and businesses, generating notable returns for investors. Through meticulous analysis, communication, and partnerships, they aim to create lasting value in each one of their deals."
+  },
+  {
+    "name": "Endurance",
+    "text": "Detailed explanation for Endurance."
+  }
+]

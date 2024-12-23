@@ -5,7 +5,7 @@
       <div class="container container--sm">
         <img class="mb-32" src="public/images/logo-single.svg" alt="Sheba Gold Capital" /> 
         <h2 class="mb-24 mb-64-sm">Leading the Way in Strategic Investment<br> and Sustainable Growth</h2>
-        <p class="lg">Sheba Gold Capital is an esteemed investment firm specializing in the identification of lucrative real estate holdings nationwide, as well ass businesses exhibiting significant growth potential.</p>   
+        <p class="lg scalable">Sheba Gold Capital is an esteemed investment firm specializing in the identification of lucrative real estate holdings nationwide, as well ass businesses exhibiting significant growth potential.</p>   
       </div>
       <div class="overview-heading">Overview</div>
     </section>
@@ -21,6 +21,8 @@
         <hr>
       </div>
     </section>
+
+    <GuidingPrincipals/>
   </main>
 </template>
 
@@ -31,7 +33,8 @@ import splitType from 'split-type';
 
 import Splash from '~/components/Splash.vue';
 import OverviewItem from '~/components/OverviewItem.vue';
-import Blockquote from '~/components/Blockquote.vue';
+import Blockquote from '~/components/elements/Blockquote.vue';
+import GuidingPrincipals from '../components/GuidingPrincipals.vue';
 
 import overviewData from '~/data/overview-items.json';
 
@@ -52,32 +55,35 @@ onMounted(() => {
     });
   });
 
-  const ourText = new splitType('h2', { types: 'words' });
-  const words = ourText.words;
+  $gsap.utils.toArray('h2').forEach(item => {
+    const ourText = new splitType(item, { types: 'words' });
+    const words = ourText.words;
 
-  $gsap.from(words, { 
-    x: 30,
-    opacity: 0,
-    stagger: 0.4,
-    duration: 2,
-    ease: 'power4.out',
-    scrollTrigger: {
-      trigger: 'h2',
-      start: 'top 90%',
-      end: 'bottom 60%',
-      scrub: true,
-    },
+    $gsap.from(words, { 
+      x: 30,
+      opacity: 0,
+      stagger: 0.4,
+      duration: 2,
+      ease: 'power4.out',
+      scrollTrigger: {
+        trigger: words,
+        start: 'top 90%',
+        end: 'bottom 60%',
+        scrub: true,
+      },
+    });
   });
 
+
   $gsap.fromTo(
-    ".overview-heading",
+    '.overview-heading',
     { x: -400 },
     {
       x: 600,
       scrollTrigger: {
-        trigger: ".overview-heading",
-        start: "top bottom",
-        end: "+=3000",
+        trigger: '.overview-heading',
+        start: 'top bottom',
+        end: '+=3000',
         scrub: true,
       },
     }

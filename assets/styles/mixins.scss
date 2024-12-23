@@ -13,6 +13,10 @@ $grid-columns: 12 !default;
 $grid-font-size: 16 !default;
 $grid-fraction: 8 !default;
 
+$grid-hidden-name: "d-none";
+$grid-visible-name: "d-block";
+$grid-visible-flex-name: "d-flex";
+
 // --- Margin and Padding Lists
 $margin-type-list: (
   m: null,
@@ -171,12 +175,8 @@ $col-padding: $grid-fraction * 1.25 + px;
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  @include respond-to(sm) {
-    margin: 0 $row-margin-sm;
-  }
   &.no-gutter {
     margin: 0;
-
     > .col, > [class^="col-"], > [class*=" col-"] {
       padding: 0;
     }
@@ -215,4 +215,152 @@ $col-padding: $grid-fraction * 1.25 + px;
 @mixin textDesktopL{
   @include fsz(20px);
   line-height: 1.7;
+}
+
+$text-align-type-list: (
+  text-center: ('center'),
+  text-left: ('left'),
+  text-right: ('right')
+);
+
+$flex-attribute-list: (
+  d-flex:           (display: "flex !important"),
+  d-inline-flex:      (display: "inline-flex !important"),
+
+  flex-row:             (flex-direction: "row !important"),
+  flex-row-reverse:         (flex-direction: "row-reverse !important"),
+  flex-column:          (flex-direction: "column !important"),
+  flex-column-reverse:      (flex-direction: "column-reverse !important"),
+
+  flex-wrap:            (flex-wrap: "wrap !important"),
+  flex-wrap-reverse:        (flex-wrap: "wrap-reverse !important"),
+  flex-nowrap:          (flex-wrap: "nowrap !important"),
+
+  justify-content-start:      (justify-content: "flex-start !important"),
+  justify-content-end:      (justify-content: "flex-end !important"),
+  justify-content-center:     (justify-content: "center !important"),
+  justify-content-baseline:     (justify-content: "baseline !important"),
+  justify-content-around:     (justify-content: "space-around !important"),
+  justify-content-between:    (justify-content: "space-between !important"),
+
+  align-items-start:        (align-items: "flex-start !important"),
+  align-items-end:        (align-items: "flex-end !important"),
+  align-items-center:       (align-items: "center !important"),
+  align-items-baseline:       (align-items: "baseline !important"),
+  align-items-stretch:      (align-items: "stretch !important"),
+
+  align-self-start:         (align-self: "flex-start"),
+  align-self-end:         (align-self: "flex-end"),
+  align-self-center:        (align-self: "center"),
+  align-self-baseline:      (align-self: "baseline"),
+  align-self-stretch:       (align-self: "stretch"),
+
+  align-content-start:      (align-content: "flex-start"),
+  align-content-end:        (align-content: "flex-end"),
+  align-content-center:       (align-content: "center"),
+  align-content-between:      (align-content: "space-between"),
+  align-content-around:       (align-content: "space-around"),
+
+  m-auto:           (margin: "auto !important"),
+
+  ml-auto:           (margin-left: "auto !important"),
+  mr-auto:           (margin-right: "auto !important"),
+
+  mt-auto:           (margin-top: "auto !important"),
+  mb-auto:           (margin-bottom: "auto !important")
+);
+
+
+// flex attribute function
+@mixin make-attribute($screen-name) {
+  @each $attribute-name,$options-list in $flex-attribute-list {
+    .#{$attribute-name}-#{$screen-name} {
+      @each $option-name, $option-value in $options-list {
+        #{$option-name}:#{$option-value};
+      }
+    }
+  }
+}
+
+@each $attribute-name, $options-list in $flex-attribute-list {
+  .#{$attribute-name} {
+    @each $option-name,
+    $option-value in $options-list {
+      #{$option-name}:#{$option-value};
+    }
+  }
+}
+
+@each $screen-name,$screen-size in $breakpoints {
+  @media (min-width: #{$screen-size + 1}) {
+    @include make-attribute($screen-name);
+  }
+}
+
+@for $i from  0 through 4{
+  .order-#{$i}{
+    order: #{$i}
+  }
+}
+
+@each $screen-name,$screen-size in $breakpoints {
+  @media (min-width: #{$screen-size + 1}) {
+    @for $i from  0 through 4{
+      .order-#{$i}-#{$screen-name}{
+        order: #{$i}
+      }
+    }
+  }
+}
+
+.#{$grid-hidden-name} {
+  display: none !important;
+}
+@each $screen-name, $screen-size in $breakpoints {
+  @media (min-width: #{$screen-size + 1}) {
+    @for $i from 1 through 1 {
+      .#{$grid-hidden-name}-#{$screen-name} {
+        display: none !important;
+      }
+    }
+  }
+}
+
+.#{$grid-visible-name} {
+  display: block !important;
+}
+@each $screen-name, $screen-size in $breakpoints {
+  @media (min-width: #{$screen-size + 1}) {
+    @for $i from 1 through 1 {
+      .#{$grid-visible-name}-#{$screen-name} {
+        display: block !important;
+      }
+    }
+  }
+}
+
+.#{$grid-visible-flex-name} {
+  display: flex;
+}
+
+@each $screen-name, $screen-size in $breakpoints {
+  @media (min-width: #{$screen-size + 1}) {
+    @for $i from 1 through 1 {
+      .#{$grid-visible-flex-name}-#{$screen-name} {
+        display: flex !important;
+      }
+    }
+  }
+}
+
+@each $option-name, $option-value in $text-align-type-list {
+  .#{$option-name}{text-align: #{$option-value};}
+}
+
+@each $screen-name, $screen-size in $breakpoints {
+  @media (min-width: #{$screen-size + 1}) {
+    @each $option-name, $option-value in $text-align-type-list {
+      .#{$option-name}-#{$screen-name}{text-align: #{$option-value};}
+    }
+  }
 }

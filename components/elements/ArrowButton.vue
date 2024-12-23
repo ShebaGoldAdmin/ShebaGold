@@ -6,7 +6,7 @@
 
 <script setup>
 import { computed } from 'vue';
-import ArrowSvg from '~/components/ArrowSvg.vue';
+import ArrowSvg from '~/components/elements/ArrowSvg.vue';
 
 const props = defineProps({
   color: {
