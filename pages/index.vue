@@ -4,7 +4,7 @@
     <section class="overview" id="overview">
       <div class="container container--sm">
         <img class="mb-32" src="public/images/logo-single.svg" alt="Sheba Gold Capital" /> 
-        <h2 class="mb-24 mb-64-sm">Leading the Way in Strategic Investment<br> and Sustainable Growth</h2>
+        <h2 class="word-split mb-24 mb-64-sm">Leading the Way in Strategic Investment<br> and Sustainable Growth</h2>
         <p class="lg scalable">Sheba Gold Capital is an esteemed investment firm specializing in the identification of lucrative real estate holdings nationwide, as well ass businesses exhibiting significant growth potential.</p>   
       </div>
       <div class="overview-heading">Overview</div>
@@ -23,6 +23,8 @@
     </section>
 
     <GuidingPrincipals/>
+    <Leadership/>
+    <PortfolioHome/>
   </main>
 </template>
 
@@ -35,6 +37,8 @@ import Splash from '~/components/Splash.vue';
 import OverviewItem from '~/components/OverviewItem.vue';
 import Blockquote from '~/components/elements/Blockquote.vue';
 import GuidingPrincipals from '../components/GuidingPrincipals.vue';
+import Leadership from '~/components/Leadership.vue';
+import PortfolioHome from '~/components/PortfolioHome.vue';
 
 import overviewData from '~/data/overview-items.json';
 
@@ -55,7 +59,7 @@ onMounted(() => {
     });
   });
 
-  $gsap.utils.toArray('h2').forEach(item => {
+  $gsap.utils.toArray('.word-split').forEach(item => {
     const ourText = new splitType(item, { types: 'words' });
     const words = ourText.words;
 

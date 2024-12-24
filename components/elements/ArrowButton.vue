@@ -1,17 +1,26 @@
 <template>
-  <a class="arrow-button" :style="styleVariables">
-    <ArrowSvg />
+  <a class="arrow-button-wrapper" :style="styleVariables">
+    <span class="arrow-button">
+      <ArrowSvg :style="`transform: rotate(${arrowRotate}deg)`"/>
+    </span>
+    <span v-if="hasSlot" class="ml-16 ml-40-sm">
+      <slot></slot>
+    </span>
   </a>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, useSlots } from 'vue';
 import ArrowSvg from '~/components/elements/ArrowSvg.vue';
 
 const props = defineProps({
   color: {
     type: String,
     default: 'dark',
+  },
+  arrowRotate: {
+    type: String,
+    default: '0deg',
   },
 });
 
@@ -35,9 +44,34 @@ const styleVariables = computed(() => {
 
   return styles;
 });
+
+const slots = useSlots();
+const hasSlot = computed(() => !!slots.default);
 </script>
 
 <style lang="scss">
+.arrow-button-wrapper{
+  display: inline-flex;
+  align-items: center;
+  span{
+    @include fsz(45px);
+    font-family: var(--font-heading);
+    color: var(--svg-stroke-color);
+    @include respond-to(sm){
+      @include fsz(30px);
+    }
+  }
+  &:hover {
+    .arrow-button{
+      &:before{
+        opacity: 1;
+      }
+    }
+    path{
+      stroke: var(--hover-svg-stroke-color);
+    }
+  }
+}
 .arrow-button {
   position: relative;
   display: inline-flex;
@@ -46,18 +80,11 @@ const styleVariables = computed(() => {
   z-index: 2;
   width: 80px;
   height: 80px;
-  border: 1px solid var(--border-color);
-  background:
-    linear-gradient(to right, var(--svg-stroke-color) 1px, transparent 1px) 0 0,
-    linear-gradient(to right, var(--svg-stroke-color) 1px, transparent 1px) 0 100%,
-    linear-gradient(to left, var(--svg-stroke-color) 1px, transparent 1px) 100% 0,
-    linear-gradient(to left, var(--svg-stroke-color) 1px, transparent 1px) 100% 100%,
-    linear-gradient(to bottom, var(--svg-stroke-color) 1px, transparent 1px) 0 0,
-    linear-gradient(to bottom, var(--svg-stroke-color) 1px, transparent 1px) 100% 0,
-    linear-gradient(to top, var(--svg-stroke-color) 1px, transparent 1px) 0 100%,
-    linear-gradient(to top, var(--svg-stroke-color) 1px, transparent 1px) 100% 100%;
-  background-repeat: no-repeat;
-  background-size: 8px 8px;
+  outline: 1px solid var(--border-color);
+  outline-offset: -1px;
+  > * {
+    z-index: 4;
+  }
   &:before{
     content: '';
     position: absolute;
@@ -67,21 +94,33 @@ const styleVariables = computed(() => {
     height: 100%;
     background: var(--hover-background-color);
     opacity: 0;
-    z-index: -1;
     transform: rotate(-90deg);
     transition: 300ms;
+    z-index: 3;
+  }
+  &:after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+      linear-gradient(to right, var(--svg-stroke-color) 1px, transparent 1px) 0 0,
+      linear-gradient(to right, var(--svg-stroke-color) 1px, transparent 1px) 0 100%,
+      linear-gradient(to left, var(--svg-stroke-color) 1px, transparent 1px) 100% 0,
+      linear-gradient(to left, var(--svg-stroke-color) 1px, transparent 1px) 100% 100%,
+      linear-gradient(to bottom, var(--svg-stroke-color) 1px, transparent 1px) 0 0,
+      linear-gradient(to bottom, var(--svg-stroke-color) 1px, transparent 1px) 100% 0,
+      linear-gradient(to top, var(--svg-stroke-color) 1px, transparent 1px) 0 100%,
+      linear-gradient(to top, var(--svg-stroke-color) 1px, transparent 1px) 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 8px 8px;
+    z-index: 2;
   }
   path{
     stroke: var(--svg-stroke-color);
     transition: 200ms;
-  }
-  &:hover {
-    &:before{
-      opacity: 1;
-    }
-    path{
-      stroke: var(--hover-svg-stroke-color);
-    }
   }
   @include respond-to(sm){
     width: 56px;

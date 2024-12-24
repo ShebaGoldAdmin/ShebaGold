@@ -58,7 +58,7 @@
       </div>
       <div class="subfooter">
         <a href="mailto:info@sheba.gold">info@sheba.gold</a>
-        <div>Sheba Gold Capital 2024 © All rights reserved</div>
+        <div class="text-center">Sheba Gold Capital 2024 © All rights reserved</div>
       </div>
     </div>
   </footer>

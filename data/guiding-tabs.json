@@ -2,13 +2,22 @@
   {
     "name": "Wisdom",
     "subtabs": [
-      { "name": "Sub Wisdom 1", "text": "Detailed explanation for Sub Wisdom 1." },
-      { "name": "Sub Wisdom 2", "text": "Detailed explanation for Sub Wisdom 2." },
+      { 
+        "name": "Integrity", 
+        "text": "At Sheba Gold Capital, we prioritize conducting our business with unwavering integrity.  We firmly uphold the highest standards of honesty, transparency and trustworthiness in all our interactions with investors and partners. Our commitment and drive for utmost integrity is a core value evident to all individuals in our greater network."
+      },
+      { 
+        "name": "Collaboration",
+        "text": "We recognize the crucial necessity, power and value of collaboration. Consequently, we actively work to build supportive and enduring relationship with investors and partners. We understand that through leveraging knowledge and experience of others, we can achieve even greater results." 
+      },
       {
         "name": "Accountability",
         "text": "Sheba Gold Capital deems ourselves responsible for each action and decision made. This reflects our ability to meet commitments and take ownership when necessary. Through this valued principle, we can solidify trust and grow credibility."
       },
-      { "name": "Sub Wisdom 4", "text": "Detailed explanation for Sub Wisdom 4." }
+      { 
+        "name": "Adaptability",
+        "text": "Our agility and responsive nature to fluctuating market dynamics and industry trends ensures that we are always a step ahead. This enables us to capitalize on opportunities, mitigate risks, and guarantee long-term sustainability and success for our business and investors."
+      }
     ]
   },
   {
@@ -17,6 +26,6 @@
   },
   {
     "name": "Endurance",
-    "text": "Detailed explanation for Endurance."
+    "text": "To be a trusted name in the investment world, known for a wide range of expertise and exceptional ability to identify high potential real estate holdings and lucrative businesses. Sheba Gold Capital aims to be synonymous with success and long term value for all parties involved."
   }
 ]

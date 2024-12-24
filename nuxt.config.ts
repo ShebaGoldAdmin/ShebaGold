@@ -3,6 +3,10 @@
 export default defineNuxtConfig({
   modules: ['@pinia/nuxt', '@nuxt/image', 'nuxt-purgecss', 'nuxt-gtag'],
 
+  plugins: [
+    '~/plugins/global-components',
+  ],
+
   css: ['@/assets/styles/normalize.css','@/assets/styles/reset.css', '@/assets/styles/main.scss'],
 
   vite: {

@@ -33,12 +33,19 @@ h4{
 }
 
 h5{
-  @include fsz(40px);
+  @include fsz(46px);
+  @include respond-to(sm){
+    @include fsz(24px);
+    line-height: 1.4;
+  }
 }
 
 p{
   @include textDesktopM();
   &.lg{
     @include textDesktopL();
+  }
+  + p{
+    margin-top: 24px;
   }
 }

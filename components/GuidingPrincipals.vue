@@ -8,7 +8,7 @@
       />
     </div>
     <div class="container">
-      <h2 class="mb-88 text-center">Guiding Principals</h2>
+      <h2 class="word-split mb-88 text-center">Guiding Principals</h2>
       <div class="guiding-wrapper">
         <!-- Main Tabs -->
         <div class="guiding-tabs">
@@ -53,7 +53,7 @@
                         class="guiding-content__subtab-content" 
                         :key="tabsStore.currentSubmode.name"
                       >
-                        <h3>{{ tabsStore.currentSubmode.name }}</h3>
+                        <h3 class="mb-24">{{ tabsStore.currentSubmode.name }}</h3>
                         <p>{{ tabsStore.currentSubmode.text }}</p>
                       </div>
                     </transition>
@@ -343,6 +343,7 @@ onMounted(() => {
     position: absolute;
     right: 16px;
     bottom: 24px;
+    pointer-events: none;
     @include respond-to(sm){
       @include fsz(100px);
       letter-spacing: 5px;

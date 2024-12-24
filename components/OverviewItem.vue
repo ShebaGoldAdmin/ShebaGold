@@ -6,7 +6,7 @@
         <h3 class="mb-24 mb-0-sm">{{ item.title }}</h3>
       </div>
       <div class="col-sm-6">
-        <p class="scalable">{{ item.description }}</p>
+        <p>{{ item.description }}</p>
       </div>
     </div>
   </div>

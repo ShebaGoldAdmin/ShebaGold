@@ -17,7 +17,6 @@
 <script setup>
 import { ref } from 'vue'
 import LoadAnimation from '~/components/LoadAnimation.vue';
-import ArrowButton from '~/components/elements/ArrowButton.vue';
 
 const isAnimationComplete = ref(false);
 

@@ -18,17 +18,29 @@ import { onMounted } from 'vue';
 const { $gsap } = useNuxtApp();
 
 onMounted(() => {
- $gsap.utils.toArray('.scalable').forEach(item => {
+  $gsap.utils.toArray('.scalable').forEach(item => {
     $gsap.from(item, {
       y: 20,
       scale: 0.8,
       opacity: 0,
-      duration: 5,
+      duration: 1,
       scrollTrigger: {
         trigger: item,
-        start: 'top 80%',
-        end: 'top 20%',
-        scrub: true,
+        start: 'top 100%',
+        toggleActions: "play pause resume reverse",
+      },
+    });
+  });
+
+  $gsap.utils.toArray('.from-right').forEach(item => {
+    $gsap.from(item, {
+      x: 60,
+      opacity: 0,
+      duration: 1,
+      scrollTrigger: {
+        trigger: item,
+        start: 'top 100%',
+        toggleActions: "play pause resume reverse",
       },
     });
   });
