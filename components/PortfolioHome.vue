@@ -51,8 +51,16 @@ onMounted(() => {
 .portfolio-home{
   padding: 280px 0 188px;
   background: rgb(var(--color-dark));
-  color: rgb(var(--color-white));
   position: relative;
+  h2{
+    background: linear-gradient(82deg, #EACEA9 9.24%, #D7A25B 46.1%, #FDEED5 67.08%, #CDA36C 99.7%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  p{
+    color: rgba(var(--color-white),0.6);
+  }
   @include respond-to(sm){
     padding: 80px 0 500px;
   }
