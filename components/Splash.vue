@@ -1,7 +1,7 @@
 <template>
   <div>
     <section>
-      <video class="fullscreen d-none d-flex-md" src="/assets/videos/sheba-video.mp4" playsinline autoplay muted loop disablePictureInPicture controlsList="nodownload"></video>
+      <video class="fullscreen" src="/assets/videos/sheba-video.mp4" playsinline autoplay muted loop disablePictureInPicture controlsList="nodownload"></video>
       <div class="splash-inner" :class="{'loaded': isAnimationComplete}">
         <div class="splash-button-wrap">
           <ArrowButton color="gold" 

@@ -9,7 +9,7 @@
     </div>
     <div class="container">
       <div class="portfolio-home__inner">
-        <h2 class="word-split mb-24">Our Portfolio</h2>
+        <h2 class="mb-24">Our Portfolio</h2>
         <p class="lg scalable">Sheba Gold Capital is an esteemed investment firm specializing in the identification of lucrative real estate holdings nationwide, as well ass businesses exhibiting significant growth potential.</p> 
         <ArrowButton class="mt-72 from-right"
           color="gold"
