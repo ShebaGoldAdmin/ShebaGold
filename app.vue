@@ -2,47 +2,104 @@
   <Head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300..500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500&display=swap" rel="stylesheet">
   </Head>
-  <main>
-    <NuxtPage />
-  </main>
-  <Footer />
+  
+  <transition
+    name="page"
+    mode="out-in"
+    @before-enter="beforePageEnter"
+    @after-enter="afterPageEnter"
+  >
+    <div :key="$route.fullPath" class="page-wrapper">
+      <NuxtPage />
+      <Footer />
+    </div>
+  </transition>
 </template>
 
 <script setup>
-import Header from '~/components/Header.vue';
-import Footer from '~/components/Footer.vue';
+import { onMounted } from 'vue'
+import { useNuxtApp } from '#app'
+import splitType from 'split-type'
+import Footer from './components/Footer.vue'
 
-import { onMounted } from 'vue';
-const { $gsap } = useNuxtApp();
+useHead({
+  titleTemplate: (titleChunk) => {
+    return titleChunk ? `${titleChunk} | Sheba Gold Capital` : 'Sheba Gold Capital';
+  }
+});
+
+const { $gsap } = useNuxtApp()
+
+const anim = {
+  scale: { y: 20, scale: 0.8, opacity: 0, duration: 1 },
+  right: { x: 60, opacity: 0, duration: 1 },
+  word: { x: 30, opacity: 0, stagger: 0.1, duration: 0.8, ease: 'power4.out' },
+  trigger: { start: 'top 100%', toggleActions: 'play pause resume reverse' },
+  wordTrigger: { start: 'top 80%', toggleActions: 'play pause resume reverse' }
+}
+
+function initializeAnimations() {
+  $gsap.utils.toArray('.scalable').forEach(item => 
+    $gsap.from(item, {
+      ...anim.scale,
+      scrollTrigger: { trigger: item, ...anim.trigger }
+    })
+  )
+
+  $gsap.utils.toArray('.from-right').forEach(item => 
+    $gsap.from(item, {
+      ...anim.right,
+      scrollTrigger: { trigger: item, ...anim.trigger }
+    })
+  )
+
+  $gsap.utils.toArray('.word-split').forEach(item => {
+    splitType.revert(item)
+    const words = new splitType(item, { types: 'words' }).words
+    $gsap.from(words, {
+      ...anim.word,
+      scrollTrigger: { trigger: item, ...anim.wordTrigger }
+    })
+  })
+}
+
+function beforePageEnter() {
+  if ($gsap.core?.globals) {
+    const { ScrollTrigger } = $gsap.core.globals()
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+    ScrollTrigger.refresh()
+  }
+}
+
+function afterPageEnter() {
+  initializeAnimations()
+  document.querySelector('.page-wrapper > main').style.opacity = 1
+}
 
 onMounted(() => {
-  $gsap.utils.toArray('.scalable').forEach(item => {
-    $gsap.from(item, {
-      y: 20,
-      scale: 0.8,
-      opacity: 0,
-      duration: 1,
-      scrollTrigger: {
-        trigger: item,
-        start: 'top 100%',
-        toggleActions: "play pause resume reverse",
-      },
-    });
-  });
-
-  $gsap.utils.toArray('.from-right').forEach(item => {
-    $gsap.from(item, {
-      x: 60,
-      opacity: 0,
-      duration: 1,
-      scrollTrigger: {
-        trigger: item,
-        start: 'top 100%',
-        toggleActions: "play pause resume reverse",
-      },
-    });
-  });
-});
+  initializeAnimations()
+  document.querySelector('.page-wrapper > main').style.opacity = 1;
+})
 </script>
+
+<style>
+.page-wrapper > main {
+  opacity: 0;
+  transition: 600ms;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.6s;
+}
+
+.page-enter-from {
+  opacity: 0;
+}
+
+.page-leave-to {
+  opacity: 0;
+}
+</style>

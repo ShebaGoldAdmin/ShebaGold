@@ -1,0 +1,12 @@
+{
+  "firstColumnLinks": [
+    { "name": "Home", "path": "/" },
+    { "name": "Overview", "path": "#overview" },
+    { "name": "Principals", "path": "#principals" }
+  ],
+  "secondColumnLinks": [
+    { "name": "Leadership", "path": "#leadership" },
+    { "name": "Team", "path": "/team" },
+    { "name": "Portfolio", "path": "#0", "tooltip": "Coming Soon!" }
+  ]
+}

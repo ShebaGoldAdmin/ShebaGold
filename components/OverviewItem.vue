@@ -2,7 +2,7 @@
   <div class="overview-item">
     <div class="row">
       <div class="col-sm-6">
-        <div class="overview-item__id">[ {{ item.id }} ]</div>
+        <HelperText>{{ item.id }}</HelperText>
         <h3 class="mb-24 mb-0-sm">{{ item.title }}</h3>
       </div>
       <div class="col-sm-6">
@@ -13,6 +13,8 @@
 </template>
 
 <script setup>
+import HelperText from './elements/HelperText.vue';
+
 defineProps({
   item: {
     type: Object,
@@ -28,11 +30,8 @@ defineProps({
   @include respond-to(sm){
     padding: 40px 0;
   }
-  &__id{
-    margin-bottom: 12px;
-    @include fsz(13px);
-    color: rgb(var(--color-gold));
-    font-weight: 500;
+  h3{
+    margin-top: 12px;
   }
 }
 </style>

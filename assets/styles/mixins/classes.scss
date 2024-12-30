@@ -1,47 +1,6 @@
 // --- Import Math Module
 @use 'sass:math';
-
-// --- Breakpoints
-$screen-xs: 575px !default;
-$screen-sm: 767px !default;
-$screen-md: 991px !default;
-$screen-lg: 1199px !default;
-$screen-xl: 1488px !default;
-
-// --- Grid Settings
-$grid-columns: 12 !default;
-$grid-font-size: 16 !default;
-$grid-fraction: 8 !default;
-
-$grid-hidden-name: "d-none";
-$grid-visible-name: "d-block";
-$grid-visible-flex-name: "d-flex";
-
-// --- Margin and Padding Lists
-$margin-type-list: (
-  m: null,
-  mt: top,
-  mr: right,
-  mb: bottom,
-  ml: left
-);
-
-$padding-type-list: (
-  p: null,
-  pt: top,
-  pr: right,
-  pb: bottom,
-  pl: left
-);
-
-// --- Responsive Breakpoints List
-$breakpoints: (
-  xs: $screen-xs,
-  sm: $screen-sm,
-  md: $screen-md,
-  lg: $screen-lg,
-  xl: $screen-xl
-);
+@use './variables' as *;
 
   // margin function
 @mixin make-margin($screen-name, $line:"-"){
@@ -107,51 +66,6 @@ $breakpoints: (
 }
 
 
-// --- Responsive Font Size Utility
-@function calculateRem($size) {
-  $remSize: math.div($size, $grid-font-size * 1px);
-  @return $remSize * 1rem;
-}
-
-@mixin fsz($size) {
-  font-size: calculateRem($size);
-}
-
-// --- Text Truncate
-@mixin truncateText() {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-// --- Center Position
-@mixin center($position) {
-  position: absolute;
-  @if $position == 'vertical' {
-    top: 50%;
-    transform: translateY(-50%);
-  } @else if $position == 'horizontal' {
-    left: 50%;
-    transform: translateX(-50%);
-  } @else if $position == 'both' {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
-
-// --- Responsive Breakpoint Utility
-@mixin respond-to($media) {
-  @each $key, $value in $breakpoints {
-    @if $media == $key {
-      @media only screen and (max-width: #{$value}) { @content; }
-    } @else if $media == "#{$key}_up" {
-      @media only screen and (min-width: #{$value + 1px}) { @content; }
-    }
-  }
-}
-
-
 $container-padding: $grid-fraction * 3 + px;
 $row-margin: $grid-fraction * -1 + px;
 $row-margin-sm: $grid-fraction * -1 + px;
@@ -205,16 +119,6 @@ $col-padding: $grid-fraction * 1.25 + px;
   } @else {
     @include make-grid("col", $grid-columns);
   }
-}
-
-@mixin textDesktopM{
-  @include fsz(18px);
-  line-height: 1.55;
-}
-
-@mixin textDesktopL{
-  @include fsz(20px);
-  line-height: 1.7;
 }
 
 $text-align-type-list: (

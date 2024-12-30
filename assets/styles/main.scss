@@ -40,3 +40,17 @@ hr{
 .v-popper--theme-tooltip .v-popper__arrow-outer {
   border-color: rgb(var(--color-gold)) !important;
 }
+
+.two-columns {
+  column-count: 2;
+  column-gap: 98px;
+  orphans: 3;
+  widows: 3;
+  @include respond-to(sm){
+    column-count: 1;
+  }
+  p{
+    break-inside: avoid-column;
+  }
+}
+

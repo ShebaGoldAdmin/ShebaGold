@@ -1,0 +1,57 @@
+@use 'sass:math';
+@use './variables' as *;
+
+// --- Responsive Font Size Utility
+@function calculateRem($size) {
+  $remSize: math.div($size, $grid-font-size * 1px);
+  @return $remSize * 1rem;
+}
+
+@mixin fsz($size) {
+  font-size: calculateRem($size);
+}
+
+// --- Text Truncate
+@mixin truncateText() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// --- Center Position
+@mixin center($position) {
+  position: absolute;
+  @if $position == 'vertical' {
+    top: 50%;
+    transform: translateY(-50%);
+  } @else if $position == 'horizontal' {
+    left: 50%;
+    transform: translateX(-50%);
+  } @else if $position == 'both' {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+// --- Responsive Breakpoint Utility
+@mixin respond-to($media) {
+  @each $key, $value in $breakpoints {
+    @if $media == $key {
+      @media only screen and (max-width: #{$value}) { @content; }
+    } @else if $media == "#{$key}_up" {
+      @media only screen and (min-width: #{$value + 1px}) { @content; }
+    }
+  }
+}
+
+
+@mixin textDesktopM{
+  @include fsz(18px);
+  line-height: 1.55;
+}
+
+@mixin textDesktopL{
+  @include fsz(20px);
+  line-height: 1.7;
+}

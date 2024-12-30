@@ -22,8 +22,8 @@
       </div>
     </section>
 
-    <GuidingPrincipals/>
-    <Leadership/>
+    <GuidingPrincipals id="principals"/>
+    <Leadership id="leadership"/>
     <PortfolioHome/>
   </main>
 </template>
@@ -31,7 +31,6 @@
 <script setup lang="js">
 import { onMounted } from 'vue';
 const { $gsap } = useNuxtApp();
-import splitType from 'split-type';
 
 import Splash from '~/components/Splash.vue';
 import OverviewItem from '~/components/OverviewItem.vue';
@@ -58,26 +57,6 @@ onMounted(() => {
       },
     });
   });
-
-  $gsap.utils.toArray('.word-split').forEach(item => {
-    const ourText = new splitType(item, { types: 'words' });
-    const words = ourText.words;
-
-    $gsap.from(words, { 
-      x: 30,
-      opacity: 0,
-      stagger: 0.4,
-      duration: 2,
-      ease: 'power4.out',
-      scrollTrigger: {
-        trigger: words,
-        start: 'top 90%',
-        end: 'bottom 60%',
-        scrub: true,
-      },
-    });
-  });
-
 
   $gsap.fromTo(
     '.overview-heading',

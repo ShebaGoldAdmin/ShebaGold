@@ -1,5 +1,5 @@
 <template>
-  <a class="arrow-button-wrapper" :style="styleVariables">
+  <a class="arrow-button-wrapper" :href="href" :style="styleVariables">
     <span class="arrow-button">
       <ArrowSvg :style="`transform: rotate(${arrowRotate}deg)`"/>
     </span>
@@ -21,6 +21,10 @@ const props = defineProps({
   arrowRotate: {
     type: String,
     default: '0deg',
+  },
+  href: {
+    type: String,
+    default: '#',
   },
 });
 

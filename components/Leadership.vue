@@ -17,12 +17,8 @@
         <div class="col-md-9">
           <div class="row mt-80 mt-184-sm">
             <div class="col-sm-5 pr-32-md">
-              <div class="leader-img">
-                <NuxtImg ref="leaderImg"
-                  format="avif"
-                  quality="90"
-                  src="/images/team/eli-abisror.png"
-                />
+              <div class="leadership-img">
+                <TeamImage src="/images/team/eli-abisror.png"/>
               </div>
             </div>
             <div class="col-sm-7 pl-40-lg d-flex flex-column align-items-start">
@@ -42,6 +38,7 @@
 </template>
 
 <script setup>
+import TeamImage from './elements/TeamImage.vue';
 import { ref, onMounted} from 'vue';
 
 const { $gsap } = useNuxtApp();
@@ -49,8 +46,9 @@ const { $gsap } = useNuxtApp();
 const slidingHeadingRef = ref(null);
 
 onMounted(() => {
-  const leaderImgWrap = document.querySelector('.leader-img');
+  const leaderImgWrap = document.querySelector('.team-img');
   const leaderImg = leaderImgWrap.querySelector('img') ;
+  const leaderLogo = leaderImgWrap.querySelector('svg') ;
 
   let tl = $gsap.timeline({
     scrollTrigger: {
@@ -67,7 +65,12 @@ onMounted(() => {
   });
   tl.from(leaderImg, 3, {
     xPercent: 100,
-    scale: 1.6,
+    scale: 1.3,
+    delay: -3,
+    ease: 'power4.out',
+  });
+  tl.from(leaderLogo, 3, {
+    xPercent: 100,
     delay: -3,
     ease: 'power4.out',
   });
@@ -89,18 +92,6 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.leader-img{
-  overflow: hidden;
-  @include respond-to(sm){
-    margin-left: 25%;
-    margin-bottom: 122px;
-  }
-  img{
-    width: 100%;
-    transform-origin: left;
-    display: block;
-  }
-}
 .leader-sliding-heading{
   @include fsz(250px);
   letter-spacing: 12.5px;
@@ -113,6 +104,13 @@ onMounted(() => {
     @include fsz(130px);
     letter-spacing: 6.5px;
     top: 600px;
+  }
+}
+.leadership-img{
+  overflow: hidden;
+  @include respond-to(sm){
+    margin-left: 25%;
+    margin-bottom: 122px;
   }
 }
 .leader-logo{

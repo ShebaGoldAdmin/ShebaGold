@@ -7,7 +7,11 @@ export default defineNuxtConfig({
     '~/plugins/global-components',
   ],
 
-  css: ['@/assets/styles/normalize.css','@/assets/styles/reset.css', '@/assets/styles/main.scss'],
+  css: ['@/assets/styles/normalize.css',
+      '@/assets/styles/reset.css',
+      '@/assets/styles/mixins/classes.scss',
+      '@/assets/styles/main.scss'
+  ],
 
   vite: {
     css: {
@@ -15,7 +19,7 @@ export default defineNuxtConfig({
         scss: {
           api: 'modern-compiler',
           additionalData: `
-            @use "@/assets/styles/mixins.scss" as *;
+            @use "@/assets/styles/mixins/mixins.scss" as *;
           `
         }
       }
@@ -28,9 +32,9 @@ export default defineNuxtConfig({
   },
 
   app: {
-    pageTransition: false, 
+    pageTransition: { name: 'page', mode: 'out-in' },
+    
     head: {
-      title: 'Sheba Gold Capital',
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no' },
         { name: 'format-detection', content: 'telephone=no' },

@@ -3,66 +3,55 @@
     <div class="container">
       <div class="footer-inner">
         <ul>
-          <li><NuxtLink to="/">Home</NuxtLink></li>
-          <li><button @click="$scrollToAnchor('#overview')"><span>Overview</span></button></li>
-          <li>
-            <VTooltip
-              :placement="'top'"
-              :distance="14"
-            >
-              <NuxtLink to="#0">Principals</NuxtLink>
-              <template #popper>
-                Coming Soon!
-              </template>
-            </VTooltip>
+          <li v-for="link in firstColumnLinks" :key="link.name">
+            <a :href="getLinkHref(link.path)">{{ link.name }}</a>
           </li>
         </ul>
         <ul>
-          <li>
-            <VTooltip
-              :placement="'top'"
-              :distance="14"
-            >
-              <NuxtLink to="#0">Leadership</NuxtLink>
-              <template #popper>
-                Coming Soon!
-              </template>
-            </VTooltip>
-          </li>
-          <li>
-            <VTooltip
-              :placement="'top'"
-              :distance="14"
-            >
-              <NuxtLink to="#0">Team</NuxtLink>
-              <template #popper>
-                Coming Soon!
-              </template>
-            </VTooltip>
-          </li>
-          <li>
-            <VTooltip
-              :placement="'top'"
-              :distance="14"
-            >
-              <NuxtLink to="#0">Portfolio</NuxtLink>
-              <template #popper>
-                Coming Soon!
-              </template>
-            </VTooltip>
+          <li v-for="link in secondColumnLinks" :key="link.name">
+            <template v-if="link.tooltip">
+              <VTooltip :placement="'top'" :distance="14">
+                <a :href="getLinkHref(link.path)">{{ link.name }}</a>
+                <template #popper>{{ link.tooltip }}</template>
+              </VTooltip>
+            </template>
+            <template v-else>
+              <a :href="getLinkHref(link.path)">{{ link.name }}</a>
+            </template>
           </li>
         </ul>
         <div class="footer-logo">
-          <img src="/images/logo-text.svg" alt="">
+          <img src="/images/logo-text.svg" alt="" />
         </div>
       </div>
       <div class="subfooter">
         <a href="mailto:info@sheba.gold">info@sheba.gold</a>
-        <div class="text-center">Sheba Gold Capital 2024 © All rights reserved</div>
+        <div class="text-center">Sheba Gold Capital {{ currentYear }} © All rights reserved</div>
       </div>
     </div>
   </footer>
 </template>
+
+<script setup>
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+import links from '~/data/links.json';
+
+const route = useRoute();
+const isHomePage = computed(() => route.path === '/');
+
+const { firstColumnLinks, secondColumnLinks } = links;
+
+const getLinkHref = (path) => {
+  if (path.startsWith('#') && !isHomePage.value) {
+    return `/${path}`;
+  }
+  return path;
+};
+
+const currentYear = new Date().getFullYear();
+</script>
+
 
 <style lang="scss" scoped>
 footer{

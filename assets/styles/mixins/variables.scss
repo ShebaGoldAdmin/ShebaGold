@@ -1,0 +1,41 @@
+// --- Breakpoints
+$screen-xs: 575px !default;
+$screen-sm: 767px !default;
+$screen-md: 991px !default;
+$screen-lg: 1199px !default;
+$screen-xl: 1488px !default;
+
+// --- Grid Settings
+$grid-columns: 12 !default;
+$grid-font-size: 16 !default;
+$grid-fraction: 8 !default;
+
+$grid-hidden-name: "d-none";
+$grid-visible-name: "d-block";
+$grid-visible-flex-name: "d-flex";
+
+// --- Margin and Padding Lists
+$margin-type-list: (
+  m: null,
+  mt: top,
+  mr: right,
+  mb: bottom,
+  ml: left
+);
+
+$padding-type-list: (
+  p: null,
+  pt: top,
+  pr: right,
+  pb: bottom,
+  pl: left
+);
+
+// --- Responsive Breakpoints List
+$breakpoints: (
+  xs: $screen-xs,
+  sm: $screen-sm,
+  md: $screen-md,
+  lg: $screen-lg,
+  xl: $screen-xl
+);
