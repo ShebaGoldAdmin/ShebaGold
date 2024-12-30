@@ -26,6 +26,7 @@
               <p class="scalable mb-40">He is currently CEO of ‘Mission Medical’ - founded in 2006, and has since concurrently launched multiple international healthcare supply companies - spanning 30 countries across six continents.</p>
               <ArrowButton class="mt-auto from-right"
                 arrowRotate="-90"
+                href="/team/eli-b-abisror"
               >
                 Find out more
               </ArrowButton>

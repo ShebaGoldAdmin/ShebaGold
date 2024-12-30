@@ -25,6 +25,8 @@ defineProps({
   overflow: hidden;
   background: rgb(var(--color-gray-team));
   position: relative;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   img{
     width: 100%;
     transform-origin: left;
