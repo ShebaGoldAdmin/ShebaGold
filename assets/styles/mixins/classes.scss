@@ -128,6 +128,8 @@ $text-align-type-list: (
 );
 
 $flex-attribute-list: (
+  d-none:      (display: "none !important"),
+  d-block:      (display: "block !important"),
   d-flex:           (display: "flex !important"),
   d-inline-flex:      (display: "inline-flex !important"),
 
@@ -212,46 +214,6 @@ $flex-attribute-list: (
     @for $i from  0 through 4{
       .order-#{$i}-#{$screen-name}{
         order: #{$i}
-      }
-    }
-  }
-}
-
-.#{$grid-hidden-name} {
-  display: none !important;
-}
-@each $screen-name, $screen-size in $breakpoints {
-  @media (min-width: #{$screen-size + 1}) {
-    @for $i from 1 through 1 {
-      .#{$grid-hidden-name}-#{$screen-name} {
-        display: none !important;
-      }
-    }
-  }
-}
-
-.#{$grid-visible-name} {
-  display: block !important;
-}
-@each $screen-name, $screen-size in $breakpoints {
-  @media (min-width: #{$screen-size + 1}) {
-    @for $i from 1 through 1 {
-      .#{$grid-visible-name}-#{$screen-name} {
-        display: block !important;
-      }
-    }
-  }
-}
-
-.#{$grid-visible-flex-name} {
-  display: flex;
-}
-
-@each $screen-name, $screen-size in $breakpoints {
-  @media (min-width: #{$screen-size + 1}) {
-    @for $i from 1 through 1 {
-      .#{$grid-visible-flex-name}-#{$screen-name} {
-        display: flex !important;
       }
     }
   }

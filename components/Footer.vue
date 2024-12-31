@@ -11,7 +11,7 @@
           <li v-for="link in secondColumnLinks" :key="link.name">
             <template v-if="link.tooltip">
               <VTooltip :placement="'top'" :distance="14">
-                <a :href="getLinkHref(link.path)">{{ link.name }}</a>
+                <a :href="getLinkHref(link.path)" class="d-none d-inline-flex-md">{{ link.name }}</a>
                 <template #popper>{{ link.tooltip }}</template>
               </VTooltip>
             </template>

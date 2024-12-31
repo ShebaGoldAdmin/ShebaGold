@@ -28,7 +28,10 @@ export default defineNuxtPlugin((nuxtApp) => {
       if (!target) return;
     
       const href = target.getAttribute('href');
-      if (!href || href === '#0') return;
+      if (!href || href === '#0') {
+        e.preventDefault();
+        return;
+      }
     
       if (href.startsWith('#')) {
         e.preventDefault();
@@ -44,6 +47,6 @@ export default defineNuxtPlugin((nuxtApp) => {
           lenis.scrollTo(section);
         }
       }
-    });    
+    });
   }
 });
