@@ -1,6 +1,7 @@
 /* purgecss start ignore */
 @use './fonts';
 @use './typography';
+@use 'floating-vue/dist/style.css';
 
 body{
   background: rgb(var(--color-dark));
@@ -26,7 +27,7 @@ hr{
 .v-popper--theme-tooltip .v-popper__inner {
   background: rgb(var(--color-gold)) !important;
   color: black !important;
-  padding: 24px;
+  padding: 8px !important;
   border-radius: 6px;
   border: 1px solid rgb(var(--color-gold)) !important;
   box-shadow: 0 6px 30px rgba(0, 0, 0, .1);
