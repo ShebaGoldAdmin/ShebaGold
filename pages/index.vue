@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main id="home">
     <Splash/>
     <section class="overview" id="overview">
       <div class="container container--sm">

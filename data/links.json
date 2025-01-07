@@ -1,12 +1,12 @@
 {
   "firstColumnLinks": [
-    { "name": "Home", "path": "/" },
-    { "name": "Overview", "path": "#overview" },
-    { "name": "Principals", "path": "#principals" }
+    { "id": "01", "name": "Home", "path": "#home" },
+    { "id": "02", "name": "Overview", "path": "#overview" },
+    { "id": "03", "name": "Principals", "path": "#principals" }
   ],
   "secondColumnLinks": [
-    { "name": "Leadership", "path": "#leadership" },
-    { "name": "Team", "path": "/team" },
-    { "name": "Portfolio", "path": "#0", "tooltip": "Coming Soon!" }
+    { "id": "04", "name": "Leadership", "path": "#leadership" },
+    { "id": "05", "name": "Team", "path": "/team" },
+    { "id": "06", "name": "Portfolio", "path": "#0", "tooltip": "Coming Soon!" }
   ]
 }

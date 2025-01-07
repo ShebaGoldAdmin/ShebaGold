@@ -12,6 +12,7 @@
     @after-enter="afterPageEnter"
   >
     <div :key="$route.fullPath" class="page-wrapper">
+      <Header />
       <NuxtPage />
       <Footer />
     </div>
@@ -23,6 +24,7 @@ import { onMounted } from 'vue'
 import { useNuxtApp } from '#app'
 import splitType from 'split-type'
 import Footer from './components/Footer.vue'
+import Header from './components/Header.vue'
 
 useHead({
   titleTemplate: (titleChunk) => {
