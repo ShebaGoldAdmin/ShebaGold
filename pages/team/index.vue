@@ -9,7 +9,7 @@
             <h2 class="mb-64 mb-80-sm word-split">With 20 years of experience in the business and real estate worlds.</h2>
             <div class="row scalable">
               <div class="col-sm-6 pr-120-md d-none d-block-sm">
-                <transition name="slide-y" mode="out-in">
+                <transition name="transition-slide-y" mode="out-in">
                   <div v-if="activeMember && activeMember.description.length > 0" 
                     :key="activeMember"
                   >
@@ -31,7 +31,7 @@
                     </NuxtLink>
                   </div>
                 </div>
-                <transition name="slide-y" mode="out-in">
+                <transition name="transition-slide-y" mode="out-in">
                   <div v-if="activeMember && activeMember.description.length > 0"
                     class="team-carousel__item-data"
                     :key="activeMember"
@@ -164,21 +164,21 @@ onMounted(() => {
   cursor: default;
 }
 
-.slide-y-enter-active,
-.slide-y-leave-active {
+.transition-slide-y-enter-active,
+.transition-slide-y-leave-active {
   transition: all 0.5s ease;
 }
 
-.slide-y-enter-from,
-.slide-y-leave-to {
+.transition-slide-y-enter-from,
+.transition-slide-y-leave-to {
   opacity: 0;
 }
 
-.slide-y-leave-to {
+.transition-slide-y-leave-to {
   transform: translateY(20px);
 }
 
-.slide-y-enter-from {
+.transition-slide-y-enter-from {
   transform: translateY(20px);
 }
 </style>

@@ -120,7 +120,7 @@
     </section>
 
     <!-- Lightbox -->
-    <transition name="fade">
+    <transition name="transition-fade">
       <div v-if="isLightboxOpen" class="lightbox">
         <div class="carousel-arrows">
           <ArrowButton arrowRotate="90"
@@ -500,7 +500,7 @@ useHead({
   }
 }
 
-.fade {
+.transition-fade {
   &-enter-active,
   &-leave-active {
     transition: opacity 0.3s ease;

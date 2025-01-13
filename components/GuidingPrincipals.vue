@@ -29,7 +29,7 @@
 
         <!-- Content Section -->
         <div class="guiding-content">
-          <transition name="slide-x" mode="out-in">
+          <transition name="transition-slide-x" mode="out-in">
             <div class="w-100" :key="tabsStore.currentMode.name">
               <div v-if="tabsStore.currentMode?.subtabs" class="guiding-content__inner">
                 <div class="row align-items-center">
@@ -48,7 +48,7 @@
                   </div>
                   
                   <div class="col-sm-7">
-                    <transition name="slide-x" mode="out-in">
+                    <transition name="transition-slide-x" mode="out-in">
                       <div v-if="tabsStore.currentSubmode" 
                         class="guiding-content__subtab-content" 
                         :key="tabsStore.currentSubmode.name"
@@ -72,7 +72,7 @@
           </transition>
           
           <div class="guiding-content__sliding-heading" ref="slidingHeadingRef">
-            <transition name="fade" mode="out-in">
+            <transition name="transition-fade" mode="out-in">
               <div :key="tabsStore.currentMode.name">
                 {{ tabsStore.currentMode.name }}
               </div>
@@ -351,31 +351,31 @@ onMounted(() => {
   }
 }
 
-.fade-enter-active,
-.fade-leave-active {
+.transition-fade-enter-active,
+.transition-fade-leave-active {
   transition: all 0.5s ease;
 }
 
-.fade-enter-from,
-.fade-leave-to {
+.transition-fade-enter-from,
+.transition-fade-leave-to {
   opacity: 0;
 }
 
-.slide-x-enter-active,
-.slide-x-leave-active {
+.transition-slide-x-enter-active,
+.transition-slide-x-leave-active {
   transition: all 0.5s ease;
 }
 
-.slide-x-enter-from,
-.slide-x-leave-to {
+.transition-slide-x-enter-from,
+.transition-slide-x-leave-to {
   opacity: 0;
 }
 
-.slide-x-leave-to {
+.transition-slide-x-leave-to {
   transform: translateX(20px);
 }
 
-.slide-x-enter-from {
+.transition-slide-x-enter-from {
   transform: translateX(20px);
 }
 
