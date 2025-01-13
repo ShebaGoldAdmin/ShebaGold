@@ -7,6 +7,12 @@ export default defineNuxtConfig({
     '~/plugins/global-components',
   ],
 
+  purgecss: {
+    safelist: {
+      deep: [/^splide/, /^splide__/, /^splide-core/],
+    },
+  },
+
   css: ['@/assets/styles/normalize.css',
       '@/assets/styles/reset.css',
       '@/assets/styles/mixins/classes.scss',
