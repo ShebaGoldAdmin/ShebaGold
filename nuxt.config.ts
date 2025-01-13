@@ -9,7 +9,8 @@ export default defineNuxtConfig({
 
   purgecss: {
     safelist: {
-      deep: [/^splide/, /^splide__/, /^splide-core/],
+      deep: [/^splide/, /^splide__/, /^splide-core/, /^page/],
+      greedy: [/page$/]
     },
   },
 
