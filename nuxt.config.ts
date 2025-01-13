@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   purgecss: {
     safelist: {
       deep: [/^splide/, /^splide__/, /^splide-core/, /^page/],
-      greedy: [/page$/, /transition$/],
+      greedy: [/page$/, /-(leave|enter|appear)(|-(to|from|active))$/],
     },
   },
 
