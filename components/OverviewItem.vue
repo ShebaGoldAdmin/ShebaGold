@@ -13,8 +13,6 @@
 </template>
 
 <script setup>
-import HelperText from './elements/HelperText.vue';
-
 defineProps({
   item: {
     type: Object,

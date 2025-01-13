@@ -7,6 +7,6 @@
   "secondColumnLinks": [
     { "id": "04", "name": "Leadership", "path": "#leadership" },
     { "id": "05", "name": "Team", "path": "/team" },
-    { "id": "06", "name": "Portfolio", "path": "#0", "tooltip": "Coming Soon!" }
+    { "id": "06", "name": "Portfolio", "path": "/portfolio"}
   ]
 }

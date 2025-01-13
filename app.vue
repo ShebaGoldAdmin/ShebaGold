@@ -35,8 +35,9 @@ useHead({
 const { $gsap } = useNuxtApp()
 
 const anim = {
-  scale: { y: 20, scale: 0.8, opacity: 0, duration: 1 },
+  scale: { y: 20, scale: 0.8, opacity: 0, duration: 1,},
   right: { x: 60, opacity: 0, duration: 1 },
+  bottom: { y: 60, opacity: 0, duration: 1, stagger: 0.15 },
   word: { x: 30, opacity: 0, stagger: 0.1, duration: 0.8, ease: 'power4.out' },
   trigger: { start: 'top 100%', toggleActions: 'play pause resume reverse' },
   wordTrigger: { start: 'top 80%', toggleActions: 'play pause resume reverse' }
@@ -53,6 +54,13 @@ function initializeAnimations() {
   $gsap.utils.toArray('.from-right').forEach(item => 
     $gsap.from(item, {
       ...anim.right,
+      scrollTrigger: { trigger: item, ...anim.trigger }
+    })
+  )
+
+  $gsap.utils.toArray('.from-bottom').forEach(item => 
+    $gsap.from(item, {
+      ...anim.bottom,
       scrollTrigger: { trigger: item, ...anim.trigger }
     })
   )

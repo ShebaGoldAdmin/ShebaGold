@@ -10,11 +10,13 @@
             :key="paragraph"
             class="scalable"
           >
-            {{ paragraph }}
+           {{ paragraph }}
           </p>
         </div>
 
-        <HelperText class="mb-40 scalable">Experience</HelperText>
+        <HelperText class="mb-40 scalable">
+          Experience
+        </HelperText>
         <div class="row">
           <div class="col-sm-6">
             <div class="company-name scalable" v-for="company in member.experience" :key="company">
@@ -43,8 +45,9 @@
 
 <script setup>
 import team from '~/data/team.json';
-import { useRoute } from 'vue-router';
+import { useRoute } from '#app';
 import InnerTop from '~/components/InnerTop.vue';
+
 
 const route = useRoute();
 const member = team.find((m) => m.slug === route.params.slug);

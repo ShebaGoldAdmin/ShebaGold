@@ -53,7 +53,7 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute } from '#app';
 import links from '~/data/links.json';
 
 const route = useRoute();

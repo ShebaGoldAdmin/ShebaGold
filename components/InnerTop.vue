@@ -1,16 +1,20 @@
 <template>
   <section class="inner-top pt-32 pb-32 pt-56-sm pb-88-sm">
-    <div v-if="member"
+    <div 
+      v-if="member?.name || subheading"
       class="inner-top__sliding-heading"
       ref="slidingHeadingRef"
     >
-      {{ member.name }}
+      {{ member?.name || subheading }}
     </div>
     <div class="container">
       <NuxtLink to="/">
         <img class="inner-top__logo" src="/images/logo-text-gold.svg" alt="Sheba Gold Capital">
       </NuxtLink>
-      <h1 class="mt-112 mt-160-sm" v-if="heading">{{ heading }}</h1>
+      <div class="mt-112 mt-160-sm" v-if="heading">
+        <HelperText v-if="subheading" class="mb-16">{{ subheading }}</HelperText>
+        <h1>{{ heading }}</h1>
+      </div>
       <div class="row mt-80 mt-160-md" v-else>
         <div class="col-sm-7 col-md-6">
           <div class="inner-top__info">
@@ -41,6 +45,10 @@ import TeamImage from '~/components/elements/TeamImage.vue';
 
 const props = defineProps({
   heading: {
+    type: String,
+    default: '',
+  },
+  subheading: {
     type: String,
     default: '',
   },

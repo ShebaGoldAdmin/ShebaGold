@@ -40,7 +40,7 @@
 
 <script setup>
 import { computed, ref, nextTick } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute } from '#app';
 import { useNuxtApp } from '#app';
 import links from '~/data/links.json';
 import SplitType from 'split-type';
@@ -80,10 +80,8 @@ const animateMenu = () => {
     const h4 = item.querySelector('h4');
     const helperText = item.querySelector('[data-helper-text]');
     
-    // Split the text of the h4 element into characters
     const split = new SplitType(h4, { types: 'chars' });
     
-    // Animate h4 characters
     $gsap.fromTo(
       split.chars,
       { opacity: 0, x: 20 },
@@ -97,7 +95,6 @@ const animateMenu = () => {
       }
     );
 
-    // Animate HelperText with scaling and opacity
     $gsap.fromTo(
       helperText,
       { opacity: 0, scale: 0.5 },

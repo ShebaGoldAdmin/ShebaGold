@@ -95,6 +95,12 @@ $col-padding: $grid-fraction * 1.25 + px;
       padding: 0;
     }
   }
+  &.gutter-48 {
+    margin: 0 -24px;
+    > .col, > [class^="col-"], > [class*=" col-"] {
+      padding: 0 24px;
+    }
+  }
 }
 
 .col, [class^="col-"], [class*=" col-"] {

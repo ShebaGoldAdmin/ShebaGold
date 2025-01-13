@@ -12,6 +12,7 @@
   "dependencies": {
     "@nuxt/image": "^1.8.1",
     "@pinia/nuxt": "^0.9.0",
+    "@splidejs/vue-splide": "^0.6.12",
     "floating-vue": "^5.2.2",
     "gsap": "^3.12.5",
     "lenis": "^1.1.18",

@@ -20,11 +20,11 @@ const props = defineProps({
   },
   arrowRotate: {
     type: String,
-    default: '0deg',
+    default: '0',
   },
   href: {
     type: String,
-    default: '#',
+    default: '',
   },
 });
 

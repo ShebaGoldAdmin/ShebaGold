@@ -60,7 +60,7 @@
 </template>
 
 
-<script setup lang="js">
+<script setup>
 import { ref, computed, onMounted } from 'vue';
 import teamData from '~/data/team.json';
 
