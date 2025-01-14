@@ -2,29 +2,6 @@
   "items": [
     {
       "id": 1,
-      "title": "Transit Plaza",
-      "category": "Real Estates",
-      "slug": "transit-plaza",
-      "description": [
-        "Transit Plaza is a Class A, 214-unit apartment building located at 1 West Dickerson Street. The property consists of 53 one-bedroom, 70 one-bedroom with a den, 84 two-bedroom units and 7 two bedroom two bath apartments. The property was completed in 2021 and has experienced a quick lease up. The property benefits from a 30-year tax pilot, no COAH restrictions, and multiple opportunities to increase revenue. There are 283 garage parking spaces and multiple amenities for tenants to enjoy."
-      ],
-      "itemDetails": [
-        {
-          "title": "Date",
-          "description": "July 2022"
-        },
-        {
-          "title": "Units",
-          "description": "214 units"
-        },
-        {
-          "title": "Amount",
-          "description": "$75M"
-        }
-      ]
-    },
-    {
-      "id": 2,
       "title": "Mission Medical",
       "category": "Healthcare",
       "slug": "mission-medical",
@@ -56,9 +33,32 @@
       ]
     },
     {
+      "id": 2,
+      "title": "Transit Plaza",
+      "category": "Real Estate",
+      "slug": "transit-plaza",
+      "description": [
+        "Transit Plaza is a Class A, 214-unit apartment building located at 1 West Dickerson Street. The property consists of 53 one-bedroom, 70 one-bedroom with a den, 84 two-bedroom units and 7 two bedroom two bath apartments. The property was completed in 2021 and has experienced a quick lease up. The property benefits from a 30-year tax pilot, no COAH restrictions, and multiple opportunities to increase revenue. There are 283 garage parking spaces and multiple amenities for tenants to enjoy."
+      ],
+      "itemDetails": [
+        {
+          "title": "Date",
+          "description": "July 2022"
+        },
+        {
+          "title": "Units",
+          "description": "214 units"
+        },
+        {
+          "title": "Amount",
+          "description": "$75M"
+        }
+      ]
+    },
+    {
       "id": 3,
       "title": "710 Route 46",
-      "category": "Real Estates",
+      "category": "Real Estate",
       "slug": "710-route",
       "description": [
         "This 104,000 square foot office building is situated on 9.82 acres and is strategically located minutes off Interstate 80. The Property offers unparalleled visibility and accessibility on Route 46 and is surrounded by a plethora of nearby amenities. The 4- story building is currently undergoing significant rehabilitation and aesthetic upgrades. Once renovation is complete, this building will epitomize a state-of-the-art business center complete with modern interior design and notable amenities."
@@ -81,7 +81,7 @@
     {
       "id": 4,
       "title": "611 West Front St",
-      "category": "Real Estates",
+      "category": "Real Estate",
       "slug": "611-west-front",
       "description": [
         "As an original development plan, the 6.5 acre lot at 611 W. Front Street was to be developed into a 316 unit, five-story building, with surface and covered parking. Seeing the potential in the area, we purchased the neighboring property, 605 W. Front Street and skillfully worked to have it legally merged with 611 W Front Street.",

@@ -54,7 +54,7 @@ import { ref, onMounted } from 'vue';
 import portfolioData from '~/data/portfolio.json';
 
 const items = ref(portfolioData.items);
-const categories = ['View All', 'Healthcare', 'Real Estates'];
+const categories = ['View All', 'Healthcare', 'Real Estate'];
 const selectedCategory = ref('View All');
 const itemRefs = ref({});
 const isAnimating = ref(false);

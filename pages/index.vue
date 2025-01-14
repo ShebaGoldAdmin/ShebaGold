@@ -29,8 +29,9 @@
 </template>
 
 <script setup lang="js">
-import { onMounted } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 const { $gsap } = useNuxtApp();
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
 import Splash from '~/components/Splash.vue';
 import OverviewItem from '~/components/OverviewItem.vue';
@@ -41,7 +42,21 @@ import PortfolioHome from '~/components/PortfolioHome.vue';
 
 import overviewData from '~/data/overview-items.json';
 
+const emit = defineEmits();
 const overviewItems = overviewData;
+
+onMounted(() => {
+  const trigger = ScrollTrigger.create({
+    start: "top -99%",
+    end: "bottom -100%",
+    onEnter: () => emit('update:headerHidden', false),
+    onLeaveBack: () => emit('update:headerHidden', true),
+  })
+
+  onUnmounted(() => {
+    trigger.kill()
+  })
+})
 
 onMounted(() => {
  $gsap.utils.toArray('.overview-item').forEach(item => {

@@ -12,15 +12,16 @@
     @after-enter="afterPageEnter"
   >
     <div :key="$route.fullPath" class="page-wrapper">
-      <Header />
-      <NuxtPage />
+      <Header :buttonHidden="headerHidden"/>
+      <NuxtPage @update:headerHidden="updateHeaderHidden"/>
       <Footer />
     </div>
   </transition>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, watch, ref } from 'vue'
+import { useRoute } from '#app'
 import { useNuxtApp } from '#app'
 import splitType from 'split-type'
 import Footer from './components/Footer.vue'
@@ -33,6 +34,8 @@ useHead({
 });
 
 const { $gsap } = useNuxtApp()
+const route = useRoute()
+const headerHidden = ref(false)
 
 const anim = {
   scale: { y: 20, scale: 0.8, opacity: 0, duration: 1,},
@@ -41,6 +44,22 @@ const anim = {
   word: { x: 30, opacity: 0, stagger: 0.1, duration: 0.8, ease: 'power4.out' },
   trigger: { start: 'top 100%', toggleActions: 'play pause resume reverse' },
   wordTrigger: { start: 'top 80%', toggleActions: 'play pause resume reverse' }
+}
+
+watch(
+  () => route.fullPath,
+  (newPath) => {
+    if (newPath === '/') {
+      headerHidden.value = true
+    } else {
+      headerHidden.value = false
+    }
+  },
+  { immediate: true }
+)
+
+const updateHeaderHidden = (value) => {
+  headerHidden.value = value
 }
 
 function initializeAnimations() {
@@ -90,7 +109,7 @@ function afterPageEnter() {
 
 onMounted(() => {
   initializeAnimations()
-  document.querySelector('.page-wrapper > main').style.opacity = 1;
+  document.querySelector('.page-wrapper > main').style.opacity = 1
 })
 </script>
 

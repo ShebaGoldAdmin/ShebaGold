@@ -26,10 +26,10 @@
   </header>
   <button 
     class="toggle-menu"
-    :class="{'is-active' : isMenuOpen }"
+    :class="{'is-active' : isMenuOpen, 'is-hidden': buttonHidden }"
     @click="toggleMenu"
   >
-    <span>menu</span>
+    <span class="d-none d-block-sm">menu</span>
     <div class="toggle-menu__inner">
       <span class="line"></span>
       <span class="line"></span>
@@ -44,6 +44,13 @@ import { useRoute } from '#app';
 import { useNuxtApp } from '#app';
 import links from '~/data/links.json';
 import SplitType from 'split-type';
+
+const props = defineProps({
+  buttonHidden: {
+    type: Boolean,
+    default: true,
+  },
+});
 
 const { $gsap } = useNuxtApp();
 const route = useRoute();
@@ -168,6 +175,7 @@ header {
   letter-spacing: 2px;
   display: flex;
   align-items: center;
+  transition: 400ms;
   @include respond-to(sm) {
     right: 24px;
   }
@@ -215,6 +223,11 @@ header {
         width: 100%;
       }
     }
+  }
+  &.is-hidden {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
   }
 }
 </style>
