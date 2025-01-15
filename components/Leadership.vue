@@ -24,12 +24,14 @@
             <div class="col-sm-7 pl-40-lg d-flex flex-column align-items-start">
               <p class="scalable">Based in Tinton Falls, he has expertly overseen the distribution of medical and dental supply products, leveraging his extensive knowledge in the medical export and import sectors. </p>
               <p class="scalable mb-40">He is currently CEO of ‘Mission Medical’ - founded in 2006, and has since concurrently launched multiple international healthcare supply companies - spanning 30 countries across six continents.</p>
-              <ArrowButton class="mt-auto from-right"
-                arrowRotate="-90"
-                href="/team/eli-b-abisror"
-              >
-                Find out more
-              </ArrowButton>
+              <NuxtLink to="/team/eli-b-abisror">
+                <ArrowButton class="mt-auto from-right"
+                  href="/team/eli-b-abisror"
+                  arrowRotate="-90"
+                >
+                  Find out more
+                </ArrowButton>
+              </NuxtLink>
             </div>
           </div>
         </div>

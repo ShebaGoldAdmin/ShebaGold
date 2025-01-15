@@ -11,15 +11,13 @@
       <div class="portfolio-home__inner">
         <h2 class="mb-24">Our Portfolio</h2>
         <p class="lg scalable">Sheba Gold Capital is an esteemed investment firm specializing in the identification of lucrative real estate holdings nationwide, as well ass businesses exhibiting significant growth potential.</p> 
-        <ArrowButton class="mt-72 from-right d-none d-inline-flex-md"
-          v-tooltip="{
-            content: 'Coming Soon!',
-            distance: 14,
-          }"
-          color="gold"
-          arrowRotate="-90"
-        />
-        <h3 class="d-none-md mt-72">Portfolio coming Soon!</h3>
+        <NuxtLink to="/portfolio">
+          <ArrowButton class="mt-72 from-right"
+            href="/portfolio"
+            color="gold"
+            arrowRotate="-90"
+          />
+        </NuxtLink>
       </div>
     </div>
   </section>
