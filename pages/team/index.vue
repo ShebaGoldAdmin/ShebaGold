@@ -7,48 +7,45 @@
           <div class="col-lg-8">
             <HelperText class="mb-24">Meet Our Team</HelperText>
             <h2 class="mb-64 mb-80-sm word-split">With 20 years of experience in the business and real estate worlds.</h2>
-            <div class="row scalable">
-              <div class="col-sm-6 pr-120-md d-none d-block-sm">
-                <transition name="transition-slide-y" mode="out-in">
-                  <div v-if="activeMember && activeMember.description.length > 0" 
-                    :key="activeMember"
-                  >
-                    <p class="mt-24">{{ activeMember.description[0] }}</p>
-                  </div>
-                </transition>
-              </div>
-              <div class="col-sm-6">
-                <div class="team-carousel">
-                  <div 
-                    class="team-carousel__item"
-                    :class="{ 'disabled-link': (index !== activeMemberIndex) }"
-                    v-for="(member, index) in teamMembers" 
-                    :key="index"
-                  >
-                    <NuxtLink :to="'/team/' + member.slug">
-                      <TeamImage :src="member.image" />
-                      <div class="team-carousel__overlay"></div>
-                    </NuxtLink>
-                  </div>
+            <div class="team-section">
+              <div class="row scalable">
+                <div class="col-sm-6 pr-120-md d-none d-block-sm">
+                  <transition name="transition-slide-y" mode="out-in">
+                    <div v-if="activeMember && activeMember.description.length > 0" 
+                      :key="activeMember"
+                    >
+                      <p class="mt-24">{{ activeMember.description[0] }}</p>
+                    </div>
+                  </transition>
                 </div>
-                <transition name="transition-slide-y" mode="out-in">
-                  <div v-if="activeMember && activeMember.description.length > 0"
-                    class="team-carousel__item-data"
-                    :key="activeMember"
+                <div class="col-sm-6">
+                  <div 
+                    class="team-carousel"
+                    @touchstart="onTouchStart"
+                    @touchmove="onTouchMove"
+                    @touchend="onTouchEnd"
                   >
-                    <h3>{{ activeMember.name }}</h3>
-                    <p>{{ activeMember.position }}</p>
+                    <div 
+                      class="team-carousel__item"
+                      :class="{ 'disabled-link': (index !== activeMemberIndex) }"
+                      v-for="(member, index) in teamMembers" 
+                      :key="index"
+                    >
+                      <NuxtLink :to="'/team/' + member.slug">
+                        <TeamImage :src="member.image" />
+                        <div class="team-carousel__overlay"></div>
+                      </NuxtLink>
+                    </div>
                   </div>
-                </transition>
-                <div class="d-flex align-items-center justify-content-center mt-40">
-                  <ArrowButton class="ml-8 mr-8"
-                    @click="prevMember" 
-                    arrowRotate="90"
-                  />
-                  <ArrowButton class="ml-8 mr-8"
-                    @click="nextMember"
-                    arrowRotate="-90"
-                  />
+                  <transition name="transition-slide-y" mode="out-in">
+                    <div v-if="activeMember && activeMember.description.length > 0"
+                      class="team-carousel__item-data"
+                      :key="activeMember"
+                    >
+                      <h3>{{ activeMember.name }}</h3>
+                      <p>{{ activeMember.position }}</p>
+                    </div>
+                  </transition>
                 </div>
               </div>
             </div>
@@ -59,7 +56,6 @@
   </main>
 </template>
 
-
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import teamData from '~/data/team.json';
@@ -69,9 +65,11 @@ import TeamImage from '~/components/elements/TeamImage.vue';
 
 const teamMembers = ref(teamData);
 const activeMemberIndex = ref(0);
+const touchStartX = ref(0);
+const touchEndX = ref(0);
 
 useHead({
-  title: 'Team',
+ title: 'Team',
 });
 
 const activeMember = computed(() => teamMembers.value[activeMemberIndex.value]);
@@ -79,54 +77,102 @@ const activeMember = computed(() => teamMembers.value[activeMemberIndex.value]);
 const { $gsap } = useNuxtApp();
 
 const triggerAnimation = () => {
-  const teamItems = document.querySelectorAll('.team-carousel__item');
+ const teamItems = document.querySelectorAll('.team-carousel__item');
 
-  const baseScale = 1;
-  const scaleDecrement = 0.2;
-  const baseXOffset = 80;
+ const baseScale = 1;
+ const scaleDecrement = 0.2;
+ const baseXOffset = 80;
 
-  const calculateXOffset = (relativeIndex) => {
-    if (relativeIndex === 0) return 0;
+ const calculateXOffset = (relativeIndex) => {
+   if (relativeIndex === 0) return 0;
+   let offset = baseXOffset;
+   for (let i = 2; i <= relativeIndex; i++) {
+     offset += baseXOffset * (1 - (i - 1) * scaleDecrement);
+   }
+   return offset;
+ };
 
-    let offset = baseXOffset;
-    for (let i = 2; i <= relativeIndex; i++) {
-      offset += baseXOffset * (1 - (i - 1) * scaleDecrement);
-    }
-    return offset;
-  };
+ const calculateOverlayOpacity = (relativeIndex) => {
+   if (relativeIndex === 0) return 0;
+   return 1 - 1 / Math.pow(2, relativeIndex);
+ };
 
-  const calculateOverlayOpacity = (relativeIndex) => {
-    if (relativeIndex === 0) return 0;
-    return 1 - 1 / Math.pow(2, relativeIndex);
-  };
+ teamItems.forEach((member, index) => {
+   const relativeIndex = (index - activeMemberIndex.value + teamItems.length) % teamItems.length;
+   const overlay = member.querySelector('.team-carousel__overlay');
 
-  teamItems.forEach((member, index) => {
-    const relativeIndex = (index - activeMemberIndex.value + teamItems.length) % teamItems.length;
-    const overlay = member.querySelector('.team-carousel__overlay');
+   overlay.style.opacity = calculateOverlayOpacity(relativeIndex);
 
-    overlay.style.opacity = calculateOverlayOpacity(relativeIndex);
-
-    $gsap.timeline().set(member, { zIndex: teamItems.length - relativeIndex })
-      .to(member, {
-        scale: baseScale - scaleDecrement * relativeIndex,
-        xPercent: calculateXOffset(relativeIndex),
-        duration: 0.6,
-      });
-  });
-};
-
-const prevMember = () => {
-  activeMemberIndex.value = (activeMemberIndex.value - 1 + teamMembers.value.length) % teamMembers.value.length;
-  triggerAnimation();
+   $gsap.timeline().set(member, { zIndex: teamItems.length - relativeIndex })
+     .to(member, {
+       scale: baseScale - scaleDecrement * relativeIndex,
+       xPercent: calculateXOffset(relativeIndex),
+       duration: 0.5,
+     });
+ });
 };
 
 const nextMember = () => {
-  activeMemberIndex.value = (activeMemberIndex.value + 1) % teamMembers.value.length;
-  triggerAnimation();
+ const totalMembers = teamMembers.value.length;
+ activeMemberIndex.value = (activeMemberIndex.value + 1) % totalMembers;
+ triggerAnimation();
 };
 
+const prevMember = () => {
+ const totalMembers = teamMembers.value.length;
+ activeMemberIndex.value = (activeMemberIndex.value - 1 + totalMembers) % totalMembers;
+ triggerAnimation();
+};
+
+const onTouchStart = (event) => {
+ touchStartX.value = event.touches[0].clientX;
+};
+
+const onTouchMove = (event) => {
+ touchEndX.value = event.touches[0].clientX;
+};
+
+const onTouchEnd = () => {
+ const swipeDistance = touchStartX.value - touchEndX.value;
+ const swipeThreshold = 50;
+
+ if (swipeDistance > swipeThreshold) {
+   nextMember();
+ } else if (swipeDistance < -swipeThreshold) {
+   prevMember();
+ }
+};
+
+const triggerScrollAnimation = () => {
+ const teamSection = document.querySelector('.team-section');
+ const teamItems = document.querySelectorAll('.team-carousel__item');
+
+ $gsap.timeline({
+   scrollTrigger: {
+     trigger: teamSection,
+     start: 'top 5%',
+     end: `+=${teamItems.length * window.innerHeight}`,
+     pin: true,
+     scrub: 0.6,
+     onUpdate: (self) => {
+       const currentIndex = Math.min(
+         teamItems.length - 1, 
+         Math.floor(self.progress * teamItems.length)
+       );
+       activeMemberIndex.value = currentIndex;
+       triggerAnimation();
+     },
+   },
+ });
+};
+
+const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
 onMounted(() => {
-  triggerAnimation();
+ triggerAnimation();
+ if (!isTouchDevice()) {
+   triggerScrollAnimation();
+ }
 });
 </script>
 
