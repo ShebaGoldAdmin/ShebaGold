@@ -40,23 +40,52 @@
       </div>
     </section>
 
+    <section 
+      class="pb-80"
+      :class="{ 'bg-light-gray': member.achievements }"
+    >
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <RouterLink v-if="prevMember" :to="`/team/${prevMember.slug}`" class="mr-8">
+            <ArrowButton
+              arrowRotate="90"
+              paginationLeft
+            >
+              {{ prevMember.name }}
+            </ArrowButton>
+          </RouterLink>
+          <RouterLink v-if="nextMember" :to="`/team/${nextMember.slug}`">
+            <ArrowButton 
+              arrowRotate="-90"
+              paginationRight
+            >
+              {{ nextMember.name }}
+            </ArrowButton>
+          </RouterLink>
+        </div>
+      </div>
+    </section>
   </main>
 </template>
+
 
 <script setup>
 import team from '~/data/team.json';
 import { useRoute } from '#app';
 import InnerTop from '~/components/InnerTop.vue';
 
-
 const route = useRoute();
-const member = team.find((m) => m.slug === route.params.slug);
+const currentIndex = team.findIndex((m) => m.slug === route.params.slug);
+const member = team[currentIndex];
+const prevMember = currentIndex === 0 ? team[team.length - 1] : team[currentIndex - 1];
+const nextMember = currentIndex === team.length - 1 ? team[0] : team[currentIndex + 1];
 
 useHead({
   title: member?.name,
   description: member?.position,
 });
 </script>
+
 
 <style lang="scss" scoped>
 .company-name{
@@ -82,6 +111,9 @@ useHead({
       width: 88px;
     }
   }
+}
+.bg-light-gray {
+  background: rgb(var(--color-light-gray));
 }
 .timeline {
   column-count: 2;

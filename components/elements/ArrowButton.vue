@@ -1,12 +1,15 @@
 <template>
-  <a class="arrow-button-wrapper" :href="href" :style="styleVariables">
+  <button class="arrow-button-wrapper" 
+    :class="arrowButtonClass"
+    :style="styleVariables"
+  >
     <span class="arrow-button">
       <ArrowSvg :style="`transform: rotate(${arrowRotate}deg)`"/>
     </span>
-    <span v-if="hasSlot" class="ml-16 ml-40-sm">
+    <span v-if="hasSlot" class="arrow-button-name">
       <slot></slot>
     </span>
-  </a>
+  </button>
 </template>
 
 <script setup>
@@ -22,9 +25,13 @@ const props = defineProps({
     type: String,
     default: '0',
   },
-  href: {
-    type: String,
-    default: '',
+  paginationLeft: {
+    type: Boolean,
+    default: false,
+  },
+  paginationRight: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -51,6 +58,13 @@ const styleVariables = computed(() => {
 
 const slots = useSlots();
 const hasSlot = computed(() => !!slots.default);
+
+const arrowButtonClass = computed(() => {
+  return {
+    'pagination-left': props.paginationLeft,
+    'pagination-right': props.paginationRight,
+  };
+});
 </script>
 
 <style lang="scss">
@@ -132,6 +146,41 @@ const hasSlot = computed(() => !!slots.default);
     svg{
       width: 20px;
       height: 20px;
+    }
+  }
+}
+
+.arrow-button-name {
+  margin-left: 40px;
+  @include respond-to(sm) {
+    margin-left: 16px;
+  }
+}
+
+.pagination-left {
+  @include respond-to(sm) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .arrow-button-name {
+    @include respond-to(sm) {
+      margin-left: 0;
+      margin-top: 16px;
+    }
+  }
+}
+
+.pagination-right {
+  flex-flow: row-reverse;
+  @include respond-to(sm) {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .arrow-button-name {
+    margin-right: 40px;
+    @include respond-to(sm) {
+      margin-right: 0;
+      margin-top: 16px;
     }
   }
 }

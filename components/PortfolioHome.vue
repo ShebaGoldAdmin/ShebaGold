@@ -13,7 +13,6 @@
         <p class="lg scalable">Sheba Gold Capital is an esteemed investment firm specializing in the identification of lucrative real estate holdings nationwide, as well ass businesses exhibiting significant growth potential.</p> 
         <NuxtLink to="/portfolio">
           <ArrowButton class="mt-72 from-right"
-            href="/portfolio"
             color="gold"
             arrowRotate="-90"
           />

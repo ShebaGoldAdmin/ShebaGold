@@ -27,6 +27,7 @@ defineProps({
   position: relative;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
+  transition: 300ms;
   img{
     width: 100%;
     transform-origin: left;

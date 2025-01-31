@@ -119,6 +119,32 @@
       </div>
     </section>
 
+    <section 
+      class="pb-80"
+      :class="`${portfolioImages.length >= 3 ? 'bg-light-gray' : 'bg-white'}`"
+    >
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <RouterLink v-if="prevItem" :to="`/portfolio/${prevItem.slug}`" class="mr-8">
+            <ArrowButton
+              arrowRotate="90"
+              paginationLeft
+            >
+              {{ prevItem.title }}
+            </ArrowButton>
+          </RouterLink>
+          <RouterLink v-if="nextItem" :to="`/portfolio/${nextItem.slug}`" class="ml-8">
+            <ArrowButton 
+              arrowRotate="-90"
+              paginationRight
+            >
+              {{ nextItem.title }}
+            </ArrowButton>
+          </RouterLink>
+        </div>
+      </div>
+    </section>
+
     <!-- Lightbox -->
     <transition name="transition-fade">
       <div v-if="isLightboxOpen" class="lightbox">
@@ -181,7 +207,10 @@ import '@splidejs/splide/css';
 const { $gsap } = useNuxtApp();
 
 const route = useRoute();
-const portfolioItem = portfolioData.items.find((item) => item.slug === route.params.slug);
+const currentIndex = portfolioData.items.findIndex((m) => m.slug === route.params.slug);
+const portfolioItem = portfolioData.items[currentIndex];
+const prevItem = currentIndex === 0 ? portfolioData.items[portfolioData.items.length - 1] : portfolioData.items[currentIndex - 1];
+const nextItem = currentIndex === portfolioData.items.length - 1 ? portfolioData.items[0] : portfolioData.items[currentIndex + 1];
 const portfolioImages = ref([]);
 const isLightboxOpen = ref(false);
 const currentImageIndex = ref(0);
@@ -509,5 +538,16 @@ useHead({
   &-leave-to {
     opacity: 0;
   }
+}
+
+.bg-light-gray {
+  background: rgb(var(--color-light-gray));
+  z-index: 2;
+  position: relative;
+}
+.bg-white {
+  background: rgb(var(--color-white));
+  z-index: 2;
+  position: relative;
 }
 </style>

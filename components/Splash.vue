@@ -4,8 +4,9 @@
       <video class="fullscreen" src="/assets/videos/sheba-video.mp4" playsinline autoplay muted loop disablePictureInPicture controlsList="nodownload"></video>
       <div class="splash-inner" :class="{'loaded': isAnimationComplete}">
         <div class="splash-button-wrap">
-          <ArrowButton color="gold" 
-            href="#overview"
+          <ArrowButton 
+            color="gold"
+            @click="() => $lenis.scrollTo('#overview')"
           />
         </div>
         <LoadAnimation @onAnimationComplete="handleAnimationComplete"/>
@@ -18,6 +19,7 @@
 import { ref } from 'vue'
 import LoadAnimation from '~/components/LoadAnimation.vue';
 
+const { $lenis } = useNuxtApp();
 const isAnimationComplete = ref(false);
 
 const handleAnimationComplete = () => {

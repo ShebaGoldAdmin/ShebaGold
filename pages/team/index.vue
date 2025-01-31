@@ -18,7 +18,7 @@
                     </div>
                   </transition>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-10 col-sm-6">
                   <div 
                     class="team-carousel"
                     @touchstart="onTouchStart"
@@ -27,14 +27,15 @@
                   >
                     <div 
                       class="team-carousel__item"
-                      :class="{ 'disabled-link': (index !== activeMemberIndex) }"
                       v-for="(member, index) in teamMembers" 
                       :key="index"
+                      @click="handleCardClick(index)"
                     >
-                      <NuxtLink :to="'/team/' + member.slug">
-                        <TeamImage :src="member.image" />
-                        <div class="team-carousel__overlay"></div>
-                      </NuxtLink>
+                      <TeamImage :src="member.image" />
+                      <div class="team-carousel__overlay"></div>
+                      <div v-show="index === activeMemberIndex" class="team-carousel__view-more">
+                        <span>View More</span>
+                      </div>
                     </div>
                   </div>
                   <transition name="transition-slide-y" mode="out-in">
@@ -46,6 +47,20 @@
                       <p>{{ activeMember.position }}</p>
                     </div>
                   </transition>
+                </div>
+              </div>
+              <div class="row justify-content-end">
+                <div class="col-12 col-sm-6">
+                  <div class="d-flex align-items-center justify-content-center mt-40">
+                    <ArrowButton class="ml-8 mr-8"
+                      @click="prevMember" 
+                      arrowRotate="90"
+                    />
+                    <ArrowButton class="ml-8 mr-8"
+                      @click="nextMember"
+                      arrowRotate="-90"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -69,130 +84,142 @@ const touchStartX = ref(0);
 const touchEndX = ref(0);
 
 useHead({
- title: 'Team',
+  title: 'Team',
 });
 
-const activeMember = computed(() => teamMembers.value[activeMemberIndex.value]);
-
 const { $gsap } = useNuxtApp();
+const router = useRouter();
+
+let teamItems = [];
+
+const activeMember = computed(() => {
+  return teamMembers.value[activeMemberIndex.value] || {};
+});
+
+const changeMember = (newIndex) => {
+  const totalMembers = teamMembers.value.length;
+
+  activeMemberIndex.value = (newIndex + totalMembers) % totalMembers;
+
+  teamItems.forEach(item => item.classList.remove('is-active'));
+
+  const currentItem = teamItems[activeMemberIndex.value];
+  triggerAnimation();
+
+  setTimeout(() => {
+    currentItem.classList.add('is-active');
+  }, 500);
+};
 
 const triggerAnimation = () => {
- const teamItems = document.querySelectorAll('.team-carousel__item');
+  teamItems.forEach((member, index) => {
+    const relativeIndex = (index - activeMemberIndex.value + teamItems.length) % teamItems.length;
+    const overlay = member.querySelector('.team-carousel__overlay');
 
- const baseScale = 1;
- const scaleDecrement = 0.2;
- const baseXOffset = 80;
+    overlay.style.opacity = calculateOverlayOpacity(relativeIndex);
 
- const calculateXOffset = (relativeIndex) => {
-   if (relativeIndex === 0) return 0;
-   let offset = baseXOffset;
-   for (let i = 2; i <= relativeIndex; i++) {
-     offset += baseXOffset * (1 - (i - 1) * scaleDecrement);
-   }
-   return offset;
- };
+    $gsap.timeline()
+      .set(member, { zIndex: teamItems.length - relativeIndex })
+      .to(member, {
+        scale: 1 - 0.2 * relativeIndex,
+        xPercent: calculateXOffset(relativeIndex),
+        duration: 0.5,
+      });
+  });
+};
 
- const calculateOverlayOpacity = (relativeIndex) => {
-   if (relativeIndex === 0) return 0;
-   return 1 - 1 / Math.pow(2, relativeIndex);
- };
+const calculateXOffset = (relativeIndex) => {
+  const baseXOffset = 80;
+  if (relativeIndex === 0) return 0;
+  let offset = baseXOffset;
+  for (let i = 2; i <= relativeIndex; i++) {
+    offset += baseXOffset * (1 - (i - 1) * 0.2);
+  }
+  return offset;
+};
 
- teamItems.forEach((member, index) => {
-   const relativeIndex = (index - activeMemberIndex.value + teamItems.length) % teamItems.length;
-   const overlay = member.querySelector('.team-carousel__overlay');
-
-   overlay.style.opacity = calculateOverlayOpacity(relativeIndex);
-
-   $gsap.timeline().set(member, { zIndex: teamItems.length - relativeIndex })
-     .to(member, {
-       scale: baseScale - scaleDecrement * relativeIndex,
-       xPercent: calculateXOffset(relativeIndex),
-       duration: 0.5,
-     });
- });
+const calculateOverlayOpacity = (relativeIndex) => {
+  if (relativeIndex === 0) return 0;
+  return 1 - 1 / Math.pow(2, relativeIndex);
 };
 
 const nextMember = () => {
- const totalMembers = teamMembers.value.length;
- activeMemberIndex.value = (activeMemberIndex.value + 1) % totalMembers;
- triggerAnimation();
+  changeMember(activeMemberIndex.value + 1);
 };
 
 const prevMember = () => {
- const totalMembers = teamMembers.value.length;
- activeMemberIndex.value = (activeMemberIndex.value - 1 + totalMembers) % totalMembers;
- triggerAnimation();
+  changeMember(activeMemberIndex.value - 1);
+};
+
+const handleCardClick = (index) => {
+  if (index === activeMemberIndex.value) {
+    router.push(`/team/${teamMembers.value[index].slug}`);
+  } else {
+    changeMember(index);
+  }
 };
 
 const onTouchStart = (event) => {
- touchStartX.value = event.touches[0].clientX;
+  touchStartX.value = event.touches[0].clientX;
 };
 
 const onTouchMove = (event) => {
- touchEndX.value = event.touches[0].clientX;
+  touchEndX.value = event.touches[0].clientX;
 };
 
 const onTouchEnd = () => {
- const swipeDistance = touchStartX.value - touchEndX.value;
- const swipeThreshold = 50;
+  const swipeDistance = touchStartX.value - touchEndX.value;
+  const swipeThreshold = 50;
 
- if (swipeDistance > swipeThreshold) {
-   nextMember();
- } else if (swipeDistance < -swipeThreshold) {
-   prevMember();
- }
+  if (swipeDistance > swipeThreshold) {
+    nextMember();
+  } else if (swipeDistance < -swipeThreshold) {
+    prevMember();
+  }
 };
-
-const triggerScrollAnimation = () => {
- const teamSection = document.querySelector('.team-section');
- const teamItems = document.querySelectorAll('.team-carousel__item');
-
- $gsap.timeline({
-   scrollTrigger: {
-     trigger: teamSection,
-     start: 'top 5%',
-     end: `+=${teamItems.length * window.innerHeight}`,
-     pin: true,
-     scrub: 0.6,
-     onUpdate: (self) => {
-       const currentIndex = Math.min(
-         teamItems.length - 1, 
-         Math.floor(self.progress * teamItems.length)
-       );
-       activeMemberIndex.value = currentIndex;
-       triggerAnimation();
-     },
-   },
- });
-};
-
-const isTouchDevice = () => 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
 onMounted(() => {
- triggerAnimation();
- if (!isTouchDevice()) {
-   triggerScrollAnimation();
- }
+  teamItems = document.querySelectorAll('.team-carousel__item');
+
+  triggerAnimation();
+  if (teamItems.length > 0) {
+    teamItems[0].classList.add('is-active');
+  }
 });
 </script>
 
 
+
 <style lang="scss" scoped>
-.team-carousel{
+.team-carousel {
   position: relative;
   height: 0;
   padding-bottom: 122%;
-  &__item{
+  
+  &__item {
     position: absolute;
     width: 100%;
     height: 100%;
     filter: drop-shadow(60px 0 20px rgba(var(--color-white), 0.7));
+    cursor: e-resize;
+    overflow: hidden;
+    &.is-active {
+      cursor: pointer;
+      &:hover{
+        .team-carousel__view-more{
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
   }
-  &__item-data{
+
+  &__item-data {
     padding: 40px 20px;
     text-align: center;
   }
-  &__overlay{
+
+  &__overlay {
     position: absolute;
     z-index: 10;
     top: 0;
@@ -203,11 +230,25 @@ onMounted(() => {
     opacity: 0;
     pointer-events: none;
   }
-}
 
-.disabled-link {
-  pointer-events: none;
-  cursor: default;
+  &__view-more {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(var(--color-white), 0.8);
+    padding: 8px 16px;
+    opacity: 0.3;
+    transform: translateY(100%);
+    transition: 300ms;
+    z-index: 20;
+    pointer-events: none;
+    color: rgb(var(--color-navy-blue));
+    border-top: 1px solid rgb(var(--color-navy-blue));
+    font-family: var(--font-heading);
+    @include fsz(32px);
+  }
 }
 
 .transition-slide-y-enter-active,
