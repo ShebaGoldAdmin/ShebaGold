@@ -5,7 +5,7 @@
       <div class="container container--sm">
         <img class="mb-32" src="public/images/logo-single.svg" alt="Sheba Gold Capital" /> 
         <h2 class="word-split mb-24 mb-64-sm">Leading the Way in Strategic Investment<br> and Sustainable Growth</h2>
-        <p class="lg scalable">Sheba Gold Capital is an esteemed investment firm specializing in the identification of lucrative real estate holdings nationwide, as well ass businesses exhibiting significant growth potential.</p>   
+        <p class="lg scalable">Sheba Gold Capital is an esteemed investment firm specializing in the identification of lucrative real estate holdings nationwide, as well as businesses exhibiting significant growth potential.</p>   
       </div>
       <div class="overview-heading">Overview</div>
     </section>
