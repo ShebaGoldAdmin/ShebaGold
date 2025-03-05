@@ -3,10 +3,10 @@
     <div class="row">
       <div class="col-sm-6">
         <HelperText>{{ item.id }}</HelperText>
-        <h3 class="mb-24 mb-0-sm">{{ item.title }}</h3>
+        <h3 class="mb-24 mb-0-sm word-split">{{ item.title }}</h3>
       </div>
       <div class="col-sm-6">
-        <p>{{ item.description }}</p>
+        <p class="from-right">{{ item.description }}</p>
       </div>
     </div>
   </div>
@@ -25,6 +25,7 @@ defineProps({
 .overview-item{
   padding: 80px 0;
   border-bottom: 1px solid rgb(var(--color-stroke));
+  text-align: left;
   @include respond-to(sm){
     padding: 40px 0;
   }
