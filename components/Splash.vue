@@ -32,6 +32,7 @@ section{
   overflow: hidden;
   position: relative;
   height: 100dvh;
+  z-index: 2;
 }
 .splash-inner{
   position: absolute;

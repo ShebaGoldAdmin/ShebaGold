@@ -2,7 +2,9 @@
   <main id="home">
     <Splash/>
     <section class="overview" id="overview">
-      <div class="overview-heading">Overview</div>
+      <div class="overview-heading">
+        <div>Overview</div>
+      </div>
       <div class="container container--sm">
         <img class="mb-32" src="public/images/logo-single.svg" alt="Sheba Gold Capital" /> 
         <h2 class="word-split mb-24 mb-64-sm">Leading the Way in Strategic Investment<br> and Sustainable Growth</h2>
@@ -58,10 +60,10 @@ onMounted(() => {
 })
 
 onMounted(() => {
-  const tl = $gsap.timeline({
+  $gsap.to('.overview-heading', {
     scrollTrigger: {
       trigger: '.overview',
-      start: 'top 20%',
+      start: 'top 50%',
       end: 'bottom top',
       scrub: true,
       pin: '.overview-heading',
@@ -69,38 +71,31 @@ onMounted(() => {
     }
   });
 
-  tl.from('.overview-heading', {
-    opacity: 0,
-    duration: 0.1,
-  })
-
-  .to('.overview-heading', {
-    opacity: 0.05,
-    duration: 0.2,
-  })
-  .to('.overview-heading', {
-    opacity: 0.5,
-    duration: 0.9
+  $gsap.from('.overview-heading div', {
+    y: -300,
+    scrollTrigger: {
+      trigger: '.overview',
+      start: 'top 90%',
+      end: 'top 20%',
+      scrub: true
+    }
   });
 
-  $gsap.matchMedia().add("(min-width: 768px)", () => {
-    $gsap.to('.overview-heading', {
-      scale: 1.1,
-      duration: 0.2,
-      scrollTrigger: {
-        trigger: '.overview',
-        start: 'top 80%',
-        end: 'bottom top',
-        scrub: true,
-      }
-    });
+  $gsap.from('.overview-heading div', {
+    opacity: 1,
+    scrollTrigger: {
+      trigger: '.overview',
+      start: 'top 30%',
+      end: 'top top',
+      scrub: true
+    }
   });
 
-  $gsap.to('.overview-heading', {
-    color: 'rgb(230, 230, 230)',
+  $gsap.to('.overview-heading div', {
+    color: 'rgb(0,0,0)',
     scrollTrigger: {
       trigger: '.overview-items',
-      start: 'top bottom',
+      start: 'top 60%',
       end: 'top center',
       scrub: true
     }
@@ -110,7 +105,17 @@ onMounted(() => {
     backgroundColor: 'rgb(255,255,255)',
     scrollTrigger: {
       trigger: '.overview-items',
-      start: 'top bottom',
+      start: 'top 60%',
+      end: 'top center',
+      scrub: true
+    }
+  });
+
+  $gsap.to('.overview .container', {
+    y: -50,
+    scrollTrigger: {
+      trigger: '.overview-items',
+      start: 'top 70%',
       end: 'top center',
       scrub: true
     }
@@ -126,12 +131,12 @@ onMounted(() => {
 <style lang="scss" scoped>
 .overview{
   background: rgb(var(--color-dark));
-  padding: 1000px 0 310px;
+  padding: 400px 0 310px;
   text-align: center;
   color: rgb(var(--color-white));
   position: relative;
   @include respond-to(sm){
-    padding: 1000px 0 160px;
+    padding: 280px 0 160px;
   }
   p{
     opacity: 0.6;
@@ -144,23 +149,21 @@ onMounted(() => {
   @include fsz(348px);
   letter-spacing: 17px;
   color: rgb(var(--color-gray));
-  top: 0;
   position: absolute;
   left: 50%;
   top: 0;
   transform: translateX(-50%);
+  line-height: 0;
+  div{
+    opacity: 0.05;
+  }
   @include respond-to(sm){
     @include fsz(100px);
     letter-spacing: 6.5px;
-    bottom: 20px;
   }
 }
 .overview-items{
-  margin-top: 700px;
-  padding-top: 400px;
+  padding-top: 200px;
   color: rgb(var(--color-navy-blue));
-  @include respond-to(sm){
-    padding-top: 100px;
-  }
 }
 </style>
