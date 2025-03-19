@@ -14,29 +14,12 @@
         </ul>
         <ul>
           <li v-for="link in secondColumnLinks" :key="link.name">
-            <template v-if="link.tooltip">
-              <VTooltip :placement="'top'" :distance="14">
-                <NuxtLink
-                  v-if="isPageLink(link.path)"
-                  :to="getLinkHref(link.path)"
-                  class="d-none d-inline-flex-md"
-                >
-                  {{ link.name }}
-                </NuxtLink>
-                <a v-else :href="getLinkHref(link.path)" class="d-none d-inline-flex-md">
-                  {{ link.name }}
-                </a>
-                <template #popper>{{ link.tooltip }}</template>
-              </VTooltip>
-            </template>
-            <template v-else>
-              <NuxtLink v-if="isPageLink(link.path)" :to="getLinkHref(link.path)">
-                {{ link.name }}
-              </NuxtLink>
-              <a v-else :href="getLinkHref(link.path)">
-                {{ link.name }}
-              </a>
-            </template>
+            <NuxtLink v-if="isPageLink(link.path)" :to="getLinkHref(link.path)">
+              {{ link.name }}
+            </NuxtLink>
+            <a v-else :href="getLinkHref(link.path)">
+              {{ link.name }}
+            </a>
           </li>
         </ul>
         <div class="footer-logo">

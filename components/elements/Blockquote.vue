@@ -1,14 +1,13 @@
 <template>
   <blockquote>
     <img src="/images/blockquote.svg" alt="">
-    <h3><slot/></h3>
+    <h3 class="text-left word-split"><slot/></h3>
   </blockquote>
 </template>
 
 <script setup lang="js">
 import { onMounted } from 'vue';
 const { $gsap } = useNuxtApp();
-import splitType from 'split-type';
 
 onMounted(() => {
   $gsap.from('blockquote img', {
@@ -20,23 +19,6 @@ onMounted(() => {
       trigger: 'blockquote img',
       start: 'top 80%',
       end: 'top 20%',
-      scrub: true,
-    },
-  });
-
-  const ourText = new splitType('blockquote h3', { types: 'words' });
-  const words = ourText.words;
-
-  $gsap.from(words, { 
-    y: -20,
-    opacity: 0,
-    stagger: 0.4,
-    duration: 2,
-    ease: 'power4.out',
-    scrollTrigger: {
-      trigger: 'blockquote h3',
-      start: 'top 90%',
-      end: 'bottom 20%',
       scrub: true,
     },
   });

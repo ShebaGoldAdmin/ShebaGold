@@ -61,10 +61,11 @@ onMounted(() => {
   });
 
   tl.set(leaderImgWrap, { autoAlpha: 1 });
-  tl.from(leaderImgWrap, 3, {
-    xPercent: -100,
-    ease: 'power4.out',
-  });
+  tl.fromTo(
+    leaderImgWrap, 3, 
+    { xPercent: -100 },
+    { xPercent: 0, delay: -3, ease: 'power4.out' }
+  );
   tl.from(leaderImg, 3, {
     xPercent: 100,
     scale: 1.3,

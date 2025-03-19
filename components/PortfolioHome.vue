@@ -45,8 +45,6 @@ onMounted(() => {
     }
   );
 });
-
-
 </script>
 
 <style lang="scss" scoped>
@@ -122,7 +120,6 @@ onMounted(() => {
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   _::-webkit-full-page-media, _:future, :root .portfolio-home__img::before {
-    /* Safari-specific styles here */
     display: none;
   }
 }

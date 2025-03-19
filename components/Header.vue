@@ -115,9 +115,7 @@ const animateMenu = () => {
     );
   });
 };
-
 </script>
-
 
 <style lang="scss" scoped>
 header {

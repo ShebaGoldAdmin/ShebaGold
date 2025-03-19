@@ -34,8 +34,7 @@ export default defineNuxtConfig({
   },
 
   image: {
-    dir: 'public',
-    format: ['avif']
+    dir: 'public'
   },
 
   app: {

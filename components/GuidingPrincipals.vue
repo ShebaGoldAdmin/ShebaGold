@@ -78,7 +78,6 @@
               </div>
             </transition>
           </div>
-            
         </div>
       </div>
     </div>
