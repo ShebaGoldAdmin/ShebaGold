@@ -89,23 +89,18 @@ useHead({
 
 const { $gsap } = useNuxtApp();
 const router = useRouter();
-
 let teamItems = [];
-
 const activeMember = computed(() => {
   return teamMembers.value[activeMemberIndex.value] || {};
 });
+const touchStartTime = ref(0);
 
 const changeMember = (newIndex) => {
   const totalMembers = teamMembers.value.length;
-
   activeMemberIndex.value = (newIndex + totalMembers) % totalMembers;
-
   teamItems.forEach(item => item.classList.remove('is-active'));
-
   const currentItem = teamItems[activeMemberIndex.value];
   triggerAnimation();
-
   setTimeout(() => {
     currentItem.classList.add('is-active');
   }, 500);
@@ -115,9 +110,7 @@ const triggerAnimation = () => {
   teamItems.forEach((member, index) => {
     const relativeIndex = (index - activeMemberIndex.value + teamItems.length) % teamItems.length;
     const overlay = member.querySelector('.team-carousel__overlay');
-
     overlay.style.opacity = calculateOverlayOpacity(relativeIndex);
-
     $gsap.timeline()
       .set(member, { zIndex: teamItems.length - relativeIndex })
       .to(member, {
@@ -161,6 +154,7 @@ const handleCardClick = (index) => {
 
 const onTouchStart = (event) => {
   touchStartX.value = event.touches[0].clientX;
+  touchStartTime.value = Date.now();
 };
 
 const onTouchMove = (event) => {
@@ -168,27 +162,31 @@ const onTouchMove = (event) => {
 };
 
 const onTouchEnd = () => {
+  const touchDuration = Date.now() - touchStartTime.value;
   const swipeDistance = touchStartX.value - touchEndX.value;
-  const swipeThreshold = 50;
-
-  if (swipeDistance > swipeThreshold) {
-    nextMember();
-  } else if (swipeDistance < -swipeThreshold) {
-    prevMember();
+  const swipeThreshold = 100;
+  
+  if (touchDuration < 200 && Math.abs(swipeDistance) < swipeThreshold) {
+    return;
+  }
+  
+  if (Math.abs(swipeDistance) > swipeThreshold) {
+    if (swipeDistance > 0) {
+      nextMember();
+    } else {
+      prevMember();
+    }
   }
 };
 
 onMounted(() => {
   teamItems = document.querySelectorAll('.team-carousel__item');
-
   triggerAnimation();
   if (teamItems.length > 0) {
     teamItems[0].classList.add('is-active');
   }
 });
 </script>
-
-
 
 <style lang="scss" scoped>
 .team-carousel {
