@@ -80,8 +80,6 @@ import TeamImage from '~/components/elements/TeamImage.vue';
 
 const teamMembers = ref(teamData);
 const activeMemberIndex = ref(0);
-const touchStartX = ref(0);
-const touchEndX = ref(0);
 
 useHead({
   title: 'Team',
@@ -90,10 +88,14 @@ useHead({
 const { $gsap } = useNuxtApp();
 const router = useRouter();
 let teamItems = [];
+const touchStartX = ref(0);
+const touchEndX = ref(0);
+const touchMoved = ref(false);
+const swipeThreshold = 80;
+
 const activeMember = computed(() => {
   return teamMembers.value[activeMemberIndex.value] || {};
 });
-const touchStartTime = ref(0);
 
 const changeMember = (newIndex) => {
   const totalMembers = teamMembers.value.length;
@@ -145,38 +147,47 @@ const prevMember = () => {
 };
 
 const handleCardClick = (index) => {
-  if (index === activeMemberIndex.value) {
-    router.push(`/team/${teamMembers.value[index].slug}`);
-  } else {
-    changeMember(index);
+  if (!touchMoved.value) {
+    if (index === activeMemberIndex.value) {
+      router.push(`/team/${teamMembers.value[index].slug}`);
+    } else {
+      changeMember(index);
+    }
   }
 };
 
 const onTouchStart = (event) => {
   touchStartX.value = event.touches[0].clientX;
-  touchStartTime.value = Date.now();
+  touchMoved.value = false;
 };
 
 const onTouchMove = (event) => {
-  touchEndX.value = event.touches[0].clientX;
+  const currentX = event.touches[0].clientX;
+  const diffX = Math.abs(currentX - touchStartX.value);
+  
+  // If movement is significant, mark as moved
+  if (diffX > 10) {
+    touchMoved.value = true;
+  }
+  
+  touchEndX.value = currentX;
 };
 
 const onTouchEnd = () => {
-  const touchDuration = Date.now() - touchStartTime.value;
-  const swipeDistance = touchStartX.value - touchEndX.value;
-  const swipeThreshold = 100;
-  
-  if (touchDuration < 200 && Math.abs(swipeDistance) < swipeThreshold) {
-    return;
-  }
-  
-  if (Math.abs(swipeDistance) > swipeThreshold) {
-    if (swipeDistance > 0) {
-      nextMember();
-    } else {
-      prevMember();
+  if (touchMoved.value) {
+    const swipeDistance = touchStartX.value - touchEndX.value;
+    
+    if (Math.abs(swipeDistance) > swipeThreshold) {
+      if (swipeDistance > 0) {
+        nextMember();
+      } else {
+        prevMember();
+      }
     }
   }
+  
+  // Reset after processing
+  touchMoved.value = false;
 };
 
 onMounted(() => {
@@ -198,8 +209,10 @@ onMounted(() => {
     position: absolute;
     width: 100%;
     height: 100%;
-    filter: drop-shadow(60px 0 20px rgba(var(--color-white), 0.7));
+    box-shadow: 60px 0 40px rgba(var(--color-white), 0.7);
     cursor: e-resize;
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
     overflow: hidden;
     &.is-active {
       cursor: pointer;
