@@ -14,16 +14,18 @@
           </p>
         </div>
 
-        <HelperText class="mb-40 scalable">
-          Experience
-        </HelperText>
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="company-name scalable" v-for="company in member.experience" :key="company">
-              {{ company }}
+        <template v-if="member.experience">
+          <HelperText class="mb-40 scalable">
+            Experience
+          </HelperText>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="company-name scalable" v-for="company in member.experience" :key="company">
+                {{ company }}
+              </div>
             </div>
           </div>
-        </div>
+        </template>
       </div>
     </section>
 
