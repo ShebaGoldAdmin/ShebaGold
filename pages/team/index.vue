@@ -228,6 +228,9 @@ onMounted(() => {
   &__item-data {
     padding: 40px 20px;
     text-align: center;
+    p{
+      max-height: 28px;
+    }
   }
 
   &__overlay {
