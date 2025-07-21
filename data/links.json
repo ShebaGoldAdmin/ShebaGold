@@ -2,7 +2,7 @@
   "firstColumnLinks": [
     { "id": "01", "name": "Home", "path": "#home" },
     { "id": "02", "name": "Overview", "path": "#overview" },
-    { "id": "03", "name": "Principals", "path": "#principals" }
+    { "id": "03", "name": "Principles", "path": "#principles" }
   ],
   "secondColumnLinks": [
     { "id": "04", "name": "Leadership", "path": "#leadership" },

@@ -1,6 +1,6 @@
 <template>
-  <section class="guiding-principals">
-    <div class="guiding-principals__top-waves" ref="waves">
+  <section class="guiding-principles">
+    <div class="guiding-principles__top-waves" ref="waves">
       <NuxtImg 
         format="avif"
         quality="90"
@@ -8,7 +8,7 @@
       />
     </div>
     <div class="container">
-      <h2 class="word-split mb-88 text-center">Guiding Principals</h2>
+      <h2 class="word-split mb-88 text-center">Guiding Principles</h2>
       <div class="guiding-wrapper">
         <!-- Main Tabs -->
         <div class="guiding-tabs">
@@ -159,7 +159,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.guiding-principals {
+.guiding-principles {
   padding: 190px 0 128px;
   background: rgb(var(--color-black));
   color: rgb(var(--color-white));

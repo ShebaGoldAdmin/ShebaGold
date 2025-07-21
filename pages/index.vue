@@ -2,7 +2,7 @@
   <main id="home">
     <Splash/>
     <Overview id="overview"/>
-    <GuidingPrincipals id="principals"/>
+    <GuidingPrinciples id="principles"/>
     <Leadership id="leadership"/>
     <PortfolioHome/>
   </main>
@@ -13,7 +13,7 @@ import { onMounted, onUnmounted } from 'vue';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
 import Splash from '~/components/Splash.vue';
-import GuidingPrincipals from '../components/GuidingPrincipals.vue';
+import GuidingPrinciples from '../components/GuidingPrinciples.vue';
 import Leadership from '~/components/Leadership.vue';
 import PortfolioHome from '~/components/PortfolioHome.vue';
 import Overview from '~/components/Overview.vue';
