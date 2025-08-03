@@ -11,8 +11,8 @@
             See what happens when legacy meets vision → connect with us at <a class="link" href="mailto:info@sheba.gold">info@sheba.gold</a>
           </p>
         </div>
+        <h2 class="mb-24">Member Login</h2>
         <div class="col-sm-7 position-relative">
-          <h2 class="mb-24">Member Login</h2>
           <form @submit.prevent="login">
             <div class="error" v-if="error">{{ error }}</div>
             <TextInput 
