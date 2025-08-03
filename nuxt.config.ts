@@ -14,6 +14,12 @@ export default defineNuxtConfig({
     },
   },
 
+  runtimeConfig: {
+    public: {
+      AUTH_SECRET: process.env.AUTH_SECRET
+    }
+  },
+
   css: ['@/assets/styles/normalize.css',
       '@/assets/styles/reset.css',
       '@/assets/styles/mixins/classes.scss',

@@ -9,14 +9,7 @@
     </div>
     <div class="container">
       <div class="portfolio-home__inner">
-        <h2 class="mb-24">Our Portfolio</h2>
-        <p class="lg scalable">Sheba Gold Capital is an esteemed investment firm specializing in the identification of lucrative real estate holdings nationwide, as well as businesses exhibiting significant growth potential.</p>
-        <NuxtLink to="/portfolio">
-          <ArrowButton class="mt-72 from-right"
-            color="gold"
-            arrowRotate="-90"
-          />
-        </NuxtLink>
+        <slot></slot>
       </div>
     </div>
   </section>
@@ -47,7 +40,7 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .portfolio-home{
   padding: 280px 0 188px;
   background: rgb(var(--color-dark));
@@ -68,7 +61,7 @@ onMounted(() => {
     padding: 80px 0 500px;
   }
   &__inner{
-    max-width: 572px;
+    max-width: 724px;
     position: relative;
     z-index: 4;
   }

@@ -12,9 +12,9 @@
     @after-enter="afterPageEnter"
   >
     <div :key="$route.fullPath" class="page-wrapper">
-      <Header :buttonHidden="headerHidden"/>
+      <Header v-if="isLoggedIn" :buttonHidden="headerHidden"/>
       <NuxtPage @update:headerHidden="updateHeaderHidden"/>
-      <Footer />
+      <Footer :logged-in="isLoggedIn" />
     </div>
   </transition>
 </template>
@@ -36,6 +36,8 @@ useHead({
 const { $gsap } = useNuxtApp()
 const route = useRoute()
 const headerHidden = ref(false)
+
+const { isLoggedIn } = useAuth()
 
 const anim = {
   scale: { y: 20, scale: 0.8, opacity: 0, duration: 1,},
@@ -104,12 +106,18 @@ function beforePageEnter() {
 
 function afterPageEnter() {
   initializeAnimations()
-  document.querySelector('.page-wrapper > main').style.opacity = 1
+  const main = document.querySelector('.page-wrapper > main')
+  if (main) {
+    main.style.opacity = 1
+  }
 }
 
 onMounted(() => {
   initializeAnimations()
-  document.querySelector('.page-wrapper > main').style.opacity = 1
+  const main = document.querySelector('.page-wrapper > main')
+  if (main) {
+    main.style.opacity = 1
+  }
 })
 </script>
 

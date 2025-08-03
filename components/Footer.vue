@@ -2,7 +2,7 @@
   <footer>
     <div class="container">
       <div class="footer-inner">
-        <ul>
+        <ul v-if="loggedIn">
           <li v-for="link in firstColumnLinks" :key="link.name">
             <NuxtLink v-if="isPageLink(link.path)" :to="getLinkHref(link.path)">
               {{ link.name }}
@@ -12,7 +12,7 @@
             </a>
           </li>
         </ul>
-        <ul>
+        <ul v-if="loggedIn">
           <li v-for="link in secondColumnLinks" :key="link.name">
             <NuxtLink v-if="isPageLink(link.path)" :to="getLinkHref(link.path)">
               {{ link.name }}
@@ -26,7 +26,7 @@
           <img src="/images/logo-text.svg" alt="" />
         </div>
       </div>
-      <div class="subfooter">
+      <div class="subfooter" :class="{'is-logged-out': !loggedIn}">
         <a href="mailto:info@sheba.gold">info@sheba.gold</a>
         <div class="text-center">Sheba Gold Capital {{ currentYear }} © All rights reserved</div>
       </div>
@@ -38,6 +38,13 @@
 import { computed } from 'vue';
 import { useRoute } from '#app';
 import links from '~/data/links.json';
+
+const props = defineProps({
+  loggedIn: {
+    type: Boolean,
+    default: false,
+  },
+});
 
 const route = useRoute();
 const isHomePage = computed(() => route.path === '/');
@@ -172,6 +179,9 @@ footer {
   margin-top: 40px;
   position: relative;
   z-index: 2;
+  &.is-logged-out {
+    margin-top: 104px;
+  }
   @include respond-to(xs) {
     margin-top: 56px;
     flex-direction: column;

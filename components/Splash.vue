@@ -1,12 +1,12 @@
 <template>
   <div>
     <section>
-      <video class="fullscreen" src="/assets/videos/sheba-video.mp4" playsinline autoplay muted loop disablePictureInPicture controlsList="nodownload"></video>
+      <VideoBackground/>
       <div class="splash-inner" :class="{'loaded': isAnimationComplete}">
         <div class="splash-button-wrap">
           <ArrowButton 
             color="gold"
-            @click="() => $lenis.scrollTo('#overview')"
+            @click="() => $lenis.scrollTo(scrollLink)"
           />
         </div>
         <LoadAnimation @onAnimationComplete="handleAnimationComplete"/>
@@ -18,9 +18,17 @@
 <script setup>
 import { ref } from 'vue'
 import LoadAnimation from '~/components/LoadAnimation.vue';
+import VideoBackground from '~/components/VideoBackground.vue';
 
 const { $lenis } = useNuxtApp();
 const isAnimationComplete = ref(false);
+
+defineProps({
+  scrollLink: {
+    type: String,
+    default: '#'
+  }
+});
 
 const handleAnimationComplete = () => {
   isAnimationComplete.value = true;
@@ -64,19 +72,6 @@ section{
       top: calc(30dvh + 220px);
       transform: translate(-50%, 0);
     }
-  }
-}
-video.fullscreen {
-  position: absolute;
-  z-index: 0;
-  object-fit: cover;
-  width:130%;
-  height:100%;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  &::-webkit-media-controls {
-     display:none !important;
   }
 }
 </style>

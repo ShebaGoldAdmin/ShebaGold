@@ -2,6 +2,7 @@
   <button class="arrow-button-wrapper" 
     :class="arrowButtonClass"
     :style="styleVariables"
+    :type="type"
   >
     <span class="arrow-button">
       <ArrowSvg :style="`transform: rotate(${arrowRotate}deg)`"/>
@@ -32,6 +33,10 @@ const props = defineProps({
   paginationRight: {
     type: Boolean,
     default: false,
+  },
+  type: {
+    type: String,
+    default: 'button',
   },
 });
 
