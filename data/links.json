@@ -5,8 +5,8 @@
     { "id": "03", "name": "Principles", "path": "#principles" }
   ],
   "secondColumnLinks": [
-    { "id": "04", "name": "Leadership", "path": "#leadership" },
-    { "id": "05", "name": "Team", "path": "/team" },
-    { "id": "06", "name": "Portfolio", "path": "/portfolio"}
+    { "id": "04", "name": "Team", "path": "#team" },
+    { "id": "05", "name": "News", "path": "/news" },
+    { "id": "06", "name": "Privacy", "path": "/privacy"}
   ]
 }
