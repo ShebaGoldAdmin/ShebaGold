@@ -1,31 +1,14 @@
 [
   {
     "name": "Wisdom",
-    "subtabs": [
-      { 
-        "name": "Integrity", 
-        "text": "At Sheba Gold Capital, we prioritize conducting our business with unwavering integrity.  We firmly uphold the highest standards of honesty, transparency and trustworthiness in all our interactions with investors and partners. Our commitment and drive for utmost integrity is a core value evident to all individuals in our greater network."
-      },
-      { 
-        "name": "Collaboration",
-        "text": "We recognize the crucial necessity, power and value of collaboration. Consequently, we actively work to build supportive and enduring relationship with investors and partners. We understand that through leveraging knowledge and experience of others, we can achieve even greater results." 
-      },
-      {
-        "name": "Accountability",
-        "text": "Sheba Gold Capital deems ourselves responsible for each action and decision made. This reflects our ability to meet commitments and take ownership when necessary. Through this valued principle, we can solidify trust and grow credibility."
-      },
-      { 
-        "name": "Adaptability",
-        "text": "Our agility and responsive nature to fluctuating market dynamics and industry trends ensures that we are always a step ahead. This enables us to capitalize on opportunities, mitigate risks, and guarantee long-term sustainability and success for our business and investors."
-      }
-    ]
+    "text": "To be a trusted name in the investment world, known for our expertise and ability to identify and empower high potential healthcare businesses."
   },
   {
     "name": "Wealth",
-    "text": "To strategically identify and syndicate selected real estate ventures and businesses, generating notable returns for investors. Through meticulous analysis, communication, and partnerships, they aim to create lasting value in each one of their deals."
+    "text": "To expand opportunities for our portfolio companies, generating substantial returns for them and our investors for generations to come. "
   },
   {
     "name": "Endurance",
-    "text": "To be a trusted name in the investment world, known for a wide range of expertise and exceptional ability to identify high potential real estate holdings and lucrative businesses. Sheba Gold Capital aims to be synonymous with success and long term value for all parties involved."
+    "text": "To be synonymous with success and long-term value for all parties involved and for the benefit of the broader world."
   }
 ]
