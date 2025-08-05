@@ -5,8 +5,10 @@
     </div>
     <div class="container container--sm">
       <img class="mb-32" src="public/images/logo-single.svg" alt="Sheba Gold Capital" /> 
-      <h2 class="word-split mb-24 mb-64-sm">Leading the Way in Strategic Investment<br> and Sustainable Growth</h2>
-      <p class="lg scalable">Sheba Gold Capital is an esteemed investment firm specializing in the identification of lucrative real estate holdings nationwide, as well as businesses exhibiting significant growth potential.</p>   
+      <h2 class="word-split mb-24 mb-64-sm">Where Legacy Meets Vision</h2>
+      <p class="lg scalable">Sheba Gold Capital is an esteemed investment firm that identifies and supports family-owned healthcare businesses in reaching their full growth potential.</p>
+      <p class="lg scalable">We are not your typical private equity firm. At Sheba Gold Capital, we appreciate the history of the businesses we invest in, the talent of their people, and the relationships that have been built with customers. Our focus is to bring new energy, investment and vision to previously untapped opportunities, building upon proven businesses and accelerating momentum for the long-term.</p>
+      <p class="lg scalable">Sheba Gold Capital is an esteemed investment firm that identifies and supports family-owned healthcare businesses in reaching their full growth potential.</p>
     </div>
     <div class="overview-items">
       <div class="container">
@@ -15,7 +17,7 @@
           :key="item.id" 
           :item="item"
         />
-        <Blockquote>We invite you to join us on our journey towards unparalleled success.</Blockquote>
+        <Blockquote>Sheba Gold Capital was born from a desire to invest in healthcare businesses we believe in so they can achieve their full potential – ultimately, ensuring healthcare providers have access to the resources they need for the benefit of the broader world.</Blockquote>
         <hr>
       </div>
     </div>
