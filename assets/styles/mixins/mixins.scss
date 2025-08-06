@@ -55,3 +55,18 @@
   @include fsz(20px);
   line-height: 1.7;
 }
+
+// --- Gold Gradient Text Utility
+@mixin goldGradientText {
+  background: linear-gradient(82deg, #EACEA9 9.24%, #D7A25B 46.1%, #FDEED5 67.08%, #CDA36C 99.7%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// --- Paragraph Spacing Utility
+@mixin paragraphSpacing($spacing: 16px) {
+  p + p {
+    margin-top: $spacing;
+  }
+}

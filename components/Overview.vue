@@ -143,10 +143,8 @@ onMounted(() => {
   p {
     max-width: 926px;
     margin: 0 auto;
-    + p {
-      margin-top: 16px;
-    }
   }
+  @include paragraphSpacing;
 }
 
 .overview-heading {
