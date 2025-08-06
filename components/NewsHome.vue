@@ -9,7 +9,7 @@
     </div>
     <div class="container">
       <div class="news-home__inner">
-        <h2 class="mb-24">News</h2>
+        <h2 class="word-split mb-24">News</h2>
         <p class="lg scalable">Sheba Gold Capital Signs Agreement to Acquire Dominion Products & Healthcare Services Division.</p>
         <p class="lg scalable">The investment builds on Dominion legacy as a trusted partner to healthcare providers, expanding their access to critical products and services and strengthening their ability to deliver exceptional patient care for years to come.</p>
         <NuxtLink to="/portfolio">
@@ -54,20 +54,20 @@ onMounted(() => {
   background: rgb(var(--color-dark));
   position: relative;
   h2{
-    background: linear-gradient(82deg, #EACEA9 9.24%, #D7A25B 46.1%, #FDEED5 67.08%, #CDA36C 99.7%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    @include goldGradientText;
+    
+    /* Ensure gradient text is visible during word-split animation */
+    :deep(.word) {
+      @include goldGradientText;
+    }
   }
   h3{
     color: rgb(var(--color-white));
   }
   p{
     color: rgba(var(--color-white),0.6);
-    + p {
-      margin-top: 16px;
-    }
   }
+  @include paragraphSpacing;
   @include respond-to(sm){
     padding: 80px 0 500px;
   }

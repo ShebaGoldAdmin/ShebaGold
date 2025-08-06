@@ -4,7 +4,7 @@
     <Overview id="overview"/>
     <GuidingPrinciples id="principles"/>
     <Team id="team"/>
-    <PortfolioHome/>
+    <NewsHome/>
   </main>
 </template>
 
@@ -15,7 +15,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import Splash from '~/components/Splash.vue';
 import GuidingPrinciples from '../components/GuidingPrinciples.vue';
 import Team from '~/components/Team.vue';
-import PortfolioHome from '~/components/PortfolioHome.vue';
+import NewsHome from '~/components/NewsHome.vue';
 import Overview from '~/components/Overview.vue';
 
 const emit = defineEmits();
