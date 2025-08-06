@@ -8,7 +8,12 @@
       />
     </div>
     <div class="container">
-      <h2 class="word-split mb-88 text-center">Guiding Principles</h2>
+      <h2 class="word-split mb-32 text-center">Guiding Principles</h2>
+      <div class="row justify-content-center mb-88">
+        <div class="col-lg-9 text-center">
+          <p class="lg scalable opacity-60">Guided by our core principles of Wisdom, Wealth and Endurance, we carefully analyze each investment prospect, selecting those with significant capacity for long-term growth and overall profitability. By honoring the legacy of these businesses while driving growth and returns, we aim to create a lasting impact that benefits all our stakeholders.</p>
+        </div>
+      </div>
       <div class="guiding-wrapper">
         <!-- Main Tabs -->
         <div class="guiding-tabs">
@@ -54,7 +59,7 @@
                         :key="tabsStore.currentSubmode.name"
                       >
                         <h3 class="mb-24">{{ tabsStore.currentSubmode.name }}</h3>
-                        <p>{{ tabsStore.currentSubmode.text }}</p>
+                        <p class="lg opacity-60">{{ tabsStore.currentSubmode.text }}</p>
                       </div>
                     </transition>
                   </div>
@@ -65,7 +70,7 @@
               <div v-else class="guiding-content__inner">
                 <div class="guiding-content__inner-text">
                   <h3 class="mb-24">{{ tabsStore.currentMode.name }}</h3>
-                  <p>{{ tabsStore.currentMode.text }}</p>
+                  <p class="lg opacity-60">{{ tabsStore.currentMode.text }}</p>
                 </div>
               </div>
             </div>
@@ -264,9 +269,6 @@ onMounted(() => {
     }
     @include respond-to(sm){
       padding: 80px 32px 180px;
-    }
-    p {
-      opacity: 0.6;
     }
   }
   &__inner-text {
