@@ -1,0 +1,39 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "title": "Dominion Acquisition",
+      "category": "Press Release",
+      "slug": "dominion",
+      "header": "Sheba Gold Capital Signs Agreement to Acquire Dominion Products & Healthcare Services Division.",
+      "subHeader": "The investment builds on Dominion legacy as a trusted partner to healthcare providers, expanding their access to critical products and services and strengthening their ability to deliver exceptional patient care for years to come.",
+      "description": [
+        "August 6, 2025 - Sheba Gold Capital (“Sheba Gold”), an esteemed investment firm that supports family-owned businesses in reaching their full growth potential, has signed an agreement indicating its intent to acquire the Products business from Dominion. The agreement, is expected to close in the coming weeks."
+      ],
+      "quote": "At Sheba Gold, we don’t just see what a company is…we see what it can become. And in Dominion, we see the potential for a future others will benchmark against.",
+      "quoteAuthor": "Morris Sarway, Partner | Sheba Gold Capital",
+      "itemDetails": [
+        {
+          "title": "Operation",
+          "description": "143 Years"
+        },
+        {
+          "title": "Twelve-month revenue",
+          "description": "$10.72 Billion"
+        },
+        {
+          "title": "Teammates worldwide",
+          "description": "30,000"
+        },
+        {
+          "title": "Facilities served",
+          "description": "4,000"
+        },
+        {
+          "title": "Headquartered in",
+          "description": "Somewhere, USA"
+        }
+      ]
+    }
+  ]
+}
