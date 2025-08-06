@@ -55,3 +55,20 @@ p{
     margin-top: 24px;
   }
 }
+
+a {
+  color: rgb(var(--color-gold));
+  transition: all 200ms ease;
+  
+  &:hover {
+    color: rgba(var(--color-navy-blue), 0.8);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  
+  &:focus {
+    outline: 2px solid rgb(var(--color-gold));
+    outline-offset: 2px;
+  }
+}
