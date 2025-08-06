@@ -1,7 +1,12 @@
 <template>
   <section class="overview">
     <div class="overview-heading">
-      <div>Overview</div>
+      <div class="overview-heading__top">
+        <div class="content">Legacy Rises</div>
+      </div>
+      <div class="overview-heading__bottom">
+        <div class="content">Culture</div>
+      </div>
     </div>
     <div class="container container--sm">
       <img class="mb-32" src="public/images/logo-single.svg" alt="Sheba Gold Capital" /> 
@@ -12,6 +17,11 @@
     </div>
     <div class="overview-items">
       <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-10 text-center">
+            <h4 class="word-split mb-40">This is who we are and how we operate - with integrity, collaboration, accountability and adaptability. It’s by standing on these pillars that Sheba Gold Capital has built success.</h4>
+          </div>
+        </div>
         <OverviewItem 
           v-for="item in overviewItems" 
           :key="item.id" 
@@ -27,7 +37,7 @@
 <script setup lang="js">
 import { onMounted, onUnmounted } from 'vue';
 const { $gsap } = useNuxtApp();
-import ScrollTrigger from 'gsap/ScrollTrigger'
+import ScrollTrigger from 'gsap/ScrollTrigger';
 
 import OverviewItem from '~/components/OverviewItem.vue';
 import Blockquote from '~/components/elements/Blockquote.vue';
@@ -47,35 +57,21 @@ onMounted(() => {
     }
   });
 
-  $gsap.from('.overview-heading div', {
-    y: -300,
-    scrollTrigger: {
-      trigger: '.overview',
-      start: 'top 90%',
-      end: 'top top',
-      scrub: true
+  $gsap.fromTo('.overview-heading__top .content', 
+    { y: -300, opacity: 1 },
+    {
+      scrollTrigger: {
+        trigger: '.overview',
+        start: 'top 90%',
+        end: 'top -20%',
+        scrub: true,
+      },
+      keyframes: [
+        { y: 0, opacity: 1, duration: 0.4 },
+        { y: -20, opacity: 0.05, duration: 0.2 }
+      ]
     }
-  });
-
-  $gsap.from('.overview-heading div', {
-    opacity: 1,
-    scrollTrigger: {
-      trigger: '.overview',
-      start: 'top 30%',
-      end: 'top -20%',
-      scrub: true
-    }
-  });
-
-  $gsap.to('.overview-heading div', {
-    color: 'rgb(0,0,0)',
-    scrollTrigger: {
-      trigger: '.overview-items',
-      start: 'top 60%',
-      end: 'top top',
-      scrub: true
-    }
-  });
+  );
 
   $gsap.to('.overview', {
     backgroundColor: 'rgb(255,255,255)',
@@ -97,50 +93,90 @@ onMounted(() => {
     }
   });
 
+  $gsap.fromTo('.overview-heading__bottom .content',
+    { opacity: 0 },
+    {
+      scrollTrigger: {
+        trigger: '.overview-items',
+        start: 'top 45%',
+        end: 'top top',
+        scrub: true,
+      },
+      keyframes: [
+        { opacity: 1, duration: 0.2 },
+        { opacity: 1, duration: 0.3 },
+        { opacity: 0.05, duration: 0.5 }
+      ]
+    }
+  );
+
+  ScrollTrigger.create({
+    trigger: '.overview-items',
+    start: 'top 60%',
+    end: 'top 60%',
+    onEnter: () => {
+      $gsap.set('.overview-heading__top', { opacity: 0 });
+      $gsap.set('.overview-heading__bottom', { opacity: 1 });
+    },
+    onLeaveBack: () => {
+      $gsap.set('.overview-heading__top', { opacity: 1 });
+      $gsap.set('.overview-heading__bottom', { opacity: 0 });
+    }
+  });
+
   onUnmounted(() => {
     ScrollTrigger.getAll().forEach(t => t.kill());
   });
 });
 </script>
 
-
-
 <style lang="scss" scoped>
-.overview{
+.overview {
   background: rgb(var(--color-dark));
   padding: 520px 0 310px;
   text-align: center;
   color: rgb(var(--color-white));
   position: relative;
-  @include respond-to(sm){
+  @include respond-to(sm) {
     padding: 360px 0 160px;
   }
-  p{
+  p {
     opacity: 0.6;
     max-width: 926px;
     margin: 0 auto;
+    + p {
+      margin-top: 16px;
+    }
   }
 }
-.overview-heading{
+
+.overview-heading {
   font-family: var(--font-heading);
-  @include fsz(348px);
-  letter-spacing: 17px;
-  color: rgb(var(--color-gray));
+  font-size: min(19.7vw, 300px);
+  white-space: nowrap;
+  letter-spacing: 5%;
   position: absolute;
   left: 50%;
   top: 0;
   transform: translateX(-50%);
   line-height: 0;
-  div{
-    opacity: 0.05;
+  &__top,
+  &__bottom {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
-  @include respond-to(sm){
-    @include fsz(100px);
-    letter-spacing: 6.5px;
+  &__top {
+    opacity: 1;
+  }
+  &__bottom {
+    opacity: 0;
+    color: rgb(var(--color-dark));
   }
 }
-.overview-items{
-  padding-top: 340px;
+
+.overview-items {
+  padding-top: 440px;
   color: rgb(var(--color-navy-blue));
 }
 </style>

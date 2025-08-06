@@ -6,7 +6,7 @@
         <h3 class="mb-24 mb-0-sm word-split">{{ item.title }}</h3>
       </div>
       <div class="col-sm-6">
-        <p class="from-right">{{ item.description }}</p>
+        <p class="from-right lg">{{ item.description }}</p>
       </div>
     </div>
   </div>
