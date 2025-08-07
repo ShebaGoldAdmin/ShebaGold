@@ -5,10 +5,10 @@
         <div class="row scalable">
           <div class="col-sm-6 pr-120-md d-none d-block-sm">
             <transition name="transition-slide-y" mode="out-in">
-              <div v-if="activeMember && activeMember.description.length > 0" 
+              <div v-if="activeMember && (activeMember.shortBio || activeMember.fullBio.length > 0)" 
                 :key="activeMember"
               >
-                <p class="mt-24">{{ activeMember.description[0] }}</p>
+                <p class="mt-24">{{ activeMember.shortBio || activeMember.fullBio[0] }}</p>
               </div>
             </transition>
           </div>
@@ -33,7 +33,7 @@
               </div>
             </div>
             <transition name="transition-slide-y" mode="out-in">
-              <div v-if="activeMember && activeMember.description.length > 0"
+              <div v-if="activeMember && activeMember.fullBio.length > 0"
                 class="team-carousel__item-data"
                 :key="activeMember"
               >
@@ -64,6 +64,7 @@
 <script setup>
 import TeamImage from './elements/TeamImage.vue';
 import teamData from '~/data/team.json';
+import ArrowButton from "~/components/elements/ArrowButton.vue";
 
 const { $gsap } = useNuxtApp();
 const router = useRouter();

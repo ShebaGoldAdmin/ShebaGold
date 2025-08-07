@@ -6,7 +6,7 @@
       <div class="container">
         <HelperText class="mb-40 scalable">Biography</HelperText>
         <div class="two-columns mb-80 mb-128-sm">
-          <p v-for="paragraph in member.description" 
+          <p v-for="paragraph in member.fullBio" 
             :key="paragraph"
             class="scalable"
           >
@@ -75,6 +75,8 @@
 import team from '~/data/team.json';
 import { useRoute } from '#app';
 import InnerTop from '~/components/InnerTop.vue';
+import ArrowButton from "~/components/elements/ArrowButton.vue";
+import HelperText from "~/components/elements/HelperText.vue";
 
 const route = useRoute();
 const currentIndex = team.findIndex((m) => m.slug === route.params.slug);
