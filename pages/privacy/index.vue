@@ -72,6 +72,7 @@
 
 <script setup>
 import InnerTop from '~/components/InnerTop.vue';
+import HelperText from "~/components/elements/HelperText.vue";
 
 useHead({
   title: 'Privacy Policy',
