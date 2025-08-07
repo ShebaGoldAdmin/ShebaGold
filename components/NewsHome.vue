@@ -12,7 +12,7 @@
         <h2 class="word-split mb-24">News</h2>
         <p class="lg scalable">Sheba Gold Capital Signs Agreement to Acquire Dominion Products & Healthcare Services Division.</p>
         <p class="lg scalable">The investment builds on Dominion legacy as a trusted partner to healthcare providers, expanding their access to critical products and services and strengthening their ability to deliver exceptional patient care for years to come.</p>
-        <NuxtLink to="/portfolio">
+        <NuxtLink to="/news">
           <ArrowButton class="mt-72 from-right"
             color="gold"
             arrowRotate="-90"
@@ -25,6 +25,7 @@
 
 <script setup>
 import {onMounted} from 'vue';
+import ArrowButton from "~/components/elements/ArrowButton.vue";
 
 const { $gsap } = useNuxtApp();
 
