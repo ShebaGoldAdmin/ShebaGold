@@ -91,19 +91,21 @@
 
 <script setup>
 import { useTabsStore } from '~/store/guiding-principles.js';
-import { ref, onMounted, watch} from 'vue';
+import { ref, onMounted, computed } from 'vue';
 
 const { $gsap } = useNuxtApp();
 const tabsStore = useTabsStore();
-const activeIndex = ref(0);
 const tabsList = ref(null);
 const sliderRef = ref(null);
 const slidingHeadingRef = ref(null);
 const waves = ref(null);
 
+const activeIndex = computed(() => 
+  tabsStore.tabs.findIndex(tab => tab.name === tabsStore.mode)
+);
+
 const setMode = (selectedTab) => {
   tabsStore.setMode(selectedTab);
-  activeIndex.value = tabsStore.tabs.findIndex((tab) => tab.name === selectedTab.name);
   animateSlider();
 };
 
@@ -126,14 +128,6 @@ const animateSlider = () => {
 
 onMounted(() => {
   animateSlider();
-
-  watch(activeIndex, () => {
-    animateSlider();
-  });
-
-  if (!tabsStore.submode && tabsStore.currentMode?.subtabs?.length > 0) {
-    tabsStore.setSubmode(tabsStore.currentMode.subtabs[0]);
-  }
 
   $gsap.fromTo(
     slidingHeadingRef.value,
