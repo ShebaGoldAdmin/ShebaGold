@@ -78,10 +78,11 @@ footer {
     height: 100%;
     left: 0;
     top: 0;
-    background-image: url('/public/images/logo-dark.svg');
+    background-image: url('/public/images/logo-white.svg');
     background-position: center 36%;
     background-repeat: no-repeat;
     background-size: 172% 172%;
+    opacity: 1.6%;
     @include respond-to(sm) {
       background-position: center 46%;
     }
