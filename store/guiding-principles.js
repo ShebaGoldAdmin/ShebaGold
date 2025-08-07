@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import tabsData from '@/data/guiding-tabs.json';
+import tabsData from '@/data/guiding-principles.json';
 
 export const useTabsStore = defineStore('tabs', {
   state: () => ({

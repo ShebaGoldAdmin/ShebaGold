@@ -90,7 +90,7 @@
 </template>
 
 <script setup>
-import { useTabsStore } from '~/store/guiding-tabs';
+import { useTabsStore } from '~/store/guiding-principles.js';
 import { ref, onMounted, watch} from 'vue';
 
 const { $gsap } = useNuxtApp();
