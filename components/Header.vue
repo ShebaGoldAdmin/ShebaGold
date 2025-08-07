@@ -42,7 +42,7 @@
 import { computed, ref, nextTick } from 'vue';
 import { useRoute } from '#app';
 import { useNuxtApp } from '#app';
-import links from '~/data/links.json';
+import linksData from '~/data/links.json';
 import SplitType from 'split-type';
 
 const props = defineProps({
@@ -56,7 +56,11 @@ const { $gsap } = useNuxtApp();
 const route = useRoute();
 const isHomePage = computed(() => route.path === '/');
 
-const allLinks = [...links.firstColumnLinks, ...links.secondColumnLinks];
+// Helper function to get link by ID
+const getLinkById = (id) => linksData.links.find(link => link.id === id);
+
+// Get main menu links based on configuration
+const allLinks = linksData.mainMenu.map(id => getLinkById(id));
 
 const isMenuOpen = ref(false);
 

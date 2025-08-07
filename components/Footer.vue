@@ -37,12 +37,17 @@
 <script setup>
 import { computed } from 'vue';
 import { useRoute } from '#app';
-import links from '~/data/links.json';
+import linksData from '~/data/links.json';
 
 const route = useRoute();
 const isHomePage = computed(() => route.path === '/');
 
-const { firstColumnLinks, secondColumnLinks } = links;
+// Helper function to get link by ID
+const getLinkById = (id) => linksData.links.find(link => link.id === id);
+
+// Get footer links based on configuration
+const firstColumnLinks = linksData.footerMenu.firstColumn.map(id => getLinkById(id));
+const secondColumnLinks = linksData.footerMenu.secondColumn.map(id => getLinkById(id));
 
 const getLinkHref = (path) => {
   if (path.startsWith('#') && !isHomePage.value) {
