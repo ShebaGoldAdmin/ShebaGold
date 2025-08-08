@@ -9,7 +9,10 @@
     </div>
     <div class="container">
       <div class="news-home__inner">
-        <h2 class="word-split mb-24">News</h2>
+        <h2 class="word-split">News</h2>
+        <div class="row">
+          <NewsBanner />
+        </div>
         <p class="lg scalable">Sheba Gold Capital Signs Agreement to Acquire Dominion Products & Healthcare Services Division.</p>
         <p class="lg scalable">The investment builds on Dominion legacy as a trusted partner to healthcare providers, expanding their access to critical products and services and strengthening their ability to deliver exceptional patient care for years to come.</p>
         <NuxtLink to="/news">
@@ -24,6 +27,7 @@
 </template>
 
 <script setup>
+import NewsBanner from '~/components/NewsBanner.vue';
 import {onMounted} from 'vue';
 import ArrowButton from "~/components/elements/ArrowButton.vue";
 
