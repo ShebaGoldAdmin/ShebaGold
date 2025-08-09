@@ -98,8 +98,9 @@ import InnerTop from '~/components/InnerTop.vue';
 import NewsBanner from '~/components/NewsBanner.vue';
 import Blockquote from '~/components/elements/Blockquote.vue';
 import newsData from '~/data/news.json';
+import { useScrollTrigger } from '~/composables/useScrollTrigger'
 
-const { $gsap } = useNuxtApp();
+const { initializeScrollTriggers } = useScrollTrigger()
 
 const latestNews = newsData.items[0]; // Use the first entry from news.json
 const isExpanded = ref(false);
@@ -123,20 +124,22 @@ const shouldShowButton = computed(() => {
 
 const slidingHeadingRef = ref(null);
 
-onMounted(() => {
-  $gsap.fromTo(
-    slidingHeadingRef.value,
-    { x: -100 },
-    {
-      x: 600,
-      scrollTrigger: {
-        trigger: slidingHeadingRef.value,
-        start: 'top bottom',
-        end: '+=3000',
-        scrub: true,
-      },
-    }
-  );
+onMounted(async () => {
+  await initializeScrollTriggers(($gsap) => {
+    $gsap.fromTo(
+      slidingHeadingRef.value,
+      { x: -100 },
+      {
+        x: 600,
+        scrollTrigger: {
+          trigger: slidingHeadingRef.value,
+          start: 'top bottom',
+          end: '+=3000',
+          scrub: true,
+        },
+      }
+    );
+  });
 });
 
 useHead({

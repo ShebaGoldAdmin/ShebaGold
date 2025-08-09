@@ -92,11 +92,14 @@
 <script setup>
 import { useTabsStore } from '~/store/guiding-principles.js';
 import { ref, onMounted, computed } from 'vue';
+import { useScrollTrigger } from '~/composables/useScrollTrigger'
 
-const { $gsap } = useNuxtApp();
+const { initializeScrollTriggers } = useScrollTrigger()
+
 const tabsStore = useTabsStore();
 const tabsList = ref(null);
 const sliderRef = ref(null);
+const { $gsap } = useNuxtApp();
 const slidingHeadingRef = ref(null);
 const waves = ref(null);
 
@@ -126,33 +129,35 @@ const animateSlider = () => {
   }
 };
 
-onMounted(() => {
-  animateSlider();
+onMounted(async () => {
+  await initializeScrollTriggers(($gsap) => {
+    animateSlider();
 
-  $gsap.fromTo(
-    slidingHeadingRef.value,
-    { x: 300 },
-    {
+    $gsap.fromTo(
+      slidingHeadingRef.value,
+      { x: 300 },
+      {
+        x: -600,
+        scrollTrigger: {
+          trigger: slidingHeadingRef.value,
+          start: 'top bottom',
+          end: '+=3000',
+          scrub: true,
+        },
+      }
+    );
+
+    $gsap.from(waves.value, {
       x: -600,
+      rotate: -12,
+      top: -100,
       scrollTrigger: {
-        trigger: slidingHeadingRef.value,
-        start: 'top bottom',
-        end: '+=3000',
+        trigger: waves.value,
+        start: 'top 80%',
+        end: 'bottom 0%',
         scrub: true,
       },
-    }
-  );
-
-  $gsap.from(waves.value, {
-    x: -600,
-    rotate: -12,
-    top: -100,
-    scrollTrigger: {
-      trigger: waves.value,
-      start: 'top 80%',
-      end: 'bottom 0%',
-      scrub: true,
-    },
+    });
   });
 });
 </script>

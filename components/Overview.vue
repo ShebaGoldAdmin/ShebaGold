@@ -36,8 +36,10 @@
 
 <script setup lang="js">
 import { onMounted, onUnmounted } from 'vue';
-const { $gsap } = useNuxtApp();
+import { useScrollTrigger } from '~/composables/useScrollTrigger'
 import ScrollTrigger from 'gsap/ScrollTrigger';
+
+const { initializeScrollTriggers } = useScrollTrigger()
 
 import OverviewItem from '~/components/OverviewItem.vue';
 import Blockquote from '~/components/elements/Blockquote.vue';
@@ -45,83 +47,85 @@ import Blockquote from '~/components/elements/Blockquote.vue';
 import overviewData from '~/data/overview-items.json';
 const overviewItems = overviewData;
 
-onMounted(() => {
-  $gsap.to('.overview-heading', {
-    scrollTrigger: {
-      trigger: '.overview',
-      start: 'top 50%',
-      end: 'bottom top',
-      scrub: true,
-      pin: '.overview-heading',
-      pinSpacing: true,
-    }
-  });
-
-  $gsap.fromTo('.overview-heading__top .content', 
-    { y: -300, opacity: 1 },
-    {
+onMounted(async () => {
+  await initializeScrollTriggers(($gsap) => {
+    $gsap.to('.overview-heading', {
       scrollTrigger: {
         trigger: '.overview',
-        start: 'top 90%',
-        end: 'top -20%',
+        start: 'top 50%',
+        end: 'bottom top',
         scrub: true,
-      },
-      keyframes: [
-        { y: 0, opacity: 1, duration: 0.4 },
-        { y: -20, opacity: 0.05, duration: 0.2 }
-      ]
-    }
-  );
+        pin: '.overview-heading',
+        pinSpacing: true,
+      }
+    });
 
-  $gsap.to('.overview', {
-    backgroundColor: 'rgb(255,255,255)',
-    scrollTrigger: {
-      trigger: '.overview-items',
-      start: 'top 60%',
-      end: 'top top',
-      scrub: true
-    }
-  });
+    $gsap.fromTo('.overview-heading__top .content', 
+      { y: -300, opacity: 1 },
+      {
+        scrollTrigger: {
+          trigger: '.overview',
+          start: 'top 90%',
+          end: 'top top',
+          scrub: true,
+        },
+        keyframes: [
+          { y: 0, opacity: 1, duration: 0.4 },
+          { y: -20, opacity: 0.05, duration: 0.2 }
+        ]
+      }
+    );
+ 
+    $gsap.fromTo('.overview-heading__bottom .content',
+      { opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: '.overview-items',
+          start: 'top 45%',
+          end: 'top top',
+          scrub: true,
+        },
+        keyframes: [
+          { opacity: 1, duration: 0.2 },
+          { opacity: 1, duration: 0.3 },
+          { opacity: 0.05, duration: 0.5 }
+        ]
+      }
+    );
 
-  $gsap.to('.overview .container', {
-    y: -50,
-    scrollTrigger: {
-      trigger: '.overview-items',
-      start: 'top 70%',
-      end: 'top center',
-      scrub: true
-    }
-  });
-
-  $gsap.fromTo('.overview-heading__bottom .content',
-    { opacity: 0 },
-    {
+    $gsap.to('.overview', {
+      backgroundColor: 'rgb(255,255,255)',
       scrollTrigger: {
         trigger: '.overview-items',
-        start: 'top 45%',
+        start: 'top 60%',
         end: 'top top',
-        scrub: true,
-      },
-      keyframes: [
-        { opacity: 1, duration: 0.2 },
-        { opacity: 1, duration: 0.3 },
-        { opacity: 0.05, duration: 0.5 }
-      ]
-    }
-  );
+        scrub: true
+      }
+    });
 
-  ScrollTrigger.create({
-    trigger: '.overview-items',
-    start: 'top 60%',
-    end: 'top 60%',
-    onEnter: () => {
-      $gsap.set('.overview-heading__top', { opacity: 0 });
-      $gsap.set('.overview-heading__bottom', { opacity: 1 });
-    },
-    onLeaveBack: () => {
-      $gsap.set('.overview-heading__top', { opacity: 1 });
-      $gsap.set('.overview-heading__bottom', { opacity: 0 });
-    }
+    $gsap.to('.overview .container', {
+      y: -50,
+      scrollTrigger: {
+        trigger: '.overview-items',
+        start: 'top 70%',
+        end: 'top center',
+        scrub: true
+      }
+    });
+
+    ScrollTrigger.create({
+      trigger: '.overview-items',
+      start: 'top 45%',
+      end: 'top 45%',
+      onEnter: () => {
+        $gsap.set('.overview-heading__top', { opacity: 0 });
+        $gsap.set('.overview-heading__bottom', { opacity: 1 });
+      },
+      onLeaveBack: () => {
+        $gsap.set('.overview-heading__top', { opacity: 1 });
+        $gsap.set('.overview-heading__bottom', { opacity: 0 });
+      }
+    });
   });
 
   onUnmounted(() => {
@@ -173,7 +177,7 @@ onMounted(() => {
 }
 
 .overview-items {
-  padding-top: 440px;
+  padding-top: 540px;
   color: rgb(var(--color-navy-blue));
 }
 </style>

@@ -23,25 +23,28 @@
 <script setup>
 import TeamCarousel from './TeamCarousel.vue';
 import { ref, onMounted} from 'vue';
+import { useScrollTrigger } from '~/composables/useScrollTrigger'
 
-const { $gsap } = useNuxtApp();
+const { initializeScrollTriggers } = useScrollTrigger()
 
 const slidingHeadingRef = ref(null);
 
-onMounted(() => {
-  $gsap.fromTo(
-    slidingHeadingRef.value,
-    { x: -100 },
-    {
-      x: 600,
-      scrollTrigger: {
-        trigger: slidingHeadingRef.value,
-        start: 'top bottom',
-        end: '+=3000',
-        scrub: true,
-      },
-    }
-  );
+onMounted(async () => {
+  await initializeScrollTriggers(($gsap) => {
+    $gsap.fromTo(
+      slidingHeadingRef.value,
+      { x: -100 },
+      {
+        x: 600,
+        scrollTrigger: {
+          trigger: slidingHeadingRef.value,
+          start: 'top bottom',
+          end: '+=3000',
+          scrub: true,
+        },
+      }
+    );
+  });
 });
 </script>
 

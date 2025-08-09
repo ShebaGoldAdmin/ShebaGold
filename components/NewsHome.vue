@@ -30,26 +30,29 @@
 import NewsBanner from '~/components/NewsBanner.vue';
 import {onMounted} from 'vue';
 import ArrowButton from "~/components/elements/ArrowButton.vue";
+import { useScrollTrigger } from '~/composables/useScrollTrigger'
 
-const { $gsap } = useNuxtApp();
+const { initializeScrollTriggers } = useScrollTrigger()
 
-onMounted(() => {
-  const newsImg = document.querySelector('.news-home__img img');
+onMounted(async () => {
+  await initializeScrollTriggers(($gsap) => {
+    const newsImg = document.querySelector('.news-home__img img');
 
-  $gsap.fromTo(
-    newsImg,
-    { x: 300, scale: 1 },
-    {
-      x: 0,
-      scale: 1.2,
-      scrollTrigger: {
-        trigger: newsImg,
-        start: 'top bottom',
-        end: '+=3000',
-        scrub: true,
-      },
-    }
-  );
+    $gsap.fromTo(
+      newsImg,
+      { x: 300, scale: 1 },
+      {
+        x: 0,
+        scale: 1.2,
+        scrollTrigger: {
+          trigger: newsImg,
+          start: 'top bottom',
+          end: '+=3000',
+          scrub: true,
+        },
+      }
+    );
+  });
 });
 </script>
 
@@ -60,8 +63,6 @@ onMounted(() => {
   position: relative;
   h2{
     @include goldGradientText;
-    
-    /* Ensure gradient text is visible during word-split animation */
     :deep(.word) {
       @include goldGradientText;
     }

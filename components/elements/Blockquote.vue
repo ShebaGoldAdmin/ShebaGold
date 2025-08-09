@@ -15,8 +15,10 @@
 <script setup lang="js">
 import { onMounted, ref, nextTick } from 'vue';
 import BlockquoteSvg from './BlockquoteSvg.vue';
+import { useScrollTrigger } from '~/composables/useScrollTrigger'
 
-const { $gsap } = useNuxtApp();
+const { initializeScrollTriggers } = useScrollTrigger()
+
 const titleRef = ref(null);
 const authorRef = ref(null);
 
@@ -38,89 +40,91 @@ const svgColor = computed(() => {
   return 'rgba(var(--color-gold), 0.4)';
 });
 
-onMounted(() => {
-  $gsap.from('blockquote svg', {
-    y: 50,
-    scale: 0.7,
-    opacity: 0.3,
-    duration: 5,
-    scrollTrigger: {
-      trigger: 'blockquote svg',
-      start: 'top 80%',
-      end: 'top 20%',
-      scrub: true,
-    },
-  });
+onMounted(async () => {
+  await initializeScrollTriggers(($gsap) => {
+    $gsap.from('blockquote svg', {
+      y: 50,
+      scale: 0.7,
+      opacity: 0.3,
+      duration: 5,
+      scrollTrigger: {
+        trigger: 'blockquote svg',
+        start: 'top 80%',
+        end: 'top 20%',
+        scrub: true,
+      },
+    });
 
-  nextTick(() => {
-    if (!titleRef.value || !props.author) return;
+    nextTick(() => {
+      if (!titleRef.value || !props.author) return;
 
-    const { ScrollTrigger } = $gsap.core.globals();
+      const { ScrollTrigger } = $gsap.core.globals();
 
-    let authorDelayCall = null;
-    let authorTween = null;
+      let authorDelayCall = null;
+      let authorTween = null;
 
-    const scheduleAuthor = () => {
-      if (authorDelayCall) {
-        authorDelayCall.kill();
-        authorDelayCall = null;
-      }
+      const scheduleAuthor = () => {
+        if (authorDelayCall) {
+          authorDelayCall.kill();
+          authorDelayCall = null;
+        }
 
-      if (authorTween) {
-        authorTween.kill();
-        authorTween = null;
-      }
+        if (authorTween) {
+          authorTween.kill();
+          authorTween = null;
+        }
 
-      const words = titleRef.value?.querySelectorAll('.word');
-      const totalDuration = words?.length
-        ? 0.1 + words.length * 0.1
-        : 1;
+        const words = titleRef.value?.querySelectorAll('.word');
+        const totalDuration = words?.length
+          ? 0.1 + words.length * 0.1
+          : 1;
 
-      authorDelayCall = $gsap.delayedCall(totalDuration, () => {
+        authorDelayCall = $gsap.delayedCall(totalDuration, () => {
+          if (authorRef.value) {
+            authorTween = $gsap.to(authorRef.value, {
+              opacity: 1,
+              y: 0,
+              duration: 0.4,
+              ease: 'power2.out',
+            });
+          }
+        });
+      };
+
+      const hideAuthor = () => {
+        if (authorDelayCall) {
+          authorDelayCall.kill();
+          authorDelayCall = null;
+        }
+
+        if (authorTween) {
+          authorTween.kill();
+          authorTween = null;
+        }
+
         if (authorRef.value) {
-          authorTween = $gsap.to(authorRef.value, {
-            opacity: 1,
-            y: 0,
-            duration: 0.4,
-            ease: 'power2.out',
+          $gsap.to(authorRef.value, {
+            opacity: 0,
+            duration: 0.2,
+            ease: 'power2.out'
           });
         }
+      };
+
+      ScrollTrigger.create({
+        trigger: titleRef.value,
+        start: 'top 80%',
+        onEnter: () => {
+          $gsap.delayedCall(0.2, scheduleAuthor);
+        },
+        onEnterBack: () => {
+          $gsap.delayedCall(0.2, scheduleAuthor);
+        },
+        onLeave: hideAuthor,
+        onLeaveBack: hideAuthor,
       });
-    };
-
-    const hideAuthor = () => {
-      if (authorDelayCall) {
-        authorDelayCall.kill();
-        authorDelayCall = null;
-      }
-
-      if (authorTween) {
-        authorTween.kill();
-        authorTween = null;
-      }
-
-      if (authorRef.value) {
-        $gsap.to(authorRef.value, {
-          opacity: 0,
-          duration: 0.2,
-          ease: 'power2.out'
-        });
-      }
-    };
-
-    ScrollTrigger.create({
-      trigger: titleRef.value,
-      start: 'top 80%',
-      onEnter: () => {
-        $gsap.delayedCall(0.2, scheduleAuthor);
-      },
-      onEnterBack: () => {
-        $gsap.delayedCall(0.2, scheduleAuthor);
-      },
-      onLeave: hideAuthor,
-      onLeaveBack: hideAuthor,
     });
-  });
+  })
 });
 </script>
 
@@ -176,6 +180,7 @@ blockquote {
 
   @include respond-to(sm) {
     background: none;
+    border: none;
     padding: 90px 16px 40px 72px;
   }
 

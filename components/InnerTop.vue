@@ -42,6 +42,7 @@
 
 <script setup>
 import TeamImage from '~/components/elements/TeamImage.vue';
+import { useScrollTrigger } from '~/composables/useScrollTrigger'
 
 const props = defineProps({
   heading: {
@@ -58,24 +59,26 @@ const props = defineProps({
   },
 });
 
-const { $gsap } = useNuxtApp();
+const { initializeScrollTriggers } = useScrollTrigger()
 
 const slidingHeadingRef = ref(null);
 
-onMounted(() => {
-  $gsap.fromTo(
-    slidingHeadingRef.value,
-    { x: -200 },
-    {
-      x: 500,
-      scrollTrigger: {
-        trigger: slidingHeadingRef.value,
-        start: 'top bottom',
-        end: '+=3000',
-        scrub: true,
-      },
-    }
-  );
+onMounted(async () => {
+  await initializeScrollTriggers(($gsap) => {
+    $gsap.fromTo(
+      slidingHeadingRef.value,
+      { x: -200 },
+      {
+        x: 500,
+        scrollTrigger: {
+          trigger: slidingHeadingRef.value,
+          start: 'top bottom',
+          end: '+=3000',
+          scrub: true,
+        },
+      }
+    );
+  });
 });
 </script>
 

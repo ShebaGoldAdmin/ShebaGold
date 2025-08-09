@@ -17,7 +17,9 @@
 
 <script setup>
 import { onMounted } from 'vue'
-const { $gsap } = useNuxtApp();
+import { useScrollTrigger } from '~/composables/useScrollTrigger'
+
+const { initializeScrollTriggers } = useScrollTrigger()
 
 const props = defineProps({
   isColumnOnMobile: {
@@ -26,72 +28,74 @@ const props = defineProps({
   },
 });
 
-onMounted(() => {
-  const isMobile = window.innerWidth < 992
-  const useVerticalAnimation = isMobile && props.isColumnOnMobile
-  
-  const tl = $gsap.timeline({
-    scrollTrigger: {
-      trigger: '.logo-wrapper',
-      start: 'top 70%',
-      end: 'top -50%',
-      toggleActions: "play none none reverse",
-    },
+onMounted(async () => {
+  await initializeScrollTriggers(($gsap) => {
+    const isMobile = window.innerWidth < 992
+    const useVerticalAnimation = isMobile && props.isColumnOnMobile
+    
+    const tl = $gsap.timeline({
+      scrollTrigger: {
+        trigger: '.logo-wrapper',
+        start: 'top 70%',
+        end: 'top -50%',
+        toggleActions: "play none none reverse",
+      },
+    })
+    
+    tl.from('.news-logo.left img', {
+        opacity: 0,
+        duration: 0.3,
+        ease: 'power2.out',
+      }, 0)
+      .to('.news-logo.left img', {
+        scale: 1.3,
+        filter: 'brightness(2.5)',
+        duration: 0.3,
+        ease: 'power2.out',
+      }, 0.15)
+      .to('.news-logo.left img', {
+        scale: 1,
+        filter: 'brightness(1)',
+        duration: 0.4,
+        ease: 'power2.out',
+      }, 0.3)
+      .fromTo('.news-logo.left img',
+        { [useVerticalAnimation ? 'y' : 'x']: useVerticalAnimation ? -60 : -60 },
+        {
+          [useVerticalAnimation ? 'y' : 'x']: 0,
+          duration: 1.2,
+          ease: 'power2.inOut',
+        }, 0.4)
+      .from('.news-logo.right img', {
+        opacity: 0,
+        duration: 0.3,
+        ease: 'power2.out',
+      }, 0)
+      .to('.news-logo.right img', {
+        scale: 1.3,
+        filter: 'brightness(2.5)',
+        duration: 0.3,
+        ease: 'power2.out',
+      }, 0.15)
+      .to('.news-logo.right img', {
+        scale: 1,
+        filter: 'brightness(1)',
+        duration: 0.4,
+        ease: 'power2.out',
+      }, 0.3)
+      .fromTo('.news-logo.right img',
+        { [useVerticalAnimation ? 'y' : 'x']: useVerticalAnimation ? 60 : 60 },
+        {
+          [useVerticalAnimation ? 'y' : 'x']: 0,
+          duration: 1.2,
+          ease: 'power2.inOut',
+        }, 0.4)
+      .from('.news-logo-divider img', {
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power2.out',
+      }, 0.5)
   })
-  
-  tl.from('.news-logo.left img', {
-      opacity: 0,
-      duration: 0.3,
-      ease: 'power2.out',
-    }, 0)
-    .to('.news-logo.left img', {
-      scale: 1.3,
-      filter: 'brightness(2.5)',
-      duration: 0.3,
-      ease: 'power2.out',
-    }, 0.15)
-    .to('.news-logo.left img', {
-      scale: 1,
-      filter: 'brightness(1)',
-      duration: 0.4,
-      ease: 'power2.out',
-    }, 0.3)
-    .fromTo('.news-logo.left img',
-      { [useVerticalAnimation ? 'y' : 'x']: useVerticalAnimation ? -60 : -60 },
-      {
-        [useVerticalAnimation ? 'y' : 'x']: 0,
-        duration: 1.2,
-        ease: 'power2.inOut',
-      }, 0.4)
-    .from('.news-logo.right img', {
-      opacity: 0,
-      duration: 0.3,
-      ease: 'power2.out',
-    }, 0)
-    .to('.news-logo.right img', {
-      scale: 1.3,
-      filter: 'brightness(2.5)',
-      duration: 0.3,
-      ease: 'power2.out',
-    }, 0.15)
-    .to('.news-logo.right img', {
-      scale: 1,
-      filter: 'brightness(1)',
-      duration: 0.4,
-      ease: 'power2.out',
-    }, 0.3)
-    .fromTo('.news-logo.right img',
-      { [useVerticalAnimation ? 'y' : 'x']: useVerticalAnimation ? 60 : 60 },
-      {
-        [useVerticalAnimation ? 'y' : 'x']: 0,
-        duration: 1.2,
-        ease: 'power2.inOut',
-      }, 0.4)
-    .from('.news-logo-divider img', {
-      opacity: 0,
-      duration: 0.8,
-      ease: 'power2.out',
-    }, 0.5)
 })
 </script>
 
