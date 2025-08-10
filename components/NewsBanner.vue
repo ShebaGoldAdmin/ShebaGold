@@ -114,6 +114,17 @@ onMounted(async () => {
       height: 160px;
     }
   }
+  &.right{
+    img{
+      height: 170px;
+      @include respond-to(lg) {
+        height: 130px;
+      }
+      @include respond-to(sm) {
+        height: 110px;
+      }
+    }
+  }
 }
 
 .news-logo-divider {
