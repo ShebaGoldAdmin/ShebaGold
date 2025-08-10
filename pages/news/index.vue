@@ -3,6 +3,9 @@
     <InnerTop
       :heading="latestNews.title"
       :subheading="latestNews.category"
+      :sliding-heading="latestNews.tagline"
+      :x-start="600"
+      :x-end="-1600"
     />
     <div class="news-banner-section" ref="newsBannerRef">
       <div class="container">
@@ -25,7 +28,7 @@
               {{ paragraph }}
             </p>
             
-            <Transition name="slide-down">
+            <Transition name="slide-down"  @before-leave="handleBeforeLeave">
               <div v-if="isExpanded" class="mt-24">
                 <p v-for="(paragraph, index) in hiddenParagraphs"
                   :key="`hidden-${index}`"
@@ -93,16 +96,15 @@
 </template>
 
 <script setup>
-import { ref, computed, Transition } from 'vue';
+import { ref, computed, Transition, nextTick, onMounted } from 'vue';
 import InnerTop from '~/components/InnerTop.vue';
 import NewsBanner from '~/components/NewsBanner.vue';
 import Blockquote from '~/components/elements/Blockquote.vue';
 import newsData from '~/data/news.json';
-import { useScrollTrigger } from '~/composables/useScrollTrigger'
-import HelperText from "~/components/elements/HelperText.vue";
-import ArrowButton from "~/components/elements/ArrowButton.vue";
+import { useScrollTrigger } from '~/composables/useScrollTrigger';
 
-const { initializeScrollTriggers } = useScrollTrigger()
+const { initializeScrollTriggers } = useScrollTrigger();
+const { $lenis } = useNuxtApp();
 
 const latestNews = newsData.items[0]; // Use the first entry from news.json
 const isExpanded = ref(false);
@@ -116,16 +118,22 @@ const hiddenParagraphs = computed(() => {
   return latestNews.description.slice(previewParagraphCount);
 });
 
-const toggleReadMore = () => {
-  isExpanded.value = !isExpanded.value;
-};
-
 const shouldShowButton = computed(() => {
   return latestNews.description.length > previewParagraphCount;
 });
 
 const slidingHeadingRef = ref(null);
 const newsBannerRef = ref(null);
+
+const toggleReadMore = () => {
+  isExpanded.value = !isExpanded.value;
+};
+
+const handleBeforeLeave = () => {
+  nextTick(() => {
+    $lenis.scrollTo('.news-text', { offset: -20, duration: 0.3 });
+  });
+};
 
 onMounted(async () => {
   await initializeScrollTriggers(($gsap) => {
@@ -139,8 +147,8 @@ onMounted(async () => {
           trigger: slidingHeadingRef.value,
           start: 'top bottom',
           end: '+=3000',
-          scrub: true,
-        },
+          scrub: true
+        }
       }
     );
 
@@ -152,16 +160,17 @@ onMounted(async () => {
       scrollTrigger: {
         trigger: '.logo-wrapper',
         start: 'top 70%',
-        toggleActions: "play none none reverse",
-      },
+        toggleActions: 'play none none reverse'
+      }
     });
   });
 });
 
 useHead({
-  title: 'News',
+  title: 'News'
 });
 </script>
+
 
 <style lang="scss" scoped>
 .news-banner-section {

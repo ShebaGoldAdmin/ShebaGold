@@ -1,11 +1,11 @@
 <template>
   <section class="inner-top pt-32 pb-32 pt-56-sm pb-88-sm">
     <div 
-      v-if="member?.name || subheading"
+      v-if="displayHeading"
       class="inner-top__sliding-heading"
       ref="slidingHeadingRef"
     >
-      {{ member?.name || subheading }}
+      {{ displayHeading }}
     </div>
     <div class="container">
       <NuxtLink to="/">
@@ -53,11 +53,27 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  slidingHeading: {
+    type: String,
+    default: '',
+  },
   member: {
     type: Object,
     default: () => {},
   },
+  xStart: {
+    type: Number,
+    default: -200,
+  },
+  xEnd: {
+    type: Number,
+    default: 500,
+  }
 });
+
+const displayHeading = computed(() => 
+  props.slidingHeading || props.member?.name || props.subheading
+)
 
 const { initializeScrollTriggers } = useScrollTrigger()
 
@@ -67,9 +83,9 @@ onMounted(async () => {
   await initializeScrollTriggers(($gsap) => {
     $gsap.fromTo(
       slidingHeadingRef.value,
-      { x: -200 },
+      { x: props.xStart },
       {
-        x: 500,
+        x: props.xEnd,
         scrollTrigger: {
           trigger: slidingHeadingRef.value,
           start: 'top bottom',
