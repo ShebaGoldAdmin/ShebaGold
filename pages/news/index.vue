@@ -1,10 +1,10 @@
 <template>
   <main>
     <InnerTop
-      heading="Dominion Acquisition"
-      subheading="News"
+      :heading="latestNews.title"
+      :subheading="latestNews.category"
     />
-    <div class="news-banner-section">
+    <div class="news-banner-section" ref="newsBannerRef">
       <div class="container">
         <div class="row justify-content-center">
           <NewsBanner is-column-on-mobile/>
@@ -99,6 +99,8 @@ import NewsBanner from '~/components/NewsBanner.vue';
 import Blockquote from '~/components/elements/Blockquote.vue';
 import newsData from '~/data/news.json';
 import { useScrollTrigger } from '~/composables/useScrollTrigger'
+import HelperText from "~/components/elements/HelperText.vue";
+import ArrowButton from "~/components/elements/ArrowButton.vue";
 
 const { initializeScrollTriggers } = useScrollTrigger()
 
@@ -123,9 +125,11 @@ const shouldShowButton = computed(() => {
 });
 
 const slidingHeadingRef = ref(null);
+const newsBannerRef = ref(null);
 
 onMounted(async () => {
   await initializeScrollTriggers(($gsap) => {
+    // Sliding heading animation
     $gsap.fromTo(
       slidingHeadingRef.value,
       { x: -100 },
@@ -139,6 +143,18 @@ onMounted(async () => {
         },
       }
     );
+
+    // Background color transition
+    $gsap.to(newsBannerRef.value, {
+      backgroundColor: 'rgb(var(--color-dark))',
+      duration: 0.6,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '.logo-wrapper',
+        start: 'top 70%',
+        toggleActions: "play none none reverse",
+      },
+    });
   });
 });
 
@@ -149,7 +165,7 @@ useHead({
 
 <style lang="scss" scoped>
 .news-banner-section {
-  background: rgb(var(--color-dark));
+  background: rgb(var(--color-black));
   padding: 248px 0;
   @include respond-to(sm) {
     padding: 120px 0;
@@ -221,7 +237,7 @@ useHead({
   font-family: var(--font-heading);
   color: rgb(var(--color-light-gray));
   position: absolute;
-  bottom: 0;
+  right: 30%;
   white-space: nowrap;
   @include respond-to(sm){
     @include fsz(130px);
