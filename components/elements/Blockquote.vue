@@ -2,13 +2,13 @@
   <blockquote :class="type">
     <BlockquoteSvg :color="svgColor"/>
     <h3 ref="titleRef" class="text-left word-split"><slot/></h3>
-    <h6 v-if="author" 
+    <p v-if="author" 
       ref="authorRef"
-      class="mt-16"
-      style="opacity: 0; transform: translateY(10px);" 
+      class="lg mt-16"
+      style="opacity: 0; transform: translateY(10px); color: rgb(var(--color-gold));" 
     >
       {{ author }}
-    </h6>
+    </p>
   </blockquote>
 </template>
 
@@ -184,11 +184,5 @@ blockquote {
     padding: 90px 16px 40px 72px;
   }
 
-  h6 {
-    @include fsz(20px);
-    font-family: var(--font-body);
-    line-height: 1.7;
-    color: rgb(var(--color-gold));
-  }
 }
 </style>
