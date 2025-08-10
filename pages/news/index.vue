@@ -77,6 +77,7 @@
           <div class="col-lg-7">
             <HelperText>The Next One Hundred Years</HelperText>
             <h3 class="mt-16 mb-48">An Open Letter from Morris Sarway</h3>
+            <img src="/images/team/Morris-Sarway.png" alt="Morris Sarway" class="author-image" />
             <p class="lg scalable">To our valued partners and the Dominion teammates, customers and community.</p>
             <p class="lg scalable">Today marks a pivotal moment… not just in the life of Sheba Gold, but in the continuation of Dominion’s legacy.</p>
             <p class="lg scalable">It is with great excitement and deep respect that Sheba Gold Capital has signed a letter of intent to acquire Dominion’s Products & Healthcare Services business. For me, this is not just a strategic move. It’s personal, as it represents an investment in the values and principles that I’ve dedicated my career to - beliefs about people, purpose, and what’s possible when you combine vision with experience.</p>
@@ -206,8 +207,18 @@ useHead({
 }
 
 .letter-section {
-  @include paragraphSpacing(0);
+  @include paragraphSpacing();
   position: relative;
+}
+
+.author-image {
+  float: left;
+  width: 150px;
+  height: 180px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 4px;
+  margin: 0 24px 16px 0;
 }
 
 .slide-down-enter-active,
