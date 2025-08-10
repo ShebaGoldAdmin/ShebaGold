@@ -2,14 +2,15 @@
   "links": [
     { "id": "01", "name": "Home", "path": "#home" },
     { "id": "02", "name": "Overview", "path": "#overview" },
-    { "id": "03", "name": "Principles", "path": "#principles" },
-    { "id": "04", "name": "Team", "path": "#team" },
-    { "id": "05", "name": "News", "path": "/news" },
-    { "id": "06", "name": "Privacy", "path": "/privacy"}
+    { "id": "03", "name": "Culture", "path": "#culture" },
+    { "id": "04", "name": "Principles", "path": "#principles" },
+    { "id": "05", "name": "Team", "path": "#team" },
+    { "id": "06", "name": "News", "path": "/news" },
+    { "id": "07", "name": "Privacy", "path": "/privacy"}
   ],
-  "mainMenu": ["01", "02", "03", "04", "05"],
+  "mainMenu": ["01", "02", "04", "05", "06"],
   "footerMenu": {
-    "firstColumn": ["01", "02", "03"],
-    "secondColumn": ["04", "05", "06"]
+    "firstColumn": [ "01", "02", "03"],
+    "secondColumn": ["04", "05" , "06"]
   }
 }
