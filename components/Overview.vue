@@ -15,7 +15,7 @@
       <p class="lg scalable opacity-60">We are not your typical private equity firm. At Sheba Gold Capital, we appreciate the history of the businesses we invest in, the talent of their people, and the relationships that have been built with customers. Our focus is to bring new energy, investment and vision to previously untapped opportunities, building upon proven businesses and accelerating momentum for the long-term.</p>
       <p class="lg scalable opacity-60">Sheba Gold Capital is an esteemed investment firm that identifies and supports family-owned healthcare businesses in reaching their full growth potential.</p>
     </div>
-    <div class="overview-items">
+    <div class="overview-items"  id="culture">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-10 text-center">
