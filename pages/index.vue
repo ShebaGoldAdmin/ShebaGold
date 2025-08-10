@@ -1,7 +1,7 @@
 <template>
   <main id="home">
     <Splash/>
-    <FloatingBanner class="d-none d-flex-md"/>
+    <FloatingBanner/>
     <Overview id="overview"/>
     <GuidingPrinciples id="principles"/>
     <Team id="team"/>

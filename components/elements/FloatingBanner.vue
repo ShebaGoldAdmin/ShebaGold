@@ -1,7 +1,17 @@
 <template>
   <div class="floating-banner-wrapper">
-    <div class="floating-banner" ref="banner">
-      <RouterLink to="/news">
+    <div
+      class="floating-banner"
+      ref="banner"
+    >
+      <div class="mobile-bell-container" @click="toggleMobileBanner">
+        <BellSvg />
+      </div>
+      
+      <RouterLink to="/news" 
+        class="banner-content"
+        :class="{ 'mobile-show': showMobileBanner }"
+      >
         <p class="lg">Sheba Gold Capital Signs Agreement to Acquire Dominion P&HS Division</p>
         <button>
           <svg width="20" height="10" viewBox="0 0 20 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -13,23 +23,44 @@
     </div>
   </div>
 </template>
-
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, onUnmounted } from "vue";
 import { useScrollTrigger } from '~/composables/useScrollTrigger'
+import BellSvg from '~/components/elements/BellSvg.vue';
 
 const { initializeScrollTriggers } = useScrollTrigger()
 const banner = ref(null);
+const showMobileBanner = ref(false);
+
+const toggleMobileBanner = () => {
+  showMobileBanner.value = !showMobileBanner.value;
+};
+
+const closeMobileBanner = () => {
+  showMobileBanner.value = false;
+};
+
+const handleClickOutside = (event) => {
+  if (banner.value && !banner.value.contains(event.target) &&
+      !event.target.closest('.mobile-bell-container')) {
+    closeMobileBanner();
+  }
+};
 
 onMounted(async () => {
+  document.addEventListener('click', handleClickOutside);
+  
   await initializeScrollTriggers(($gsap) => {
-    const bannerHeight = banner.value.offsetHeight;
-
     $gsap.fromTo(
       banner.value,
-      { y: -bannerHeight },
+      { y: -32,
+        opacity: 0,
+        pointerEvents: 'none'
+      },
       {
-        y: 16,
+        y: 32,
+        opacity: 1,
+        pointerEvents: 'auto',
         ease: "power2.out",
         scrollTrigger: {
           trigger: banner.value.parentElement,
@@ -37,30 +68,69 @@ onMounted(async () => {
           end: "bottom bottom",
           scrub: true,
           onLeaveBack: () => {
-            $gsap.to(banner.value, { y: -bannerHeight, duration: 0.3 });
+            $gsap.to(banner.value, { y: -32, duration: 0.3, pointerEvents: 'none', opacity: 0 });
           },
         },
       }
     );
   });
 });
-</script>
 
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside);
+});
+</script>
 <style lang="scss" scoped>
 .floating-banner-wrapper {
   position: relative;
   display: flex;
   justify-content: center;
   padding: 0 16px;
-  @include respond-to(lg){
+  
+  @include respond-to(lg) {
     justify-content: flex-start;
   }
 }
 
 .floating-banner {
   position: fixed;
-  top: 0;
+  top: -16px;
   transform: translateY(-100%);
+  color: var(--color-black);
+  font-weight: var(--weight-medium);
+  z-index: 8;
+  transition: 300ms;
+  display: flex;
+  align-items: center;
+  
+  &:hover {
+    background-position: 0 0;
+  }
+
+  @include respond-to(md) {
+    opacity: 0;
+    transition: 300ms;
+    top: 0;
+    left: 16px;
+    right: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.mobile-bell-container {
+  cursor: pointer;
+  display: none;
+  @include respond-to(md) {
+    display: block;
+    margin-bottom: 16px;
+  }
+}
+
+.banner-content {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
   background: linear-gradient(
     82.32deg,
     #eacea9 9.24%,
@@ -70,35 +140,35 @@ onMounted(async () => {
   );
   background-size: 150% auto;
   background-position: 100% 0;
-  color: var(--color-black);
-  font-weight: var(--weight-medium);
-  z-index: 8;
-  transition: 300ms transform, 600ms background-position;
+  transition: 600ms background-position, 300ms opacity, 300ms transform;
   border-radius: 2px;
-  &:hover{
-    background-position: 0 0;
+  @include respond-to(md) {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+    &.mobile-show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
   }
-  a{
-    padding: 8px 16px;
-    display: flex;
-    align-items: center;
-  }
+
   p{
-    line-height: 1.1;
+    line-height: 1.2;
     @include respond-to(lg){
       @include fsz(18px);
     }
   }
-  button{
+  
+  button {
     background: rgb(var(--color-navy-blue));
-    width: 56px;
-    height: 26px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 16px;
+    flex-shrink: 0;
+    width: 48px;
+    height: 24px;
+    margin-left: 12px;
   }
 }
 </style>
-
-
