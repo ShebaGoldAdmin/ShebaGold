@@ -11,7 +11,7 @@
       <h2 class="word-split mb-32 text-center">Guiding Principles</h2>
       <div class="row justify-content-center mb-88">
         <div class="col-lg-9 text-center">
-          <p class="lg scalable opacity-60">Guided by our core principles of Wisdom, Wealth and Endurance, we carefully analyze each investment prospect, selecting those with significant capacity for long-term growth and overall profitability. By honoring the legacy of these businesses while driving growth and returns, we aim to create a lasting impact that benefits all our stakeholders.</p>
+          <p class="lg scalable opacity-60">Guided by our core principles of Wisdom, Endurance and Wealth, we carefully analyze each investment prospect, selecting those with significant capacity for long-term growth and overall profitability. By honoring the legacy of these businesses while driving growth and returns, we aim to create a lasting impact that benefits all our stakeholders.</p>
         </div>
       </div>
       <div class="guiding-wrapper">

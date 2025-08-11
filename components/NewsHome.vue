@@ -13,8 +13,8 @@
         <div class="row">
           <NewsBanner />
         </div>
-        <p class="lg scalable">Sheba Gold Capital Signs Agreement to Acquire Dominion Products & Healthcare Services Division.</p>
-        <p class="lg scalable">The investment builds on Dominion legacy as a trusted partner to healthcare providers, expanding their access to critical products and services and strengthening their ability to deliver exceptional patient care for years to come.</p>
+        <p class="lg scalable">Sheba Gold Capital Signs Definitive Agreement to Acquire Dominion's Products & Healthcare Services Business.</p>
+        <p class="lg scalable">The investment builds on Dominion’s legacy as a trusted partner to healthcare providers, expanding their access to critical products and services and strengthening their ability to deliver exceptional patient care for years to come.</p>
         <NuxtLink to="/news">
           <ArrowButton class="mt-72 from-right"
             color="gold"

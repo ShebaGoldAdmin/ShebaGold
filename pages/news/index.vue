@@ -75,15 +75,15 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-7">
-            <HelperText>The Next One Hundred Years</HelperText>
+            <HelperText>The Next 140 Years</HelperText>
             <h3 class="mt-16 mb-48">An Open Letter from Morris Sarway</h3>
             <img src="/images/team/Morris-Sarway.png" alt="Morris Sarway" class="author-image" />
-            <p class="lg scalable">To our valued partners and the Dominion teammates, customers and community.</p>
+            <p class="lg scalable">To our valued partners and the P&HS teammates, customers and community,</p>
             <p class="lg scalable">Today marks a pivotal moment… not just in the life of Sheba Gold, but in the continuation of Dominion’s legacy.</p>
-            <p class="lg scalable">It is with great excitement and deep respect that Sheba Gold Capital has signed a letter of intent to acquire Dominion’s Products & Healthcare Services business. For me, this is not just a strategic move. It’s personal, as it represents an investment in the values and principles that I’ve dedicated my career to - beliefs about people, purpose, and what’s possible when you combine vision with experience.</p>
-            <p class="lg scalable">From the start, it was clear that Dominion stood for something exceptional. Its reputation was forged from more than a century of dedication to its customers, its people, and its mission. That legacy, as well as the name, is not something we intend to change… it’s something we’re here to honor, support, and build upon.</p>
-            <p class="lg scalable">Our goal is to elevate Dominion, not disrupt it, and our team is working diligently behind the scenes to ensure a seamless and promising transition. We’ll invest in products, training, and innovation while maintaining the same exceptional service customers have come to expect.</p>
-            <p class="lg scalable">As we look toward what’s on the horizon, I couldn’t be more honored or more confident. What Dominion has built over the past 140 years is remarkable. What we’ll build over the next 100 will be nothing short of extraordinary.</p>
+            <p class="lg scalable">It is with great excitement and deep respect that Sheba Gold Capital has signed a definitive agreement to acquire Dominion’s Products & Healthcare Services Business. For me, this is not just a strategic move. It’s personal, as it represents an investment in the values and principles that I’ve dedicated my career to – beliefs about people, purpose and what’s possible when you combine vision with experience.</p>
+            <p class="lg scalable">From the start, it was clear that Dominion stood for something exceptional. Its reputation was forged from more than a century of dedication to its customers, its people and its mission. That legacy, as well as the name, is not something we intend to change…it’s something we’re here to honor, support and build upon.</p>
+            <p class="lg scalable">Our goal is to elevate the brand and the business, not disrupt it, and our team is working diligently behind the scenes to ensure a seamless and promising transition. We’ll invest in products, training and innovation while maintaining the same exceptional service customers have come to expect.</p>
+            <p class="lg scalable">As we look toward what’s on the horizon, I couldn’t be more honored or more confident. What Dominion has built over the past 140 years is remarkable. We intend on carrying this customer-centric legacy forward and building upon it for the next 140 years. What we achieve together will be nothing short of extraordinary.</p>
             <p class="lg scalable mt-24">
               Morris Sarway<br>
               Partner<br>

@@ -2,16 +2,17 @@
   <section class="pt-80 pb-80 pt-184-sm pb-144-sm position-relative">
     <div class="container container--sm">
       <div class="team-sliding-heading" ref="slidingHeadingRef">Team</div>
-      <h2 class="word-split mb-24 mb-72-sm">Team</h2>
+      <h2 class="word-split mb-24 mb-72-sm">This is our team. Together, we rise.</h2>
       <div class="row">
         <div class="col-4">
           <img class="team-logo" src="public/images/logo-rounded.svg" alt="Sheba Gold Capital" /> 
         </div>
         <div class="col-sm-8">
-          <h5 class="word-split mb-32">Extensive Experience and Success in Investment and Healthcare Solutions
+          <h5 class="word-split mb-32">
           </h5>
-          <p class="lg scalable">We believe strong companies start with fulfilled teams and a shared sense of purpose. When people thrive, success follows.<br>
-            The Sheba Gold Capital team is made up of seasoned professionals with deep expertise across the investment and healthcare landscapes. Each member of the team brings excellence,  passion and pride to everything they do.
+          <p class="lg scalable">
+            The Sheba Gold Capital team includes seasoned professionals with deep investment and operations experience across the healthcare and real estate landscapes.<br>
+            Each member of the team brings excellence, passion and pride to their role.
           </p>
         </div>
       </div>

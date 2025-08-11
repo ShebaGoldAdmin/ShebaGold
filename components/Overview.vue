@@ -11,15 +11,16 @@
     <div class="container container--sm">
       <img class="mb-32" src="public/images/logo-single.svg" alt="Sheba Gold Capital" /> 
       <h2 class="word-split mb-24 mb-64-sm">Where Legacy Meets Vision</h2>
-      <p class="lg scalable opacity-60">Sheba Gold Capital is an esteemed investment firm that identifies and supports family-owned healthcare businesses in reaching their full growth potential.</p>
+      <p class="lg scalable opacity-60">Sheba Gold Capital is an investment firm that identifies and supports family-owned healthcare businesses in reaching their full growth potential.</p>
       <p class="lg scalable opacity-60">We are not your typical private equity firm. At Sheba Gold Capital, we appreciate the history of the businesses we invest in, the talent of their people, and the relationships that have been built with customers. Our focus is to bring new energy, investment and vision to previously untapped opportunities, building upon proven businesses and accelerating momentum for the long-term.</p>
-      <p class="lg scalable opacity-60">Sheba Gold Capital is an esteemed investment firm that identifies and supports family-owned healthcare businesses in reaching their full growth potential.</p>
+      <p class="lg scalable opacity-60">One of our building blocks to success is our deep expertise in both healthcare and real estate.</p>
+      <p class="lg scalable opacity-60">We understand that healthcare doesn't happen in theory – it happens in buildings, on campuses and in communities. Our background gives us a strategic edge in identifying and optimizing real world solutions that meet the evolving demands of healthcare companies.</p>
     </div>
     <div class="overview-items"  id="culture">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-10 text-center">
-            <h4 class="word-split mb-40">This is who we are and how we operate - with integrity, collaboration, accountability and adaptability. It’s by standing on these pillars that Sheba Gold Capital has built success.</h4>
+            <h4 class="word-split mb-40">This is who we are and how we operate – with integrity, collaboration, accountability and adaptability. It’s by standing on these pillars that Sheba Gold Capital has built success.</h4>
           </div>
         </div>
         <OverviewItem 
@@ -27,7 +28,7 @@
           :key="item.id" 
           :item="item"
         />
-        <Blockquote>Sheba Gold Capital was born from a desire to invest in healthcare businesses we believe in so they can achieve their full potential – ultimately, ensuring healthcare providers have access to the resources they need for the benefit of the broader world.</Blockquote>
+        <Blockquote>Sheba Gold Capital rose from a desire to invest in healthcare businesses we believe in so they can achieve their full potential – ultimately, ensuring healthcare providers have access to the resources they need for the benefit of the broader healthcare system.</Blockquote>
         <hr>
       </div>
     </div>
