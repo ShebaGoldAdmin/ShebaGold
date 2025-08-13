@@ -199,11 +199,15 @@ onMounted(async () => {
   pointer-events: none;
   margin: 0 8px;
   img {
-    height: 84px;
+    height: 72px;
     display: block;
     max-width: 100%;
+    @include respond-to(md) {
+      height: 56px;
+      margin: 1rem 0;
+    }
     @include respond-to(sm) {
-      height: 40px;
+      height: 48px;
     }
   }
 }
